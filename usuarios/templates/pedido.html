@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from qrowd-html.vercel.app/main-html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 07:09:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Vector5/Motor</title>
+    <!-- favicons Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png" />
+    <link rel="manifest" href="assets/images/favicons/site.webmanifest" />
+    <meta name="description" content="Qrowd HTML 5 Template " />
+
+    {% load static %}
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    <!-- Vendor CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/animate/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/animate/custom-animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/jarallax/jarallax.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.pips.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/odometer/odometer.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/swiper/swiper.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/qrowd-icons/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/tiny-slider/tiny-slider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/reey-font/stylesheet.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bxslider/jquery.bxslider.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-select/css/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/vegas/vegas.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/jquery-ui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/timepicker/timePicker.css' %}">
+    
+    <!-- Template styles -->
+    <link rel="stylesheet" href="{% static 'assets/css/qrowd.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/qrowd-responsive.css' %}">
+    
+</head>
+
+<style>
+    .cart-items {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item-image {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.cart-summary {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-summary h3 {
+    margin-bottom: 20px;
+}
+
+.cart-summary ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart-summary li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.cart-summary li:last-child {
+    border-bottom: none;
+}
+
+</style>
+
+<body class="custom-cursor">
+
+    <div class="custom-cursor__cursor"></div>
+    <div class="custom-cursor__cursor-two"></div>
+
+
+
+
+
+    <div class="preloader">
+        <div class="preloader__image"></div>
+    </div>
+    <!-- /.preloader -->
+
+
+    <div class="page-wrapper">
+
+        <div class="stricky-header stricked-menu main-menu">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+
+        <!--Page Header Start-->
+        <section class="page-header">
+            <div class="page-header-bg" style="background-image: url({% static 'assets/img/toy-supermarket-cart (1).jpg' %})">
+            </div>
+            <div class="page-header-shape-1 float-bob-x">
+                <img src="{% static 'assets/img/toy-supermarket-cart (1).jpg' %}" alt="">
+            </div>
+            <div class="page-header-shape-2 float-bob-y">
+                <img src="{% static 'assets/img/toy-supermarket-cart (1).jpg' %}" alt="">
+            </div>
+            <div class="page-header-shape-3 float-bob-x">
+                <img src="{% static 'assets/img/toy-supermarket-cart (1).jpg' %}" alt="">
+            </div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <ul class="thm-breadcrumb list-unstyled">
+                        <li><a href="index.html">cliente</a></li>
+                        <li><span>/</span></li>
+                        <li>carrinho</li>
+                    </ul>
+                    <h2>Carrinho de Compras</h2>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End-->
+
+
+    <div class="page-wrapper">
+    </div>
+
+        <div class="stricky-header stricked-menu main-menu main-menu-two">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="cart-items">
+                        <ul class="list-group mb-4">
+                            {% for item in itens %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ item.produto.imagem.url }}" alt="{{ item.produto.nome }}" class="cart-item-image">
+                                        <div class="ml-3">
+                                            <a href="#">
+                                                <strong>{{ item.produto.nome }}</strong>
+                                            </a><br>
+                                            Quantidade: {{ item.quantidade }}<br>
+                                            Preço: R$ {{ item.produto.preco|floatformat:2 }}
+                                        </div>
+                                    </div>
+                                    <a href="{% url 'remover_do_carrinho' item.produto_id %}" class="btn btn-danger btn-sm" onclick="return confirm('Você tem certeza que deseja remover este item?');">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </li>
+                            {% empty %}
+                                <li class="list-group-item">Seu carrinho está vazio.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="cart-summary">
+                        <h3>Resumo do Pedido</h3>
+                        <ul class="list-unstyled">
+                            <li>
+                                <span>Subtotal</span>
+                                <span>R$ {{ subtotal|floatformat:2 }}</span>
+                            </li>
+                            <li>
+                                <span>Envio</span>
+                                <span>R$ 0.00</span>
+                            </li>
+                            <li>
+                                <span>Total</span>
+                                <span>R$ {{ total|floatformat:2 }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Endereco</h3>
+                    <form method="post" action="{% url 'finalizar_compra' %}">
+                        {% csrf_token %}
+                        <div class="card">
+                            <div class="card-header">
+                                Informações do Pedido
+                            </div>
+                            <div class="card-body">
+                                {{ form.non_field_errors }}
+                                <div class="form-group">
+                                    {{ form.endereco.label_tag }}
+                                    {{ form.endereco }}
+                                    {{ form.endereco.errors }}
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Finalizar Compra</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+
+
+<script src="{% static 'assets/vendors/jquery/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jarallax/jarallax.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-appear/jquery.appear.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-validate/jquery.validate.min.js' %}"></script>
+<script src="{% static 'assets/vendors/nouislider/nouislider.min.js' %}"></script>
+<script src="{% static 'assets/vendors/odometer/odometer.min.js' %}"></script>
+<script src="{% static 'assets/vendors/swiper/swiper.min.js' %}"></script>
+<script src="{% static 'assets/vendors/tiny-slider/tiny-slider.min.js' %}"></script>
+<script src="{% static 'assets/vendors/wnumb/wNumb.min.js' %}"></script>
+<script src="{% static 'assets/vendors/wow/wow.js' %}"></script>
+<script src="{% static 'assets/vendors/isotope/isotope.js' %}"></script>
+<script src="{% static 'assets/vendors/countdown/countdown.min.js' %}"></script>
+<script src="{% static 'assets/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bxslider/jquery.bxslider.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'assets/vendors/vegas/vegas.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-ui/jquery-ui.js' %}"></script>
+<script src="{% static 'assets/vendors/timepicker/timePicker.js' %}"></script>
+<script src="{% static 'assets/vendors/circleType/jquery.circleType.js' %}"></script>
+<script src="{% static 'assets/vendors/circleType/jquery.lettering.min.js' %}"></script>
+<script src="{% static 'assets/vendors/nice-select/jquery.nice-select.min.js' %}"></script>
+
+<!-- template js -->
+<script src="{% static 'assets/js/qrowd.js' %}"></script>
+
+</body>
+
+
+<!-- Mirrored from qrowd-html.vercel.app/main-html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 07:09:24 GMT -->
+</html>

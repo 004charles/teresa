@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Cliente</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets3/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets3/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets3/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets3/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets3/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets3/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/animate/animate.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/animate/custom-animate.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/jarallax/jarallax.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.pips.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/odometer/odometer.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/swiper/swiper.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/qrowd-icons/style.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/tiny-slider/tiny-slider.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/reey-font/stylesheet.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/bxslider/jquery.bxslider.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-select/css/bootstrap-select.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/vegas/vegas.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/jquery-ui/jquery-ui.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendors/timepicker/timePicker.css' %}">
+  
+  <!-- Template styles -->
+  <link rel="stylesheet" href="{% static 'assets/css/qrowd.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/qrowd-responsive.css' %}">
+  
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets3/css/style.css' %}" rel="stylesheet">
+
+  <style>
+    .form-container {
+        max-width: 600px; /* Limita a largura do formulário */
+        margin: 0 auto;   /* Centraliza o formulário horizontalmente */
+    }
+</style>
+
+</head>
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <header id="header">
+    <div class="d-flex flex-column">
+        <div class="profile">
+            <img src="{{ cliente.foto.url }}" alt="Foto de {{ cliente.nome }}" class="img-fluid rounded-circle">
+            <h1 class="text-light"><a href="index.html">{{ cliente.nome }}</a></h1>
+            <div class="social-links mt-3 text-center">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+        </div>
+        <nav id="navbar" class="nav-menu navbar">
+            <ul>
+                <li><a href="{% url 'finalizar_compra' %}" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Meu carrinho</span></a></li>
+                <li><a href="{% url 'produto_cliente' %}" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Produtos</span></a></li>
+                <li><a href="{% url 'contacto_cliente' %}" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Contactar</span></a></li>
+                <li><a href="{% url 'listar_faturas' %}" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Relatorio de compra</span></a></li>
+                <li><a href="{% url 'sair' %}" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Sair</span></a></li>
+                <li><a href="{% url 'perfil_cliente' %}" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Configuracoes</span></a></li>
+            </ul>
+        </nav><!-- .nav-menu -->
+    </div>
+</header><!-- End Header -->
+
+  <main id="main">
+
+   
+
+    
+
+    <section class="product">
+      <div  class="container">
+          <div style="margin-top: 4%;" class="row">
+              <div class="col-xl-3 col-lg-3">
+                  <div class="product__sidebar">
+                    <div class="form-container">
+                        <form style="margin-bottom: 2%;" action="{% url 'pesquisar_cliente' %}" method="GET" class="d-flex justify-content-center">
+                            {% csrf_token %}
+                            <input type="text" name="mome_cliente" placeholder="Pesquisar peças" class="form-control w-100">
+                            <input type="submit" value="Pesquisar" class="btn btn-primary">
+                        </form>
+                    </div>
+                      <div class="product__price-ranger product__sidebar-single">
+                          <h3 class="product__sidebar-title">Preço</h3>
+                          <div class="price-ranger">
+                              <div id="slider-range"></div>
+                              <div class="ranger-min-max-block">
+                                  <input type="text" readonly class="min">
+                                  <span>-</span>
+                                  <input type="text" readonly class="max">
+                                  <input type="submit" value="Filtrar">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="shop-category product__sidebar-single">
+                          <h3 class="product__sidebar-title">Categorias</h3>
+                          <ul class="list-unstyled">
+                              {% for categoria in categoria %}
+                                  <li><a href="#">{{ categoria.nome }}</a></li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xl-9 col-lg-9">
+                  <div class="product__items">
+                      <div class="row">
+                          <div class="col-xl-12">
+                              <div class="product__showing-result">
+                                  <div class="product__showing-text-box">
+                                      <p class="product__showing-text">Mostrando {{ produtos.count }} Resultados</p>
+                                  </div>
+                    
+                              </div>
+                          </div>
+                      </div>
+                      <div class="product__all">
+                          <div class="row">
+                              {% for produto in produto %}
+                                  <div class="col-xl-4 col-lg-4 col-md-6">
+                                      <div class="product__all-single">
+                                          <div class="product__all-img">
+                                              <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+                                              <div class="product__all-btn-box">
+                                                  <a href="{% url 'adicionar_ao_carrinho' produto.id %}" class="thm-btn product__all-btn"><i class="bi bi-cart-plus-fill"></i></a>
+                                              </div>
+                                          </div>
+                                          <div class="product__all-content">
+                                              <h4 class="product__all-title"><a href="">{{ produto.nome }}</a></h4>
+                                              <p class="product__all-price">R$ {{ produto.preco }}</p>
+                                              <div class="product__all-review">
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                              </div>
+                                              <a href="{% url 'finalizar_compra' %}" style="margin-top: 2%;" class="thm-btn product__all-btn">Comprar</a>
+
+                                          </div>
+                                      </div>
+                                  </div>
+                              {% empty %}
+                                  <p>Nenhum produto encontrado.</p>
+                              {% endfor %}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  
+  <!--Product End-->
+  </main><!-- End #main -->
+
+  
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets3/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets3/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets3/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets3/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets3/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets3/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets3/vendor/typed.js/typed.umd.js' %}"></script>
+  <script src="{% static 'assets3/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'assets3/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendors/jquery/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jarallax/jarallax.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-appear/jquery.appear.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-validate/jquery.validate.min.js' %}"></script>
+<script src="{% static 'assets/vendors/nouislider/nouislider.min.js' %}"></script>
+<script src="{% static 'assets/vendors/odometer/odometer.min.js' %}"></script>
+<script src="{% static 'assets/vendors/swiper/swiper.min.js' %}"></script>
+<script src="{% static 'assets/vendors/tiny-slider/tiny-slider.min.js' %}"></script>
+<script src="{% static 'assets/vendors/wnumb/wNumb.min.js' %}"></script>
+<script src="{% static 'assets/vendors/wow/wow.js' %}"></script>
+<script src="{% static 'assets/vendors/isotope/isotope.js' %}"></script>
+<script src="{% static 'assets/vendors/countdown/countdown.min.js' %}"></script>
+<script src="{% static 'assets/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bxslider/jquery.bxslider.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'assets/vendors/vegas/vegas.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-ui/jquery-ui.js' %}"></script>
+<script src="{% static 'assets/vendors/timepicker/timePicker.js' %}"></script>
+<script src="{% static 'assets/vendors/circleType/jquery.circleType.js' %}"></script>
+<script src="{% static 'assets/vendors/circleType/jquery.lettering.min.js' %}"></script>
+<script src="{% static 'assets/vendors/nice-select/jquery.nice-select.min.js' %}"></script>
+
+<!-- template js -->
+<script src="{% static 'assets/js/qrowd.js' %}"></script>
+
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets3/js/main.js' %}"></script>
+
+</body>
+
+</html>

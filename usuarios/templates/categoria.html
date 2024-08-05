@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Forms / Elements - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+  <!-- Favicons -->
+  <link href="assets1/img/favicon.png" rel="icon">
+  <link href="assets1img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets1/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets1/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'assets1/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets1/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+<link href="{% static 'assets1/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+<link href="{% static 'assets1/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+<link href="{% static 'assets1/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="{% static 'assets1/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  
+
+  <main id="main" class="main">
+    <section class="section">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Cadastrar Categoria</h5>
+                <!-- adicionar_categoria.html -->
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Salvar</button>
+                </form>
+            </div>
+          </div>
+
+          <div class="container mt-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for categoria in categorias %}
+                    <tr>
+                        <td>{{ categoria.id }}</td>
+                        <td>{{ categoria.nome }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+  <!-- Vendor JS Files -->
+  
+<!-- Vendor JS Files -->
+<script src="{% static 'assets1/vendor/apexcharts/apexcharts.min.js' %}"></script>
+<script src="{% static 'assets1/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets1/vendor/chart.js/chart.umd.js' %}"></script>
+<script src="{% static 'assets1/vendor/echarts/echarts.min.js' %}"></script>
+<script src="{% static 'assets1/vendor/quill/quill.js' %}"></script>
+<script src="{% static 'assets1/vendor/simple-datatables/simple-datatables.js' %}"></script>
+<script src="{% static 'assets1/vendor/tinymce/tinymce.min.js' %}"></script>
+<script src="{% static 'assets1/vendor/php-email-form/validate.js' %}"></script>
+<!-- Scripts do Bootstrap (jQuery e Popper.js) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'assets1/js/main.js' %}"></script>
+
+</body>
+
+</html>

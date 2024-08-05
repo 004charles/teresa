@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from qrowd-html.vercel.app/main-html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 07:09:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vetor5</title>
+    <!-- favicons Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png" />
+    <link rel="manifest" href="assets/images/favicons/site.webmanifest" />
+    <meta name="description" content="Qrowd HTML 5 Template " />
+
+    {% load static %}
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    <!-- Vendor CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/animate/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/animate/custom-animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/jarallax/jarallax.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.pips.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/odometer/odometer.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/swiper/swiper.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/qrowd-icons/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/tiny-slider/tiny-slider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/reey-font/stylesheet.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bxslider/jquery.bxslider.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-select/css/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/vegas/vegas.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/jquery-ui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/timepicker/timePicker.css' %}">
+    
+    <!-- Template styles -->
+    <link rel="stylesheet" href="{% static 'assets/css/qrowd.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/qrowd-responsive.css' %}">
+
+    <style>
+        .form-container {
+            max-width: 600px; /* Limita a largura do formulário */
+            margin: 0 auto;   /* Centraliza o formulário horizontalmente */
+        }
+        .news-section {
+    background-color: #f8f9fa; /* Cor de fundo clara */
+    padding: 15px; /* Espaçamento interno */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    height: 400px; /* Altura da seção de notícias */
+    overflow: hidden; /* Oculta o excesso de conteúdo */
+    position: relative; /* Necessário para o posicionamento da rolagem */
+}
+
+.news-list {
+    display: flex; /* Exibe itens em linha */
+    flex-direction: column; /* Alinha itens verticalmente */
+    animation: scrollNews 20s linear infinite; /* Animação de rolagem contínua */
+}
+
+.news-item {
+    margin-bottom: 15px; /* Espaçamento abaixo de cada item de notícia */
+}
+
+.news-item h5 {
+    margin-bottom: 5px; /* Espaçamento abaixo do título da notícia */
+}
+
+.news-item p {
+    color: #6c757d; /* Cor do texto da descrição */
+    font-size: 0.9rem; /* Tamanho da fonte */
+}
+
+/* Animação de rolagem contínua */
+@keyframes scrollNews {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+
+.individuals-work__video-icon {
+    position: relative;
+    width: 560px; /* ajuste conforme necessário */
+    height: 315px; /* ajuste conforme necessário */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+    </style>
+
+    
+    
+</head>
+
+<body class="custom-cursor">
+
+    <div class="custom-cursor__cursor"></div>
+    <div class="custom-cursor__cursor-two"></div>
+
+
+
+
+    <!--
+    
+    <div class="preloader">
+        <div class="preloader__image"></div>
+    </div>
+    
+    -->
+
+
+
+    <div  class="page-wrapper">
+        <header style="background-color: none;" class="main-header">
+            <nav class="main-menu">
+                <div class="main-menu__wrapper">
+                    <div class="main-menu__wrapper-inner clearfix">
+                        <div class="main-menu__left">
+                            <div class="main-menu__logo">
+                                <a style="color: #776ca7; font-size: 30pt; font-weight: bold;" href=""><img src="#" alt="">Vetor5</a>
+                            </div>
+                            <div class="main-menu__main-menu-box">
+                                <ul class="main-menu__list">
+                                    <li >
+                             
+                                    </li>
+
+                                    <li class="dropdown">
+                                        <a href="#">Carroceria</a>
+                                        <ul class="shadow-box">
+                                            <li>
+                                                <a style="margin-left: 8%;" href="#">Ligeiro</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'carroceria' %}">BMW</a></li>
+                                                        <li><a href="{% url 'carroceria' %}">honda</a></li>
+                                                    </ul>
+                                            </li>
+
+                                            <li>
+                                                <a style="margin-left: 8%;" href="#">Pesados</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'carroceria' %}">BMW</a></li>
+                                                        <li><a href="{% url 'carroceria' %}">honda</a></li>
+                                                    </ul>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+
+                                    <li class="dropdown">
+                                        <a href="#">Interior</a>
+                                        <ul class="shadow-box">
+                                            <li>
+                                                <a style="margin-left: 8%;" href="#">ligeiro</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'interior_conforto' %}">BMW</a></li>
+                                                        <li><a href="{% url 'interior_conforto' %}">Honda</a></li>
+                                                    </ul>
+                                            </li>
+
+                                            <li>
+                                                <a style="margin-left: 8%;" href="#">pesados</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'interior_conforto' %}">BMW</a></li>
+                                                        <li><a href="{% url 'interior_conforto' %}">Honda</a></li>
+                                                    </ul>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+
+                                    <li class="dropdown">
+                                        <a href="#">Motor</a>
+                                        <ul class="shadow-box">
+                                            <li>
+                                                <a style="margin-left: 8%;" href="#">ligeiro</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'motor' %}">BMW</a></li>
+                                                        <li><a href="{% url 'motor' %}">Honda</a></li>
+                                                    </ul>
+                                            </li>
+
+                                            <li>
+                                                <a style="margin-left: 8%;" href="#">pesados</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'motor' %}">BMW</a></li>
+                                                        <li><a href="{% url 'motor' %}">Honda</a></li>
+                                                    </ul>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+
+                                    <li class="dropdown">
+                                        <a href="#">Freios</a>
+                                        <ul class="shadow-box">
+                                            <li>
+                                                <a style="margin-left: 8%;" href="#">ligeiro</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'freio' %}">BMW</a></li>
+                                                        <li><a href="{% url 'freio' %}">Honda</a></li>
+                                                    </ul>
+                                            </li>
+
+                                            <li>
+                                                <a style="margin-left: 8%;" href="#">pesados</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'freio' %}">BMW</a></li>
+                                                        <li><a href="{% url 'freio' %}">Honda</a></li>
+                                                    </ul>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div   class="main-menu__right">
+                            <div class="main-menu__call-search-btn-box">
+                                <div class="main-menu__call">
+                                    <div class="main-menu__call-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="main-menu__call-content">
+                                        <p class="main-menu__call-sub-title">Ligar</p>
+                                        <h5 class="main-menu__call-number"><a href="tel:9288006780">923908353
+                                                </a></h5>
+                                    </div>
+                                </div>
+                
+                                <div class="main-menu__btn-box">
+                                    <a href="#" class=""><i
+                                            class=""></i><img style="width: 50px;" src="{% static 'assets/img/angola.jpeg' %}" alt=""></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="stricky-header stricked-menu main-menu main-menu-two">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+
+        <!--Main Slider Start-->
+        <section class="main-slider-two clearfix">
+            <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true,
+                "effect": "fade",
+                "pagination": {
+                "el": "#main-slider-pagination",
+                "type": "bullets",
+                "clickable": true
+                },
+                "navigation": {
+                "nextEl": "#main-slider__swiper-button-next",
+                "prevEl": "#main-slider__swiper-button-prev"
+                },
+                "autoplay": {
+                "delay": 5000
+                }}'>
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="image-layer-two"
+                            style="background-image: url({% static 'assets/img/garage-mechanic-replace-car-lights.jpg' %});"></div>
+                        <!-- /.image-layer -->
+
+                        <div class="main-slider-two__shape-1">
+                            <img src="{% static 'assets/images/shapes/main-slider-two-shape-1.png' %}" alt="">
+                        </div>
+                        <div class="main-slider-two__shape-2">
+                            <img src="{% static 'assets/images/shapes/main-slider-two-shape-2.png' %}" alt="">
+                        </div>
+                        <div class="main-slider-two__shape-3">
+                            <img src="{% static 'assets/images/shapes/main-slider-two-shape-3.png' %}" alt="">
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="main-slider-two__content">
+                                        <h2 style="font-size: 40pt;" class="main-slider-two__title">Cansado de perder tempo?<br>Vector5 entrega a solução na sua garagem.<br> 
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="image-layer-two"
+                            style="background-image: url({% static 'assets/img/foto2.jpg' %});"></div>
+                        <!-- /.image-layer -->
+
+                        <div class="main-slider-two__shape-1">
+                            <img src="{% static 'assets/images/shapes/main-slider-two-shape-1.png' %}" alt="">
+                        </div>
+                        <div class="main-slider-two__shape-2">
+                            <img src="{% static 'assets/images/shapes/main-slider-two-shape-2.png' %}" alt="">
+                        </div>
+                        <div class="main-slider-two__shape-3">
+                            <img src="{% static 'assets/images/shapes/main-slider-two-shape-3.png' %}" alt="">
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="main-slider-two__content">
+                                        <p class="main-slider-two__sub-title">
+                                            </p>
+                                        <h2 style="font-size: 40pt;"  class="main-slider-two__title">solução completa para manutenção do seu veiculo!!<br> 
+                                        </h2>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="image-layer-two"
+                            style="background-image: url({% static 'assets/img/foto1.jpg' %});"></div>
+                        <!-- /.image-layer -->
+
+                        <div class="main-slider-two__shape-1">
+                            <img src="{% static 'assets/images/shapes/main-slider-two-shape-1.png' %}" alt="">
+                        </div>
+                        <div class="main-slider-two__shape-2">
+                            <img src="{% static 'assets/images/shapes/main-slider-two-shape-2.png' %}" alt="">
+                        </div>
+                        <div class="main-slider-two__shape-3">
+                            <img src="{% static 'assets/images/shapes/main-slider-two-shape-3.png' %}" alt="">
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="main-slider-two__content">
+                                        <h2 style="font-size: 40pt;"  class="main-slider-two__title">Freios? Suspensão? Amortecedores?<br> Encontre as melhores peças para seu carro na Vector5.
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+        <!--Main Slider End-->
+
+        <!--Product Start-->
+<section class="product">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Coluna de Produtos -->
+            <div class="col-xl-9 col-lg-9 mx-auto">
+                <div class="product__items">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="text-center mb-4">
+                                <div class="form-container">
+                                    <form action="{% url 'pesquisar' %}" method="GET" class="d-flex justify-content-center">
+                                        {% csrf_token %}
+                                        <input type="text" name="nome_filtrar" placeholder="Pesquisar peças" class="form-control w-100">
+                                        <input type="submit" value="Pesquisar" class="btn btn-primary">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product__all">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                            {% for produto in produtos|slice:":30" %}
+                                <div class="col">
+                                    <div class="product__all-single">
+                                        <div class="product__all-img">
+                                            <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+                                            <div class="product__all-btn-box">
+                                                <a href="{% url 'adicionar_ao_carrinho' produto.id %}" class="thm-btn product__all-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                                                        <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/>
+                                                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product__all-content">
+                                            <h4 class="product__all-title"><a href="{% url 'detalhe_produto' produto.id %}">{{ produto.nome }}</a></h4>
+                                            <p class="product__all-price">kz{{ produto.preco }}</p>
+                                            <div class="product__all-review">
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-3">
+                <div class="news-section">
+                    <div class="row">
+                        <div class="news-list">
+                            {% if noticias %}
+                                {% for noticia in noticias %}
+                                    <div class="news-item col-12 mb-3">
+                                        <img style="width: 100%; border-radius: 8px;" src="{{ noticia.imagem.url }}" alt="Imagem da notícia">
+                                        <h5><a href="#">{{ noticia.titulo }}</a></h5>
+                                        <p>{{ noticia.descricao }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p>Sem notícias disponíveis no momento.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+</section>
+
+        
+<section class="individuals-work">
+    <div class="individuals-work__bg" data-jarallax data-speed="0.2" data-imgPosition="50% 0%" style="background-image: url('assets/images/backgrounds/individuals-bg.jpg');"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="individuals-work__inner">
+                    <div class="individuals-work__video-link d-flex justify-content-center">
+                        {% if video %}
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/9JfFt3t7OfE?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="product">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Coluna de Produtos -->
+            <div class="col-xl-9 col-lg-9 mx-auto">
+                <div class="product__items">
+                <h1 style="color: blueviolet; text-align: center;">Nossas marcas</h1>
+                    <div class="product__all">
+                        <div style="margin-top: 3%;" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                            {% for marca in marcas %}
+                                <div class="col">
+                                    <div class="product__all-single">
+                                        <div class="product__all-img">
+                                            <img src="{% static 'assets/img/benz-removebg-preview.png' %}" alt="{{ produto.nome }}">
+                                            <div class="product__all-btn-box">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="product__all-content">
+                                            <h4 class="product__all-title"><a href="">{{ marca.nome }}</a></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-3">
+                <div class="news-section">
+                    <div class="row">
+                        <div class="news-list">
+                            {% if noticias %}
+                                {% for noticia in noticias %}
+                                    <div class="news-item col-12 mb-3">
+                                        <img style="width: 100%; border-radius: 8px;" src="{{ noticia.imagem.url }}" alt="Imagem da notícia">
+                                        <h5><a href="#">{{ noticia.titulo }}</a></h5>
+                                        <p>{{ noticia.descricao }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p>Sem notícias disponíveis no momento.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+    </div>
+</section>
+
+
+    <!--Site Footer Start-->
+    <footer class="site-footer">
+        <div class="site-footer__top">
+            <div class="site-footer__shape-1 float-bob-x">
+                <img src="{% static 'assets/images/shapes/site-footer-shape-1.png' %}" alt="">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
+                        <div class="footer-widget__column footer-widget__about">
+                            <div class="footer-widget__logo">
+                                <a href="#"><img src="" alt=""></a>
+                            </div>
+                            <div class="footer-widget__about-text-box">
+                                <p class="footer-widget__about-text">Bem-vindo à nossa loja de pesca e automóveis. Oferecemos uma vasta gama de produtos para entusiastas da pesca e amantes de carros.</p>
+                            </div>
+                            <form class="footer-widget__subscribe-box">
+                                <div class="footer-widget__subscribe-input-box">
+                                    <input type="email" placeholder="Endereço de email" name="email">
+                                    <button type="submit" class="footer-widget__subscribe-btn"><img
+                                            src="{% static 'assets/images/icon/paper-plan.png' %}" alt=""></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
+                        <div class="footer-widget__column footer-widget__Explore">
+                            <div class="footer-widget__title-box">
+                                <h3 class="footer-widget__title">Explorar</h3>
+                            </div>
+                            <ul class="footer-widget__Explore-list list-unstyled">
+                                <li><a href="about.html">Sobre</a></li>
+                                <li><a href="about.html">Como Funciona</a></li>
+                                <li><a href="about.html">Hub de Conhecimento</a></li>
+                                <li><a href="news.html">Histórias de Sucesso</a></li>
+                                <li><a href="contact.html">Contato</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
+                        <div class="footer-widget__column footer-widget__Fundraising">
+                            <div class="footer-widget__title-box">
+                                <h3 class="footer-widget__title">Categorias</h3>
+                            </div>
+                            <ul class="footer-widget__Explore-list list-unstyled">
+                                <li><a href="about.html">Equipamentos de Pesca</a></li>
+                                <li><a href="about.html">Acessórios Automotivos</a></li>
+                                <li><a href="about.html">Manutenção de Carros</a></li>
+                                <li><a href="about.html">Vestuário de Pesca</a></li>
+                                <li><a href="about.html">Peças e Ferramentas</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
+                        <div class="footer-widget__column footer-widget__Contact">
+                            <div class="footer-widget__title-box">
+                                <h3 class="footer-widget__title">Contato</h3>
+                            </div>
+                            <ul class="footer-widget__Contact-list list-unstyled">
+                                <li>
+                                    <div class="icon">
+                                        <span class="icon-telephone"></span>
+                                    </div>
+                                    <div class="text">
+                                        <p><a href="tel:+5521987654321">923908353</a></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <span class="icon-email"></span>
+                                    </div>
+                                    <div class="text">
+                                        <p><a href="mailto:contato@loja.com">contato@loja.com</a></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <span class="icon-pin"></span>
+                                    </div>
+                                    <div class="text">
+                                        <p>Golf 2</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="site-footer__social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-facebook"></i></a>
+                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="site-footer__bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="site-footer__bottom-inner">
+                            <p class="site-footer__bottom-text">© Copyright 2024 por <a href="{% url 'login_gerente' %}">Vector5</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Site Footer End-->
+    
+
+
+</div><!-- /.page-wrapper -->
+
+
+<div class="mobile-nav__wrapper">
+    <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+    <!-- /.mobile-nav__overlay -->
+    <div class="mobile-nav__content">
+        <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+
+        <div class="logo-box">
+            <a href="index.html" aria-label="logo image"><img src="{% static 'assets/images/resources/logo-2.png' %}" width="143"
+                    alt="" /></a>
+        </div>
+        <!-- /.logo-box -->
+        <div class="mobile-nav__container"></div>
+        <!-- /.mobile-nav__container -->
+
+        <ul class="mobile-nav__contact list-unstyled">
+            <li>
+                <i class="fa fa-envelope"></i>
+                <a href="mailto:needhelp@packageName__.com">muquissicarlos@gmail.com</a>
+            </li>
+            <li>
+                <i class="fa fa-phone-alt"></i>
+                <a href="tel:666-888-0000">923908353</a>
+            </li>
+        </ul><!-- /.mobile-nav__contact -->
+        <div class="mobile-nav__top">
+            <div class="mobile-nav__social">
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-facebook-square"></a>
+                <a href="#" class="fab fa-pinterest-p"></a>
+                <a href="#" class="fab fa-instagram"></a>
+            </div><!-- /.mobile-nav__social -->
+        </div><!-- /.mobile-nav__top -->
+
+
+    </div>
+    <!-- /.mobile-nav__content -->
+</div>
+<!-- /.mobile-nav__wrapper -->
+
+<div class="search-popup">
+    <div class="search-popup__overlay search-toggler"></div>
+    <!-- /.search-popup__overlay -->
+    <div class="search-popup__content">
+        <form action="#">
+            <label for="search" class="sr-only">pesquisar</label><!-- /.sr-only -->
+            <input type="text" id="search" placeholder="Search Here..." />
+            <button type="submit" aria-label="search submit" class="thm-btn">
+                <i class="icon-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
+
+    <!-- /.search-popup__content -->
+</div>
+<!-- /.search-popup -->
+
+<a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="icon-right-arrow"></i></a>
+
+
+
+<script src="{% static 'assets/vendors/jquery/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jarallax/jarallax.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-appear/jquery.appear.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-validate/jquery.validate.min.js' %}"></script>
+<script src="{% static 'assets/vendors/nouislider/nouislider.min.js' %}"></script>
+<script src="{% static 'assets/vendors/odometer/odometer.min.js' %}"></script>
+<script src="{% static 'assets/vendors/swiper/swiper.min.js' %}"></script>
+<script src="{% static 'assets/vendors/tiny-slider/tiny-slider.min.js' %}"></script>
+<script src="{% static 'assets/vendors/wnumb/wNumb.min.js' %}"></script>
+<script src="{% static 'assets/vendors/wow/wow.js' %}"></script>
+<script src="{% static 'assets/vendors/isotope/isotope.js' %}"></script>
+<script src="{% static 'assets/vendors/countdown/countdown.min.js' %}"></script>
+<script src="{% static 'assets/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bxslider/jquery.bxslider.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'assets/vendors/vegas/vegas.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-ui/jquery-ui.js' %}"></script>
+<script src="{% static 'assets/vendors/timepicker/timePicker.js' %}"></script>
+<script src="{% static 'assets/vendors/circleType/jquery.circleType.js' %}"></script>
+<script src="{% static 'assets/vendors/circleType/jquery.lettering.min.js' %}"></script>
+<script src="{% static 'assets/vendors/nice-select/jquery.nice-select.min.js' %}"></script>
+
+<!-- template js -->
+<script src="{% static 'assets/js/qrowd.js' %}"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const newsList = document.querySelector('.news-list');
+    const newsHeight = newsList.scrollHeight;
+
+    // Reproduz a animação de rolagem se necessário
+    newsList.style.animation = `scrollNews ${newsHeight / 50}s linear infinite`;
+});
+
+
+</script>
+
+<script>
+ 
+    document.addEventListener('DOMContentLoaded', function() {
+        const apiKey = 'YOUR_RAPIDAPI_KEY'; // Substitua pela sua chave da RapidAPI
+        const url = 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?q=car&count=10&offset=0';
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Host': 'contextualwebsearch-websearch-v1.p.rapidapi.com',
+                'X-RapidAPI-Key': apiKey
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const newsList = document.getElementById('news-list');
+            newsList.innerHTML = ''; // Limpa o conteúdo atual
+
+            data.value.forEach(newsItem => {
+                const newsHTML = `
+                    <div class="news-item">
+                        <img style="width: 200px;" src="${newsItem.urlToImage || 'default-image.jpg'}" alt="${newsItem.title}">
+                        <h5><a href="${newsItem.url}" target="_blank">${newsItem.title}</a></h5>
+                        <p>${newsItem.description || 'Descrição não disponível.'}</p>
+                    </div>
+                `;
+                newsList.innerHTML += newsHTML;
+            });
+        })
+        .catch(error => console.error('Erro ao buscar notícias:', error));
+    });
+
+
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const videoContainer = document.getElementById('video-container');
+        const videoFrame = document.getElementById('youtube-video');
+        const overlay = document.querySelector('.overlay');
+
+        // Carregar a API do IFrame Player do YouTube
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Cria o player do YouTube
+        let player;
+        window.onYouTubeIframeAPIReady = function() {
+            player = new YT.Player('youtube-video', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        };
+
+        function onPlayerReady(event) {
+            videoContainer.addEventListener('mouseenter', function() {
+                player.playVideo();
+                overlay.style.display = 'none'; // Esconde a sobreposição ao reproduzir o vídeo
+            });
+
+            videoContainer.addEventListener('mouseleave', function() {
+                player.pauseVideo();
+                overlay.style.display = 'flex'; // Mostra a sobreposição ao pausar o vídeo
+            });
+        }
+    });
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from qrowd-html.vercel.app/main-html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 07:09:24 GMT -->
+</html>

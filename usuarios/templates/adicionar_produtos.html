@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Forms / Elements - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+  <!-- Favicons -->
+  <link href="assets1/img/favicon.png" rel="icon">
+  <link href="assets1img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets1/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets1/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'assets1/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets1/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+<link href="{% static 'assets1/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+<link href="{% static 'assets1/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+<link href="{% static 'assets1/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="{% static 'assets1/css/style.css' %}" rel="stylesheet">
+
+<style>
+    .form-container {
+        max-width: 800px;
+        margin: auto;
+    }
+    .form-label {
+        white-space: nowrap;
+    }
+</style>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  
+ 
+  <main id="main" class="main">
+    <section class="section">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Cadastrar Clientes</h5>
+              <form style="background-color: black;" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <label for="nome" class="col-sm-2 col-form-label">Nome</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nome" name="nome">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="descricao" class="col-sm-2 col-form-label">Descrição</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" id="descricao" name="descricao"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="marca" class="col-sm-2 col-form-label">Marca</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" id="marca" name="marca">
+                            {% for marca in marcas %}
+                                <option value="{{ marca.id }}">{{ marca.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="categoria" class="col-sm-2 col-form-label">Categoria</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" id="categoria" name="categoria">
+                            {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="estoque" class="col-sm-2 col-form-label">Estoque</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="estoque" name="estoque">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="preco" class="col-sm-2 col-form-label">Preço</label>
+                    <div class="col-sm-10">
+                        <input type="number" step="0.01" class="form-control" id="preco" name="preco">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="preco_promocional" class="col-sm-2 col-form-label">Preço Promocional</label>
+                    <div class="col-sm-10">
+                        <input type="number" step="0.01" class="form-control" id="preco_promocional" name="preco_promocional">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="imagem" class="col-sm-2 col-form-label">Imagem</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="file" id="imagem" name="imagem">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="peso" class="col-sm-2 col-form-label">Peso</label>
+                    <div class="col-sm-10">
+                        <input type="number" step="0.01" class="form-control" id="peso" name="peso">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="dimensao" class="col-sm-2 col-form-label">Dimensão</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="dimensao" name="dimensao">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="compatibilidade" class="col-sm-2 col-form-label">Compatibilidade</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="compatibilidade" name="compatibilidade">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="quantidade_fornecida" class="col-sm-2 col-form-label">Quantidade Fornecida</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="quantidade_fornecida" name="quantidade_fornecida">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="material" class="col-sm-2 col-form-label">Material</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="material" name="material">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="condicao" class="col-sm-2 col-form-label">Condição</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" id="condicao" name="condicao">
+                            {% for condicao in condicoes %}
+                                <option value="{{ condicao.id }}">{{ condicao.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="instrucao_instalacao" class="col-sm-2 col-form-label">Instrução de Instalação</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" id="instrucao_instalacao" name="instrucao_instalacao"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="fornecedor" class="col-sm-2 col-form-label">Fornecedor</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" id="fornecedor" name="fornecedor">
+                            {% for fornecedor in fornecedores %}
+                                <option value="{{ fornecedor.id }}">{{ fornecedor.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="garantia" class="col-sm-2 col-form-label">Garantia</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="garantia" name="garantia">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="prazo_entrega" class="col-sm-2 col-form-label">Prazo de Entrega</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="prazo_entrega" name="prazo_entrega">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-10 offset-sm-2">
+                        <button type="submit" class="btn btn-primary">Submit Form</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+            
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+  
+<!-- Vendor JS Files -->
+<script src="{% static 'assets1/vendor/apexcharts/apexcharts.min.js' %}"></script>
+<script src="{% static 'assets1/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets1/vendor/chart.js/chart.umd.js' %}"></script>
+<script src="{% static 'assets1/vendor/echarts/echarts.min.js' %}"></script>
+<script src="{% static 'assets1/vendor/quill/quill.js' %}"></script>
+<script src="{% static 'assets1/vendor/simple-datatables/simple-datatables.js' %}"></script>
+<script src="{% static 'assets1/vendor/tinymce/tinymce.min.js' %}"></script>
+<script src="{% static 'assets1/vendor/php-email-form/validate.js' %}"></script>
+<!-- Scripts do Bootstrap (jQuery e Popper.js) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'assets1/js/main.js' %}"></script>
+
+</body>
+
+</html>
+
