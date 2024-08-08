@@ -6,6 +6,7 @@ from django.conf import settings
 urlpatterns = [
     # URLs do cliente:
     path('cliente/', views.cliente, name='cliente'), 
+    path('tickets_gerente/', views.tickets_gerente, name='tickets_gerente'),
     path('pedido_cliente_gerente/', views.pedido_cliente_gerente, name='pedido_cliente_gerente'),
     path('adicionar_ao_carrinho/<int:produto_id>/', views.adicionar_ao_carrinho, name='adicionar_ao_carrinho'),
     path('perfil_cliente/', views.perfil_cliente, name='perfil_cliente'),
@@ -20,11 +21,16 @@ urlpatterns = [
     path('listar_faturas/', views.listar_faturas, name='listar_faturas'),
     path('fatura/<int:fatura_id>/', views.ver_fatura, name='ver_fatura'),
     path('produto/<int:produto_id>/', views.produto_detalhe, name='produto_detalhe'),
+    path('produtos/<int:produto_id>/', views.produtos_detalhe, name='produtos_detalhe'),
     path('produto_cliente/', views.produto_cliente, name='produto_cliente'),
     path('ver_produto_empresa/', views.ver_produto_empresa, name='ver_produto_empresa'),
     path('contacto_cliente/', views.contacto_cliente, name='contacto_cliente'),
     path('pesquisare/', views.pesquisare, name='pesquisare' ),
     path('editar_perfil/<int:pk>/', views.editar_perfil, name='editar_perfil'),
+    path('suporte/', views.suporte, name='suporte'),
+    path('enviar-ticket/', views.enviar_suporte, name='enviar_ticket'),
+    path('avaliar_produto/', views.avaliar_produto, name = "avaliar_produto"),
+
 
     
     # URLs do Gerente:
@@ -59,7 +65,7 @@ urlpatterns = [
     path('contacto_empresa/', views.contacto_empresa, name='contacto_empresa'),
     path('perfil_empresa/', views.perfil_empresa, name='perfil_empresa'),
     path('carrinho_empresa/', views.carrinho_empresa, name='carrinho_empresa'),
-    path('pagamentos/', views.pagamentos_empresa, name='pagamentos_empresa'),
+    path('pagamentos/<int:pedido_id>/', views.pagamentos_empresa, name='pagamentos_empresa'),
     path('finalizar_compra_empresa/', views.finalizar_compra_empresa, name='finalizar_compra_empresa'),
     path('adicionar_ao_carrinho_empresa/<int:produto_id>/', views.adicionar_ao_carrinho_empresa, name='adicionar_ao_carrinho_empresa'),
     path('login_empresa/', views.login_empresa, name='login_empresa'),
@@ -94,5 +100,7 @@ urlpatterns = [
     path('eliminar_cliente/<int:cliente_id>/', views.eliminar_cliente, name='eliminar_cliente'),
     path('clientes_cadastrados/',views.clientes_cadastrados, name='clientes_cadastrados' ),
     path('visao_geral/', views.visao_geral, name='visao_geral'),
-    
+    path('ticket/<int:id>/', views.ticket_detalhes, name='ticket_detalhes'),
+    path('ticket/<int:id>/atualizar/', views.atualizar_ticket, name='atualizar_ticket'),
+
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

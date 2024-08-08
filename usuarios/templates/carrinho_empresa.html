@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Vector5/Motor</title>
+    <title> Carrinho empresa</title>
     <!-- favicons Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
@@ -208,6 +208,14 @@
                                     {{ form.endereco }}
                                     {{ form.endereco.errors }}
                                 </div>
+                                <h3>Itens do Carrinho</h3>
+                                <ul class="list-group">
+                                    {% for item in itens %}
+                                        <li class="list-group-item">
+                                            {{ item.produto.nome }} - {{ item.quantidade }} x {{ item.produto.preco }} Kz
+                                        </li>
+                                    {% endfor %}
+                                </ul>
                                 <button type="submit" class="btn btn-primary btn-block">Finalizar Compra</button>
                             </div>
                         </div>

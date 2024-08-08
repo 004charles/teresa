@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Gerente,Cliente,Empresas,Categoria_produto,Marca_produto,Condicao,Fornecedor,Produtos,Chat,contactar,Pedido, Noticia, Marca_index, Video, Contato_empresa, Fatura, Iban, Pedido_empresa
+from .models import Gerente,Cliente,Empresas,Categoria_produto,Marca_produto,Condicao,Fornecedor,Produtos,Chat,contactar,Pedido, Noticia, Marca_index, Video, Contato_empresa, Fatura, Iban, Pedido_empresa, Avaliacao
+from .models import Ticket
+
 
 admin.site.register(Gerente)
 admin.site.register(Noticia)
@@ -19,6 +21,8 @@ admin.site.register(Contato_empresa)
 admin.site.register(Fatura)
 admin.site.register(Iban)
 admin.site.register(Pedido_empresa)
+admin.site.register(Ticket)
+admin.site.register(Avaliacao)
 
 
 

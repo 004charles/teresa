@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from qrowd-html.vercel.app/main-html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 07:09:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metodo de pagamento</title>
+    <!-- favicons Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png" />
+    <link rel="manifest" href="assets/images/favicons/site.webmanifest" />
+    <meta name="description" content="Qrowd HTML 5 Template " />
+
+    {% load static %}
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    <!-- Vendor CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/animate/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/animate/custom-animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/jarallax/jarallax.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.pips.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/odometer/odometer.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/swiper/swiper.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/qrowd-icons/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/tiny-slider/tiny-slider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/reey-font/stylesheet.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bxslider/jquery.bxslider.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-select/css/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/vegas/vegas.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/jquery-ui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/timepicker/timePicker.css' %}">
+    
+    <!-- Template styles -->
+    <link rel="stylesheet" href="{% static 'assets/css/qrowd.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/qrowd-responsive.css' %}">
+
+    <style>
+        .container {
+            max-width: 600px;
+            margin-top: 20px;
+        }
+        .form-control, .form-group {
+            margin-bottom: 1rem;
+        }
+        .input-group-text {
+            background-color: #f8f9fa;
+        }
+        .btn-primary {
+            margin-top: 1rem;
+        }
+        .payment-methods a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+        .payment-methods a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    
+</head>
+
+
+
+<body class="custom-cursor">
+
+    <div class="custom-cursor__cursor"></div>
+    <div class="custom-cursor__cursor-two"></div>
+
+
+
+
+
+    <div class="preloader">
+        <div class="preloader__image"></div>
+    </div>
+    <!-- /.preloader -->
+
+
+    <div class="page-wrapper">
+
+        <div class="stricky-header stricked-menu main-menu">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+
+        <!--Page Header Start-->
+        <section class="page-header">
+            <div class="page-header-bg" style="background-image: url({% static 'assets/img/person-paying-with-nfc-technology-restaurant.jpg' %})">
+            </div>
+            <div class="page-header-shape-1 float-bob-x">
+                <img src="{% static '' %}" alt="">
+            </div>
+            <div class="page-header-shape-2 float-bob-y">
+                <img src="{% static '' %}" alt="">
+            </div>
+            <div class="page-header-shape-3 float-bob-x">
+                <img src="{% static '' %}" alt="">
+            </div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <ul class="thm-breadcrumb list-unstyled">
+                        <li><a href="index.html">Cliente</a></li>
+                        <li><span>/</span></li>
+                        <li>Pagamento</li>
+                    </ul>
+                    <h2>Finalizar Compra</h2>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End-->
+
+        {% if status %}
+        <div class="alert alert-info">
+            {{ status }}
+        </div>
+        {% endif %}
+    
+
+
+    <div class="page-wrapper">
+    </div>
+
+        <div class="stricky-header stricked-menu main-menu main-menu-two">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+
+         <!--Product Start-->
+        <section class="product">
+            <div class="container">
+                <form method="post" enctype="multipart/form-data" action="{% url 'pagamentos_empresa' 1 %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="iban">Copie o nosso IBAN:</label>
+                        <div class="input-group">
+                            <input type="text" id="iban" name="iban" class="form-control" value="AO06.OO55.0000.1009.6480.1012.9" readonly>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" onclick="copyIBAN()">Copiar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-methods">
+                        <p><strong>Métodos de Pagamento:</strong></p>
+                        <a href="https://ib.bancobai.ao/" style="background-color: white;" ><img style="width: 100px;" src="{% static 'assets/img/bai-removebg-preview.png' %}" alt=""></a>
+                        <a href="https://www.atlantico.ao/pt/particulares/para-si" style="background-color: white;" ><img style="width: 70px;" src="{% static 'assets/img/ataltantico.png' %}" alt=""></a>
+                        <a href="https://www.bpc.ao/" style="background-color: white;" ><img style="width: 70px;" src="{% static 'assets/img/bpc-removebg-preview.png' %}" alt=""></a>
+                    </div>
+                    <div class="form-group">
+                        <label for="comprovativo">Carregue o comprovativo de pagamento</label>
+                        <input type="file" id="comprovativo" name="comprovativo" class="form-control-file" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Finalizar Compra</button>
+                </form>
+            </div>
+        
+        </section>
+
+        <!--Events Page Start-->
+       
+
+
+</div><!-- /.page-wrapper -->
+
+
+<div class="mobile-nav__wrapper">
+    <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+    <!-- /.mobile-nav__overlay -->
+    <div class="mobile-nav__content">
+        <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+
+        <div class="logo-box">
+            <a href="index.html" aria-label="logo image"><img src="assets/images/resources/logo-2.png" width="143"
+                    alt="" /></a>
+        </div>
+        <!-- /.logo-box -->
+        <div class="mobile-nav__container"></div>
+        <!-- /.mobile-nav__container -->
+
+        <ul class="mobile-nav__contact list-unstyled">
+            <li>
+                <i class="fa fa-envelope"></i>
+                <a href="mailto:needhelp@packageName__.com">needhelp@qrowd.com</a>
+            </li>
+            <li>
+                <i class="fa fa-phone-alt"></i>
+                <a href="tel:666-888-0000">666 888 0000</a>
+            </li>
+        </ul><!-- /.mobile-nav__contact -->
+        <div class="mobile-nav__top">
+            <div class="mobile-nav__social">
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-facebook-square"></a>
+                <a href="#" class="fab fa-pinterest-p"></a>
+                <a href="#" class="fab fa-instagram"></a>
+            </div><!-- /.mobile-nav__social -->
+        </div><!-- /.mobile-nav__top -->
+
+
+
+    </div>
+    <!-- /.mobile-nav__content -->
+</div>
+<!-- /.mobile-nav__wrapper -->
+
+<div class="search-popup">
+    <div class="search-popup__overlay search-toggler"></div>
+    <!-- /.search-popup__overlay -->
+    <div class="search-popup__content">
+        <form action="#">
+            <label for="search" class="sr-only">search here</label><!-- /.sr-only -->
+            <input type="text" id="search" placeholder="Search Here..." />
+            <button type="submit" aria-label="search submit" class="thm-btn">
+                <i class="icon-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
+    <!-- /.search-popup__content -->
+</div>
+<!-- /.search-popup -->
+
+<a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="icon-right-arrow"></i></a>
+
+
+
+<script src="{% static 'assets/vendors/jquery/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jarallax/jarallax.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-appear/jquery.appear.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-validate/jquery.validate.min.js' %}"></script>
+<script src="{% static 'assets/vendors/nouislider/nouislider.min.js' %}"></script>
+<script src="{% static 'assets/vendors/odometer/odometer.min.js' %}"></script>
+<script src="{% static 'assets/vendors/swiper/swiper.min.js' %}"></script>
+<script src="{% static 'assets/vendors/tiny-slider/tiny-slider.min.js' %}"></script>
+<script src="{% static 'assets/vendors/wnumb/wNumb.min.js' %}"></script>
+<script src="{% static 'assets/vendors/wow/wow.js' %}"></script>
+<script src="{% static 'assets/vendors/isotope/isotope.js' %}"></script>
+<script src="{% static 'assets/vendors/countdown/countdown.min.js' %}"></script>
+<script src="{% static 'assets/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bxslider/jquery.bxslider.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'assets/vendors/vegas/vegas.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-ui/jquery-ui.js' %}"></script>
+<script src="{% static 'assets/vendors/timepicker/timePicker.js' %}"></script>
+<script src="{% static 'assets/vendors/circleType/jquery.circleType.js' %}"></script>
+<script src="{% static 'assets/vendors/circleType/jquery.lettering.min.js' %}"></script>
+<script src="{% static 'assets/vendors/nice-select/jquery.nice-select.min.js' %}"></script>
+
+<!-- template js -->
+<script src="{% static 'assets/js/qrowd.js' %}"></script>
+
+<script>
+    function copyIBAN() {
+        var ibanInput = document.getElementById('iban');
+        ibanInput.select();
+        ibanInput.setSelectionRange(0, 99999); // For mobile devices
+        document.execCommand('copy');
+        alert('IBAN copiado para a área de transferência!');
+    }
+</script>
+
+</body>
+
+
+<!-- Mirrored from qrowd-html.vercel.app/main-html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 07:09:24 GMT -->
+</html>

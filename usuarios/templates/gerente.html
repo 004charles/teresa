@@ -106,7 +106,7 @@
                                 Configurações
                             </a>
                             
-                            <a class="nav-link" href="suporte.html">
+                            <a class="nav-link" href="{% url 'tickets_gerente' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-life-ring"></i></div>
                                 Suporte
                             </a>
@@ -235,7 +235,7 @@
                                                 <td>{{ cliente.email }}</td>
                                                 <td>{{ cliente.senha }}</td>
                                                 <td>
-                                                    <a href="partilhar/{{ cliente.id }}" class="btn btn-primary btn-sm">
+                                                    <a href="#" class="btn btn-primary btn-sm">
                                                         <i class="fas fa-share-alt"></i> <!-- Ícone de partilhar -->
                                                     </a>
                                                 </td>

@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .models import Gerente, Cliente, Empresas, Marca_produto, Categoria_produto
+from .models import Gerente,Avaliacao , Cliente, Empresas, Marca_produto, Categoria_produto
 from .models import Condicao, Fornecedor, Produtos, Carrinho_empresa, Iban
 from .forms import MarcaProdutoForm
-from .models import Categoria_produto, Carrinho,  Estoque, Noticia,  Marca_index, Video
+from .models import Categoria_produto, Carrinho,  Estoque, Noticia,  Marca_index, Video, ItemPedidoEmpresa
 from .forms import CategoriaProdutoForm, ContatoForm, Contato_empresa
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -330,11 +330,29 @@ def valida_cadastro_empresa(request):
        #return HttpResponse(f"{nome}, {senha}, {email}")
 
 
-def produto_detalhe(request, produto_id):
+def produtos_detalhe(request, produto_id):
     produto = get_object_or_404(Produtos, id=produto_id)
-    return render(request, 'produto_detalhe.html', {'produto': produto})
-       
+    return render(request, 'produtos_detalhe.html', {'produto': produto})
 
+def produto_detalhe(request, produto_id):
+    if 'cliente' in request.session:
+        produto = get_object_or_404(Produtos, id=produto_id)
+        return render(request, 'produto_detalhe.html', {'produto': produto})
+    else:
+        return HttpResponse("Voce nao esta autenticado para esta pagina")
+
+def avaliar_produto(request):
+    if 'cliente' in request.session:
+        nome =  request.POST.get('nome')
+        email = request.POST.get('email')
+        avaliacao  = request.POST.get('avaliacao')
+        
+        avalia = Avaliacao(nome = nome, email = email, avaliacao = avaliacao)
+        avalia.save()
+        return HttpResponse("Mensagem enviada")
+    else:
+        return HttpResponse("Voce nao esta autenticado para esta pagina")
+    
 def cadastro_produto(request):
     return render(request, 'cadastro_produto.html')
 
@@ -679,6 +697,7 @@ def pedido_empresa_gerente(request):
         'cliente': cliente
     })
 
+
 def pedido_cliente_gerente(request):
     cliente_id = request.session.get('gerente')
     if not cliente_id:
@@ -686,10 +705,12 @@ def pedido_cliente_gerente(request):
 
     cliente = get_object_or_404(Cliente, id=cliente_id)
     itens = Pedido.objects.filter(usuario=cliente)
+    
     return render(request, 'pedido_cliente_gerente.html', {
         'itens': itens,
         'cliente': cliente
     })
+
 
 
 
@@ -758,50 +779,61 @@ from django.utils import timezone
 
 
 
-def pagamento_view(request, pedido_id): 
+import PyPDF2
+
+def pagamento_view(request, pedido_id):
     if request.method == 'POST':
         cliente_id = request.session.get('cliente')
         if not cliente_id:
             return HttpResponse("Cliente não encontrado na sessão.", status=404)
 
-        metodo_pagamento = request.POST.get('metodo_pagamento')
-        comprovante = request.FILES.get('comprovante') 
+        comprovante = request.FILES.get('comprovativo') 
 
         if comprovante:
-            # 1. Processar o pagamento REAL (usar API do serviço de pagamento)
-            #    - Ex:  stripe.checkout.Session.create(...), PayPal.execute(...), etc.
             fs = FileSystemStorage()
             filename = fs.save(comprovante.name, comprovante)
-            file_url = fs.url(filename)
-            print(f"Pagamento recebido, comprovante: {file_url}")
+            file_path = fs.path(filename)
+            
+            try:
+                with open(file_path, 'rb') as f:
+                    reader = PyPDF2.PdfFileReader(f)
+                    num_pages = reader.numPages
+                    text = ""
+                    for page in range(num_pages):
+                        text += reader.getPage(page).extractText()
+                
+                if any(word in text for word in ["BAI", "Atlântico", "BPC"]):
+                    file_url = fs.url(filename)
+                    print(f"Pagamento recebido, comprovante: {file_url}")
 
-            # 2.  Após o pagamento ser processado,  
-            #     usar uma lógica  que verifique o sucesso ou o erro
-            transacao_realizada = True  # Se o pagamento foi bem-sucedido (alterar lógica)
-            if transacao_realizada:
-                try:
-                    pedido = Pedido.objects.get(pk=pedido_id)
-                    cliente = Cliente.objects.get(pk=cliente_id)
-                    fatura = Fatura.objects.create(
-                        cliente=cliente,
-                        pedido=pedido,
-                        valor_total=pedido.total(),
-                        data_emissao=timezone.now()
-                    )
-                    
-                    # Limpar o carrinho:
-                    carrinho = Carrinho.objects.get(cliente=cliente) 
-                    carrinho.produtos.clear()  
-                    
-                    return redirect('/vetor5/facturas', fatura_id=fatura.id)
-                except Exception as e:
-                    return HttpResponse(f"Erro ao criar a fatura: {e}", status=500)
+                    transacao_realizada = True  # Alterar lógica conforme necessário
+                    if transacao_realizada:
+                        try:
+                            pedido = Pedido.objects.get(pk=pedido_id)
+                            cliente = Cliente.objects.get(pk=cliente_id)
+                            fatura = Fatura.objects.create(
+                                cliente=cliente,
+                                pedido=pedido,
+                                valor_total=pedido.total(),
+                                data_emissao=timezone.now()
+                            )
+                            
+                            carrinho = Carrinho.objects.get(cliente=cliente) 
+                            carrinho.produtos.clear()  
+                            
+                            return redirect('/vetor5/faturas', fatura_id=fatura.id)
+                        except Exception as e:
+                            return HttpResponse(f"Erro ao criar a fatura: {e}", status=500)
+                else:
+                    return HttpResponse("O comprovativo é inválido.", status=400)
 
-    # Se não for POST, exibe a tela de pagamento:
+            except Exception as e:
+                return HttpResponse(f"Erro ao ler o comprovativo: {e}", status=500)
+
+
     pedido = get_object_or_404(Pedido, pk=pedido_id) 
     iban = Iban.objects.all()
-    return render(request, 'pagamento.html', {'pedido': pedido, 'ibans':iban})
-
+    return render(request, 'pagamento.html', {'pedido': pedido, 'ibans': iban})
 
 def ver_produto_empresa(request):
     produtos = Produtos.objects.all()
@@ -829,46 +861,73 @@ def adicionar_ao_carrinho_empresa(request, produto_id):
 
 
 def finalizar_compra_empresa(request):
-    empresa_id = request.session.get('empresa')
-    if not empresa_id:
-        return redirect('/vetor5/login_empresa/?status=2')  # Redireciona para a página de login se não estiver logado
+    try:
+        empresa_id = request.session.get('empresa')
+        if not empresa_id:
+            return redirect('/vetor5/login_empresa/?status=2')  # Redireciona para a página de login se não estiver logado
 
-    empresa = get_object_or_404(Empresas, id=empresa_id)
-    carrinho = get_object_or_404(Carrinho, empresa=empresa)
-    itens = ItemCarrinho.objects.filter(carrinho=carrinho)
+        empresa = Empresas.objects.get(id=empresa_id)
+        carrinho = Carrinho_empresa.objects.get(empresa=empresa)
+        itens = ItemCarrinho.objects.filter(carrinho_empresa=carrinho)
 
-    if not itens:
-        return redirect('/vetor5/empresa/?status=3')  # Carrinho vazio
+        if not itens:
+            return redirect('/vetor5/pagamento/?status=3')  # Carrinho vazio
 
-    if request.method == 'POST':
-        form = PedidoEmpresaForm(request.POST)
-        if form.is_valid():
-            pedido = form.save(commit=False)
-            pedido.empresa = empresa
-            pedido.data = timezone.now()
-            pedido.status = 'Pendente'  # Ajuste conforme o status desejado
-            pedido.save()
+        subtotal = sum(item.subtotal() for item in itens)
+        total = subtotal 
 
-            for item in itens:
-                ItemPedido.objects.create(
+        if request.method == 'POST':
+            form = PedidoEmpresaForm(request.POST)
+            if form.is_valid():
+                pedido = form.save(commit=False)
+                pedido.empresa = empresa
+                pedido.data = timezone.now()
+                pedido.status = 'Pendente'
+                pedido.save()
+
+                for item in itens:
+                    ItemPedidoEmpresa.objects.create(
+                        pedido=pedido,
+                        produto=item.produto,
+                        quantidade=item.quantidade,
+                        preco=item.produto.preco
+                    )
+                    item.delete()  # Remove o item do carrinho após a compra
+
+                # Criar a fatura associada à empresa
+                Fatura.objects.create(
+                    empresa=empresa,
                     pedido=pedido,
-                    produto=item.produto,
-                    quantidade=item.quantidade,
-                    preco=item.produto.preco  # Ajuste conforme a lógica do seu projeto
+                    valor_total=pedido.total(),
+                    data_emissao=timezone.now()
                 )
-                item.delete()  # Remove o item do carrinho após a compra
 
-            return redirect('/vetor5/empresa/pedido_confirmado/')  # Redireciona para uma página de confirmação, ajuste conforme necessário
-    else:
-        form = PedidoEmpresaForm()
+                # Verifique se o pedido foi salvo corretamente e se possui um ID
+                if pedido.id:
+                    return redirect('pagamento_empresa', pedido_id=pedido.id)
+                else:
+                    return HttpResponse("Erro ao salvar o pedido.", status=500)
+        else:
+            form = PedidoEmpresaForm()
 
-    return render(request, 'carrinho_empresa.html', {
-        'form': form,
-        'itens': itens,
-        'carrinho': carrinho,
-    })
+        return render(request, 'pagamento_empresa.html', {
+            'form': form,
+            'itens': itens,
+            'carrinho': carrinho,
+            'subtotal': subtotal,
+            'total': total
+        })
 
-def pagamentos_empresa(request):
+    except Empresas.DoesNotExist:
+        return HttpResponse("Empresa não encontrada.", status=404)
+    except Carrinho_empresa.DoesNotExist:
+        return HttpResponse("Carrinho não encontrado.", status=404)
+    except Exception as e:
+        # Captura qualquer outra exceção não prevista
+        return HttpResponse(f"Erro inesperado: {str(e)}", status=500)
+
+
+def pagamentos_empresa(request, pedido_id):
     empresa_id = request.session.get('empresa')
     if not empresa_id:
         return redirect('/vetor5/login_empresa/?status=2')  # Redireciona para a página de login se não estiver logado
@@ -876,7 +935,48 @@ def pagamentos_empresa(request):
     empresa = get_object_or_404(Empresas, id=empresa_id)
     faturas = Fatura.objects.filter(empresa=empresa)  # Ajuste o filtro conforme seu modelo
 
-    return render(request, 'pagamentos_empresa.html', {'empresa': empresa, 'faturas': faturas})
+    if request.method == 'POST':
+        comprovante = request.FILES.get('comprovativo')
+        if comprovante:
+            fs = FileSystemStorage()
+            filename = fs.save(comprovante.name, comprovante)
+            file_path = fs.path(filename)
+            
+            try:
+                with open(file_path, 'rb') as f:
+                    reader = PyPDF2.PdfFileReader(f)
+                    text = ""
+                    for page in range(reader.numPages):
+                        text += reader.getPage(page).extractText()
+                
+                if any(word in text for word in ["BAI", "Atlântico", "BPC"]):
+                    file_url = fs.url(filename)
+                    print(f"Pagamento recebido, comprovante: {file_url}")
+
+                    try:
+                        pedido = get_object_or_404(Pedido_empresa, id=pedido_id, empresa=empresa)
+                        fatura = Fatura.objects.create(
+                            empresa=empresa,
+                            pedido=pedido,
+                            valor_total=pedido.total(),
+                            data_emissao=timezone.now()
+                        )
+
+                        # Limpar o carrinho
+                        carrinho = Carrinho_empresa.objects.get(empresa=empresa)  # Supondo que exista um modelo de Carrinho_empresa
+                        carrinho.itemcarrinho_set.all().delete()  # Remove todos os itens do carrinho
+                        
+                        return redirect('/vetor5/faturas', fatura_id=fatura.id)  # Corrigir URL para redirecionar adequadamente
+                    except Exception as e:
+                        return HttpResponse(f"Erro ao criar a fatura: {e}", status=500)
+                else:
+                    return HttpResponse("O comprovativo é inválido.", status=400)
+
+            except Exception as e:
+                return HttpResponse(f"Erro ao ler o comprovativo: {e}", status=500)
+
+    return render(request, 'pagamento_empresa.html', {'empresa': empresa, 'faturas': faturas})
+
 
 def perfil_empresa(request):
     empresa_id = request.session.get('empresa')
@@ -980,3 +1080,52 @@ def visao_geral(request):
     produto = Produtos.objects.all()
     categoria = Categoria_produto.objects.all()
     return render(request, 'visao_geral.html', {'produto':produto, 'categoria':categoria})
+
+
+def suporte(request):
+    return render(request, 'suporte.html')
+
+
+from django.shortcuts import render, redirect
+from .forms import TicketForm
+
+def enviar_suporte(request):
+    if request.method == 'POST':
+        form = TicketForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/vetor5/suporte')  # Redireciona para uma página de sucesso
+    else:
+        form = TicketForm()
+    
+    return render(request, 'suporte.html', {'form': form})
+
+from .models import Ticket, Gerente
+def tickets_gerente(request):
+    if 'gerente' not in request.session:
+        return redirect('/vetor5/login_gerente/?status=2')  # Redireciona para a página de login se não estiver logado
+    
+    gerente_id = request.session['gerente']
+    try:
+        gerente = Gerente.objects.get(id=gerente_id)
+    except Gerente.DoesNotExist:
+        return redirect('/vetor5/login_gerente/?status=2')  # Redireciona se o gerente não existir
+    
+    # Obtém todos os tickets, ordenados por data de criação
+    tickets = Ticket.objects.all().order_by('-data_criacao')
+    
+    return render(request, 'suporte_gerente.html', {'tickets': tickets, 'gerente': gerente})
+
+def ticket_detalhes(request, id):
+    ticket = get_object_or_404(Ticket, id=id)
+    return render(request, 'suporte_gerente.html', {'ticket': ticket})
+
+def atualizar_ticket(request, id):
+    ticket = get_object_or_404(Ticket, id=id)
+    if request.method == 'POST':
+        # Aqui você pode implementar a lógica para atualizar o ticket
+        # Por exemplo, mudar o status
+        ticket.status = request.POST.get('status', ticket.status)
+        ticket.save()
+        return redirect('tickets_gerente')  # Redireciona de volta para a lista de tickets
+    return render(request, 'suporte_gerente.html', {'ticket': ticket})

@@ -129,15 +129,12 @@ class ItemCarrinho(models.Model):
 
 class Carrinho(models.Model):
     cliente = models.OneToOneField(Cliente, on_delete=models.CASCADE, related_name='carrinho')
-    produtos = models.ManyToManyField(Produtos, through=ItemCarrinho, related_name='carrinhos_cliente')
+    empresa = models.ForeignKey(Empresas, on_delete=models.CASCADE, related_name='carrinhos_cliente')  
+    produtos = models.ManyToManyField(Produtos, through=ItemCarrinho, related_name='carrinhos_cliente') 
 
-    def __str__(self):
-        return f'Carrinho do Cliente: {self.cliente.nome}'
-    
 class Carrinho_empresa(models.Model):
-    empresa = models.OneToOneField(Empresas, on_delete=models.CASCADE, related_name='carrinho_empresa')
+    empresa = models.OneToOneField(Empresas, on_delete=models.CASCADE, related_name='carrinhos_empresa')
     produtos = models.ManyToManyField(Produtos, through=ItemCarrinho, related_name='carrinhos_empresa')
-
     def __str__(self):
         return f'Carrinho da Empresa: {self.empresa.nome}'
 
@@ -151,9 +148,10 @@ class Pedido(models.Model):
     def __str__(self):
         return f'Pedido {self.id} para {self.usuario.nome} em {self.data.strftime("%d/%m/%Y")}'
     def total(self):
-        # Supondo que ItemPedido tem um campo quantidade e um campo produto com preço
-        return sum(item.quantidade * item.produto.preco for item in self.itempedido_set.all())
-
+        # Usar o related_name definido
+        return sum(item.quantidade * item.produto.preco for item in self.item_pedido_set.all())
+    
+    
 class Pedido_empresa(models.Model):
     imagem = models.FileField(upload_to='imagem/')
     empresa = models.ForeignKey(Empresas, on_delete=models.CASCADE)
@@ -183,15 +181,25 @@ class ItemPedidoEmpresa(models.Model):
 
     def total(self):
         return self.quantidade * self.produto.preco_unitario
+
+class Avaliacao(models.Model):
+    avaliacao = models.CharField(max_length=500)
+    nome = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    data = models.
     
+    
+    def __str__(self):
+          return self.nome
+
+
 class ItemPedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='item_pedido_set')
     produto = models.ForeignKey(Produtos, on_delete=models.CASCADE)
     quantidade = models.PositiveIntegerField()
-
+    
     def subtotal(self):
         return self.quantidade * self.produto.preco
-    
 
 class Chat(models.Model):
      mensagem = models.ForeignKey(Gerente, on_delete=models.CASCADE)
@@ -290,3 +298,12 @@ class Iban(models.Model):
 
     def __str__(self):
         return self.iban
+    
+class Ticket(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField()
+    mensagem = models.TextField()
+    data_criacao = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Ticket #{self.id} - {self.nome}"
