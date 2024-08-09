@@ -1,0 +1,168 @@
+body,
+body.boxed-wrapper .page-wrapper,
+.project-one__content,
+.why-choose-one__inner,
+.why-choose-one__inner::before,
+.news-one__bottom {
+    background-color: #152929;
+}
+
+.main-header__top {
+    background-color: var(--qrowd-black);
+    border-bottom: 1px solid #2d3f3f;
+}
+
+.main-menu__wrapper,
+.progress-levels .progress-box {
+    background-color: var(--qrowd-black);
+}
+
+.main-header__login,
+.project-one:before,
+.why-choose-one__points .icon,
+.newsletter,
+.news-one__bg-color,
+.news-one__content {
+    background-color: #172d2d;
+}
+
+.main-header__contact-list li .text p,
+.main-header__contact-list li .text p a,
+.main-header__login-list li a,
+.main-menu .main-menu__list>li>a,
+.stricky-header .main-menu__list>li>a,
+.main-menu .main-menu__list>li.dropdown>a:after,
+.main-menu__call-sub-title,
+.project-one__remaing .text p,
+.progress-levels .progress-box .inner .count-text,
+.progress-levels .progress-box .inner .percent,
+.project-one__goals-one,
+.why-choose-one__left-text p,
+.why-choose-one__points .content .text,
+.newsletter__input-box input[type="email"],
+.checked-box label,
+.testimonial-one__text-1,
+.testimonial-one__client-content p,
+.news-one__meta li a,
+.news-one__button a,
+.news-one__arrow a {
+    color: #8b9e9e;
+}
+
+.main-header__social a,
+.main-menu__call-number a,
+.main-menu__search,
+.section-title__title,
+.project-one__title a,
+.progress-levels .progress-box .inner .text,
+.project-one__goals-one span,
+.why-choose-one__points .content .title,
+.testimonial-one__client-content h4,
+.news-one__title a {
+    color: var(--qrowd-white);
+}
+
+.main-header__login-list li a:before {
+    background-color: #8b9e9e;
+}
+
+.main-menu .main-menu__list>li.current>a,
+.main-menu .main-menu__list>li:hover>a,
+.stricky-header .main-menu__list>li.current>a,
+.stricky-header .main-menu__list>li:hover>a {
+    color: var(--qrowd-white);
+}
+
+.main-menu .main-menu__list>li>a::before,
+.stricky-header .main-menu__list>li>a::before,
+.main-menu__search-box:before {
+    background-color: rgba(255, 255, 255, .20);
+}
+
+.main-menu .main-menu__list>li.current>a::after,
+.main-menu .main-menu__list>li:hover>a::after,
+.stricky-header .main-menu__list>li.current>a::after,
+.stricky-header .main-menu__list>li:hover>a::after {
+    color: var(--qrowd-white);
+}
+
+.thm-btn:hover {
+    color: var(--qrowd-base);
+}
+
+.thm-btn::before {
+    background-color: var(--qrowd-white);
+}
+
+.search-popup__content .thm-btn:hover {
+    color: var(--qrowd-white);
+}
+
+.search-popup__content .thm-btn:before {
+    background-color: var(--qrowd-black);
+}
+
+.progress-levels .progress-box .bar .bar-innner {
+    background-color: #354b4b;
+}
+
+.project-one__carousel.owl-carousel .owl-dots .owl-dot {
+    background-color: rgba(var(--qrowd-white-rgb), .30);
+}
+
+.project-one__carousel.owl-carousel .owl-dot.active {
+    background-color: rgba(var(--qrowd-primary-rgb), 1);
+}
+
+.newsletter__input-box input[type="email"] {
+    border-bottom: 1px solid rgba(var(--qrowd-white-rgb), .10);
+}
+
+.checked-box input[type="checkbox"]:checked+label span {
+    border-color: #2f4242;
+}
+
+.checked-box input[type="checkbox"]+label span {
+    background-color: transparent;
+    border: 2px solid #2f4242;
+}
+
+.checked-box label span:before {
+    border-bottom: 2px solid #8b9e9e;
+    border-right: 2px solid #8b9e9e;
+}
+
+.recommended-one__carousel.owl-carousel .owl-dots .owl-dot {
+    background-color: rgba(var(--qrowd-white-rgb), .30);
+}
+
+.recommended-one__carousel.owl-carousel .owl-dot.active {
+    background-color: rgba(var(--qrowd-primary-rgb), 1);
+}
+
+#testimonials-one__carousel-pagination .swiper-pagination-bullet {
+    background-color: rgba(var(--qrowd-white-rgb), .30);
+}
+
+#testimonials-one__carousel-pagination .swiper-pagination-bullet-active {
+    background-color: rgba(var(--qrowd-primary-rgb), 1);
+}
+
+.brand-one__title:before,
+.brand-one__title:after {
+    background-color: rgba(var(--qrowd-white-rgb), .10);
+}
+
+.brand-one__nav .swiper-button-next,
+.brand-one__nav .swiper-button-prev {
+    color: #6e7a7a;
+    background-color: var(--qrowd-black);
+}
+
+.brand-one__nav .swiper-button-next:hover,
+.brand-one__nav .swiper-button-prev:hover {
+    color: var(--qrowd-white);
+    background-color: var(--qrowd-base);
+}
+
+/*  */
