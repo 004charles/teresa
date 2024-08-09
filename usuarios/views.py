@@ -595,7 +595,7 @@ def pesquisar(request):
         produtos = Produtos.objects.filter(nome__icontains=nome_filtrar)
     else:
         produtos = Produtos.objects.all()  # Ajuste conforme o seu modelo
-    return render(request, 'index.html', {'produtos': produtos})
+    return render(request, 'ver_produto.html', {'produtos': produtos})
 
 
 def pesquisare(request):
@@ -605,7 +605,7 @@ def pesquisare(request):
         produtos = Produtos.objects.filter(nome__icontains=nome_filtrar)
     else:
         produtos = Produtos.objects.all()  # Ajuste conforme o seu modelo
-    return render(request, 'estoquehtml', {'produtos': produtos})
+    return render(request, 'estoque.html', {'produtos': produtos})
 
 
 def pesquisar_ver(request):

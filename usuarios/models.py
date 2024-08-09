@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 
 
 from django.db import models
@@ -186,7 +187,7 @@ class Avaliacao(models.Model):
     avaliacao = models.CharField(max_length=500)
     nome = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
-    data = models.
+    data = models.DateTimeField(default=timezone.now)
     
     
     def __str__(self):
@@ -297,7 +298,7 @@ class Iban(models.Model):
     ibam = models.CharField(max_length = 100)
 
     def __str__(self):
-        return self.iban
+        return self.ibam
     
 class Ticket(models.Model):
     nome = models.CharField(max_length=100)

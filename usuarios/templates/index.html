@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="{% static 'assets/vendors/vegas/vegas.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendors/jquery-ui/jquery-ui.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendors/timepicker/timePicker.css' %}">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Template styles -->
     <link rel="stylesheet" href="{% static 'assets/css/qrowd.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/qrowd-responsive.css' %}">
@@ -138,135 +138,194 @@
 
 
     <div  class="page-wrapper">
-        <header style="background-color: none;" class="main-header">
+        <header class="main-header">
+            <div class="main-header__top">
+                <div class="main-header__top-inner">
+                    <div class="main-header__top-left">
+                        <ul class="list-unstyled main-header__contact-list">
+                            <li>
+                                <div class="icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="text">
+                                    <p>Golf 2.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="text">
+                                    <p><a href="#">zrdconsultinglda@gmail.com</a></p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="main-header__top-right">
+                        <div class="main-header__login">
+                            <ul class="list-unstyled main-header__login-list">
+                                <li><a href="{% url 'login_cliente' %}"> <i class="icon-account"></i>Entrar</a></li>
+                                <li><a href="{% url 'login_cliente' %}">Registrar</a></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
             <nav class="main-menu">
                 <div class="main-menu__wrapper">
                     <div class="main-menu__wrapper-inner clearfix">
                         <div class="main-menu__left">
                             <div class="main-menu__logo">
-                                <a style="color: #776ca7; font-size: 30pt; font-weight: bold;" href=""><img src="#" alt="">Vetor5</a>
+                                <a href="{% url 'index' %}">Vetor5</a>
                             </div>
                             <div class="main-menu__main-menu-box">
+                                <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
                                 <ul class="main-menu__list">
-                                    <li >
-                             
+                                    <li class="dropdown current megamenu">
+                                        <a href="{% url 'index' %}">Home</a>
                                     </li>
-
+                                    
                                     <li class="dropdown">
                                         <a href="#">Carroceria</a>
                                         <ul class="shadow-box">
+                                            
                                             <li>
-                                                <a style="margin-left: 8%;" href="#">Ligeiro</a>
+                                                <li class="dropdown">
+                                                    <a href="#">Ligeiro</a>
                                                     <ul class="shadow-box">
                                                         <li><a href="{% url 'carroceria' %}">BMW</a></li>
-                                                        <li><a href="{% url 'carroceria' %}">honda</a></li>
+                                                        <li><a href="{% url 'carroceria' %}">Honda</a></li>
+                                                        
+                                                        
                                                     </ul>
+                                                </li>
                                             </li>
 
                                             <li>
-                                                <a style="margin-left: 8%;" href="#">Pesados</a>
+                                                <li class="dropdown">
+                                                    <a href="#">Pesados</a>
                                                     <ul class="shadow-box">
                                                         <li><a href="{% url 'carroceria' %}">BMW</a></li>
-                                                        <li><a href="{% url 'carroceria' %}">honda</a></li>
+                                                        <li><a href="{% url 'carroceria' %}">Honda</a></li>
+                                                        
+                                                        
                                                     </ul>
+                                                </li>
                                             </li>
+                                            
                                         </ul>
-
                                     </li>
-
                                     <li class="dropdown">
                                         <a href="#">Interior</a>
                                         <ul class="shadow-box">
+                                            
                                             <li>
-                                                <a style="margin-left: 8%;" href="#">ligeiro</a>
+                                                <li class="dropdown">
+                                                    <a href="#">Ligeiro</a>
                                                     <ul class="shadow-box">
                                                         <li><a href="{% url 'interior_conforto' %}">BMW</a></li>
                                                         <li><a href="{% url 'interior_conforto' %}">Honda</a></li>
+                                                        
+                                                        
                                                     </ul>
+                                                </li>
                                             </li>
 
                                             <li>
-                                                <a style="margin-left: 8%;" href="#">pesados</a>
+                                                <li class="dropdown">
+                                                    <a href="#">Pesados</a>
                                                     <ul class="shadow-box">
                                                         <li><a href="{% url 'interior_conforto' %}">BMW</a></li>
                                                         <li><a href="{% url 'interior_conforto' %}">Honda</a></li>
+                                                        
+                                                        
                                                     </ul>
+                                                </li>
                                             </li>
+                                            
                                         </ul>
-
                                     </li>
-
                                     <li class="dropdown">
                                         <a href="#">Motor</a>
                                         <ul class="shadow-box">
+                                            
                                             <li>
-                                                <a style="margin-left: 8%;" href="#">ligeiro</a>
+                                                <li class="dropdown">
+                                                    <a href="#">Ligeiro</a>
                                                     <ul class="shadow-box">
                                                         <li><a href="{% url 'motor' %}">BMW</a></li>
-                                                        <li><a href="{% url 'motor' %}">Honda</a></li>
+                                                        <li><a href="t{% url 'motor' %}">Honda</a></li>
+                                                        
+                                                        
                                                     </ul>
+                                                </li>
                                             </li>
 
                                             <li>
-                                                <a style="margin-left: 8%;" href="#">pesados</a>
+                                                <li class="dropdown">
+                                                    <a href="#">Pesados</a>
                                                     <ul class="shadow-box">
                                                         <li><a href="{% url 'motor' %}">BMW</a></li>
                                                         <li><a href="{% url 'motor' %}">Honda</a></li>
+                                                        
+                                                        
                                                     </ul>
+                                                </li>
                                             </li>
+                                            
                                         </ul>
-
                                     </li>
-
                                     <li class="dropdown">
                                         <a href="#">Freios</a>
                                         <ul class="shadow-box">
+                                            
                                             <li>
-                                                <a style="margin-left: 8%;" href="#">ligeiro</a>
+                                                <li class="dropdown">
+                                                    <a href="#">Ligeiro</a>
                                                     <ul class="shadow-box">
                                                         <li><a href="{% url 'freio' %}">BMW</a></li>
                                                         <li><a href="{% url 'freio' %}">Honda</a></li>
+                                                        
+                                                        
                                                     </ul>
+                                                </li>
                                             </li>
 
                                             <li>
-                                                <a style="margin-left: 8%;" href="#">pesados</a>
+                                                <li class="dropdown">
+                                                    <a href="#">Pesados</a>
                                                     <ul class="shadow-box">
                                                         <li><a href="{% url 'freio' %}">BMW</a></li>
                                                         <li><a href="{% url 'freio' %}">Honda</a></li>
+                                                        
+                                                        
                                                     </ul>
+                                                </li>
                                             </li>
+                                            
                                         </ul>
-
                                     </li>
-
                                     
                                 </ul>
                             </div>
                         </div>
-                        <div   class="main-menu__right">
+                        <div class="main-menu__right">
                             <div class="main-menu__call-search-btn-box">
                                 <div class="main-menu__call">
                                     <div class="main-menu__call-icon">
                                         <i class="fas fa-phone"></i>
                                     </div>
                                     <div class="main-menu__call-content">
-                                        <p class="main-menu__call-sub-title">suporte</p>
-                                        <h5 class="main-menu__call-number"><a href="tel:9288006780">
-                                                </a></h5>
+                                        <p style="color: black;" class="main-menu__call-sub-title"><a href="{% url 'suporte' %}">Suporte</a></p>
+                                        
                                     </div>
                                 </div>
-
-                                <div style="margin-right: 50%;" >
-                                    
-                                        <a href="{% url 'suporte' %}">Suporte</a>
-                                   
+                                
+                                <div>
+                                    <a href="{% url 'suporte' %}">Suporte</a>
                                 </div>
-                
-                                <div class="main-menu__btn-box">
-                                    <a href="#" class=""><i
-                                            class=""></i><img style="width: 50px;" src="{% static 'assets/img/angola.jpeg' %}" alt=""></i></a>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -424,6 +483,10 @@
                                             <h4 class="product__all-title"><a href="{% url 'produtos_detalhe' produto.id %}">{{ produto.nome }}</a></h4>
                                             <p class="product__all-price">kz{{ produto.preco }}</p>
                                             <div class="product__all-review">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                             </div>
                                         </div>
@@ -652,8 +715,8 @@
         <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
 
         <div class="logo-box">
-            <a href="index.html" aria-label="logo image"><img src="{% static 'assets/images/resources/logo-2.png' %}" width="143"
-                    alt="" /></a>
+            <a href="index.html" aria-label="logo image">
+                    Vetor5</a>
         </div>
         <!-- /.logo-box -->
         <div class="mobile-nav__container"></div>
@@ -662,21 +725,14 @@
         <ul class="mobile-nav__contact list-unstyled">
             <li>
                 <i class="fa fa-envelope"></i>
-                <a href="mailto:needhelp@packageName__.com">muquissicarlos@gmail.com</a>
+                <a href="#">muquissicarlos@gmail.com</a>
             </li>
             <li>
                 <i class="fa fa-phone-alt"></i>
                 <a href="tel:666-888-0000">923908353</a>
             </li>
         </ul><!-- /.mobile-nav__contact -->
-        <div class="mobile-nav__top">
-            <div class="mobile-nav__social">
-                <a href="#" class="fab fa-twitter"></a>
-                <a href="#" class="fab fa-facebook-square"></a>
-                <a href="#" class="fab fa-pinterest-p"></a>
-                <a href="#" class="fab fa-instagram"></a>
-            </div><!-- /.mobile-nav__social -->
-        </div><!-- /.mobile-nav__top -->
+        
 
 
     </div>
