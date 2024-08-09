@@ -8,6 +8,7 @@ from .forms import CategoriaProdutoForm, ContatoForm, Contato_empresa
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+import PyPDF2
 from .forms import FornecedorForm, PedidoEmpresaForm
 from django.core.files.storage import FileSystemStorage
 from .models import Carrinho, ItemCarrinho, Pedido, ItemPedido, Pedido_empresa
@@ -779,7 +780,7 @@ from django.utils import timezone
 
 
 
-import PyPDF2
+
 
 def pagamento_view(request, pedido_id):
     if request.method == 'POST':
