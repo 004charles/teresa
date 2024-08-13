@@ -1050,7 +1050,7 @@ def finalizar_compra(request):
 
 
 from django.core.mail import send_mail
-
+import PyPDF2
 from PyPDF2 import PdfReader  # Substitua PdfFileReader por PdfReader
 
 def pagamento_view(request, pedido_id):
