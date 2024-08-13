@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .models import Gerente,Avaliacao , Cliente, Empresas, Marca_produto, Categoria_produto
+from .models import Gerente, Cliente, Empresas, Marca_produto, Categoria_produto
 from .models import Condicao, Fornecedor, Produtos, Carrinho_empresa, Iban
 from .forms import MarcaProdutoForm
-from .models import Categoria_produto, Carrinho,  Estoque, Noticia,  Marca_index, Video, ItemPedidoEmpresa
+from .models import Categoria_produto, Estoque, Noticia,  Marca_index, Video, ItemPedidoEmpresa
 from .forms import CategoriaProdutoForm, ContatoForm, Contato_empresa
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -114,12 +114,55 @@ def contactar_gerente(request):
 def cliente(request):
     if 'cliente' in request.session:
         cliente_id = request.session['cliente']
-        cliente = get_object_or_404(Cliente, id=cliente_id)
-        produto = Produtos.objects.all()
-        categoria = Categoria_produto.objects.all()
-        pedidos = Pedido.objects.filter(usuario=cliente)
-        # Passa os pedidos para o contexto
-        return render(request, 'cliente.html', {'cliente': cliente, 'produto': produto, 'categoria': categoria, 'pedidos': pedidos})
+        
+        try:
+            # Obtém o cliente da base de dados
+            cliente = Cliente.objects.get(id=cliente_id)
+            
+            # Obtém todos os produtos e categorias
+            produto = Produtos.objects.all()
+            categoria = Categoria_produto.objects.all()
+
+            # Obtém o carrinho do cliente, cria um novo se não existir
+            carrinho, created = Carrinho.objects.get_or_create(cliente=cliente)
+            itens = ItemCarrinho.objects.filter(carrinho=carrinho)
+
+            # Calcula subtotal e total
+            subtotal = sum(item.subtotal() for item in itens)
+            total = subtotal
+
+            if request.method == 'POST':
+                form = PedidoForm(request.POST)
+                if form.is_valid():
+                    pedido = form.save(commit=False)
+                    pedido.usuario = cliente
+                    pedido.save()
+
+                    for item in itens:
+                        ItemPedido.objects.create(
+                            pedido=pedido,
+                            produto=item.produto,
+                            quantidade=item.quantidade
+                        )
+
+                    # REDIRECIONAR para pagamento APÓS CRIAR O PEDIDO
+                    return redirect('pagamento', pedido_id=pedido.id)
+            else:
+                form = PedidoForm()
+
+            return render(request, 'cliente.html', {
+                'cliente': cliente,
+                'produto': produto,
+                'categoria': categoria,
+                'itens': itens,
+                'carrinho': carrinho,
+                'form': form,
+                'subtotal': subtotal,
+                'total': total
+            })
+
+        except Cliente.DoesNotExist:
+            return HttpResponse("Cliente não encontrado.", status=404)
     else:
         return HttpResponse("Você não está autenticado para acessar esta página.")
 
@@ -128,16 +171,21 @@ def remover_do_carrinho(request, produto_id):
     if 'cliente' in request.session:
         cliente_id = request.session['cliente']
         cliente = get_object_or_404(Cliente, id=cliente_id)
-        # Busca o item do carrinho associado ao cliente e produto especificado
-        item = get_object_or_404(Carrinho, cliente=cliente, produto_id=produto_id)
+        carrinho = get_object_or_404(Carrinho, cliente=cliente)
+
+        # Busca o ItemCarrinho associado ao cliente, ao carrinho e ao produto especificado
+        item = get_object_or_404(ItemCarrinho, carrinho=carrinho, produto_id=produto_id)
         item.delete()  # Remove o item do carrinho
+
     return redirect('/vetor5/carrinho/')  # Redireciona de volta para a página do carrinho
+
 
 def historico_cliente(request):
     pass
 
 def login_cliente(request):
-    return render(request, 'login_cliente.html')
+    status = request.GET.get('status')
+    return render(request, 'login_cliente.html', {'status':status})
 
 def valida_login_cliente(request):
     if request.method == 'POST':
@@ -151,45 +199,51 @@ def valida_login_cliente(request):
             return redirect('/vetor5/cliente/')
         else:
             return redirect('/vetor5/login_cliente/?status=1')
+        
     return render(request, 'login.html')
 
 
 def cadastro_cliente(request):
-    return render(request, 'cadastro_cliente.html')
+    status = request.GET.get('status')
+    return render(request, 'cadastro_cliente.html', {'status':status})
 
 def valida_cadastro_cliente(request):
-   nome =  request.POST.get('nome')
-   senha = request.POST.get('senha')
-   email = request.POST.get('email')
-   foto = request.POST.get('foto')
-   
-   cliente = Cliente.objects.filter(email = email, nome = nome, senha = senha, foto = foto)
-   #---------------------aqui----------------------
-   if len(nome.strip()) == 0 or len(email.strip()) == 0:
-       return redirect('/SITE_ADMISSAO/logado/?status=9')
-   
-   if len(senha) < 8:
-       return redirect('/SITE_ADMISSAO/logado/?status=10')
-   
-   if len(cliente) > 0:
-       return redirect('/SITE_ADMISSAO/logado/?status=11')
-   
-   try:
-       #senha = sha256(senha.encode()).hexdigest
-       cliente = Cliente(nome = nome, senha = senha, email = email, foto = foto)
-       cliente.save()
-       return redirect('/vetor5/login_cliente/?status=1')
-   except:
-       return redirect('/SITE_ADMISSAO/cadastro/?status=4')
-       #return HttpResponse(f"{nome}, {senha}, {email}")
+    nome = request.POST.get('nome')
+    senha = request.POST.get('senha')
+    email = request.POST.get('email')
+
+    print(f"Nome: {nome}, Senha: {senha}, Email: {email}")
+
+    if len(nome.strip()) == 0 or len(email.strip()) == 0:
+        print("Erro: Nome ou Email em branco.")
+        return redirect('/vetor5/cadastro_cliente/?status=9')
+
+    if len(senha) < 8:
+        print("Erro: Senha menor que 8 caracteres.")
+        return redirect('/vetor5/cadastro_cliente/?status=10')
+
+    cliente = Cliente.objects.filter(email=email, nome=nome).exists()
+
+    if cliente:
+        print("Erro: Cliente já cadastrado.")
+        return redirect('/vetor5/cadastro_cliente/?status=11')
+
+    try:
+        cliente = Cliente(nome=nome, senha=senha, email=email)
+        cliente.save()
+        print("Cliente salvo com sucesso.")
+        return redirect('/vetor5/cadastro_cliente/?status=1')
+    except Exception as e:
+        print(f"Erro ao salvar cliente: {e}")  # Isto irá mostrar o erro específico
+        return redirect('/vetor5/cadastro_cliente/?status=4')
 
 def valida_cadastro_gerente_cliente(request):
    nome =  request.POST.get('nome')
    senha = request.POST.get('senha')
    email = request.POST.get('email')
-   foto = request.POST.get('foto')
    
-   cliente = Cliente.objects.filter(email = email, nome = nome, senha = senha, foto = foto)
+   
+   cliente = Cliente.objects.filter(email = email, nome = nome, senha = senha)
    #---------------------aqui----------------------
    if len(nome.strip()) == 0 or len(email.strip()) == 0:
        return redirect('/SITE_ADMISSAO/logado/?status=9')
@@ -202,7 +256,7 @@ def valida_cadastro_gerente_cliente(request):
    
    try:
        #senha = sha256(senha.encode()).hexdigest
-       cliente = Cliente(nome = nome, senha = senha, email = email, foto = foto)
+       cliente = Cliente(nome = nome, senha = senha, email = email)
        cliente.save()
        return redirect('/vetor5/gerente/?status=1')
    except:
@@ -212,14 +266,56 @@ def valida_cadastro_gerente_cliente(request):
 def empresa(request):
     if 'empresa' in request.session:
         empresa_id = request.session['empresa']
-        empresa = get_object_or_404(Empresas, id=empresa_id)
-        pedidos = Pedido_empresa.objects.filter(empresa=empresa)
-        produtos = Produtos.objects.all()
+        
+        try:
+            # Obtém a empresa da base de dados
+            empresa = Empresas.objects.get(id=empresa_id)
+            
+            # Obtém todos os produtos
+            produtos = Produtos.objects.all()
 
-        # Passa os dados para o contexto
-        return render(request, 'empresa.html', {'empresa': empresa, 'pedidos': pedidos, 'produtos':produtos})
+            # Obtém o carrinho da empresa, cria um novo se não existir
+            carrinho_empresa, created = Carrinho_empresa.objects.get_or_create(empresa=empresa)
+            itens = ItemCarrinho.objects.filter(carrinho_empresa=carrinho_empresa)
+
+            # Calcula subtotal e total
+            subtotal = sum(item.subtotal() for item in itens)
+            total = subtotal
+
+            if request.method == 'POST':
+                form = PedidoForm(request.POST)
+                if form.is_valid():
+                    pedido = form.save(commit=False)
+                    pedido.empresa = empresa
+                    pedido.save()
+
+                    for item in itens:
+                        ItemPedidoEmpresa.objects.create(
+                            pedido=pedido,
+                            produto=item.produto,
+                            quantidade=item.quantidade
+                        )
+
+                    # REDIRECIONAR para pagamento APÓS CRIAR O PEDIDO
+                    return redirect('pagamento_empresa', pedido_id=pedido.id)
+            else:
+                form = PedidoForm()
+
+            return render(request, 'empresa.html', {
+                'empresa': empresa,
+                'produto': produtos,
+                'carrinho_empresa': carrinho_empresa,
+                'itens': itens,
+                'form': form,
+                'subtotal': subtotal,
+                'total': total
+            })
+
+        except Empresas.DoesNotExist:
+            return HttpResponse("Empresa não encontrada.", status=404)
     else:
         return redirect('/vetor5/login_empresa/?status=2')
+
 
 
 def excluir_usuario(request, id):
@@ -301,33 +397,33 @@ def valida_login_empresa(request):
 
 
 def cadastro_empresa(request):
-   return render(request, 'cadastro_empresa.html')
+    status = request.GET.get('status')
+    return render(request, 'cadastro_empresa.html', {'status':status})
 
 def valida_cadastro_empresa(request):
    nome =  request.POST.get('nome')
    senha = request.POST.get('senha')
    email = request.POST.get('email')
-   foto = request.POST.get('foto')
    nif = request.POST.get('nif')
    
-   empresa = Empresas.objects.filter(email = email, nome = nome, senha = senha, foto = foto, nif = nif)
+   empresa = Empresas.objects.filter(email = email, nome = nome, senha = senha, nif = nif)
    #---------------------aqui----------------------
    if len(nome.strip()) == 0 or len(email.strip()) == 0:
-       return redirect('/SITE_ADMISSAO/logado/?status=9')
+       return redirect('/vetor5/cadastro_empresa/?status=9')
    
    if len(senha) < 8:
-       return redirect('/vetor5/login/?status=10')
+       return redirect('/vetor5/cadastro_empresa/?status=10')
    
    if len(empresa) > 0:
-       return redirect('/vetor5/login/logado/?status=11')
+       return redirect('/vetor5/cadastro_empresa/?status=11')
    
    try:
        #senha = sha256(senha.encode()).hexdigest
-       empresa = Empresas(nome = nome, senha = senha, email = email, foto = foto, nif = nif)
+       empresa = Empresas(nome = nome, senha = senha, email = email, nif = nif)
        empresa.save()
-       return redirect('/vetor5/login_cliente/?status=1')
+       return redirect('/vetor5/login_empresa/?status=1')
    except:
-       return redirect('/vetor5/login/?status=4')
+       return redirect('/vetor5/cadastro_empresa/?status=4')
        #return HttpResponse(f"{nome}, {senha}, {email}")
 
 
@@ -342,18 +438,6 @@ def produto_detalhe(request, produto_id):
     else:
         return HttpResponse("Voce nao esta autenticado para esta pagina")
 
-def avaliar_produto(request):
-    if 'cliente' in request.session:
-        nome =  request.POST.get('nome')
-        email = request.POST.get('email')
-        avaliacao  = request.POST.get('avaliacao')
-        
-        avalia = Avaliacao(nome = nome, email = email, avaliacao = avaliacao)
-        avalia.save()
-        return HttpResponse("Mensagem enviada")
-    else:
-        return HttpResponse("Voce nao esta autenticado para esta pagina")
-    
 def cadastro_produto(request):
     return render(request, 'cadastro_produto.html')
 
@@ -368,16 +452,22 @@ def adicionar_produto(request):
     if request.method == 'POST':
         form = ProdutoForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()  # Salva os dados no banco de dados
-            return redirect('/vetor5/adicionar_produto/')  # Altere 'pagina_de_sucesso' para a rota desejada
+            print("Formulário é válido")
+            form.save()
+            return redirect('/vetor5/adicionar_produto/')  # Redireciona após salvar o produto
+        else:
+            print("Formulário não é válido")
+            print(form.errors)  # Adicione isso para ver os erros do formulário
     else:
         form = ProdutoForm()
-    
+
+    # Consultando as tabelas relacionadas para popular os campos do formulário
     marcas = Marca_produto.objects.all()
     categorias = Categoria_produto.objects.all()
     condicoes = Condicao.objects.all()
     fornecedores = Fornecedor.objects.all()
-    
+
+    # Contexto a ser enviado para o template
     context = {
         'form': form,
         'marcas': marcas,
@@ -385,8 +475,10 @@ def adicionar_produto(request):
         'condicoes': condicoes,
         'fornecedores': fornecedores,
     }
-    
+
+    # Renderiza o template com o formulário e os dados adicionais
     return render(request, 'cadastro_produto.html', context)
+
 
 def contacto_cliente(request):
     if 'cliente' in request.session:
@@ -463,16 +555,60 @@ def selecionar_produto(request):
 
 
 def carrinho(request):
-    cliente_id = request.session.get('cliente')
-    if not cliente_id:
-        return redirect('/vetor5/login_cliente/?status=2')  # Redireciona para a página de login se não estiver logado
+    if 'cliente' in request.session:
+        cliente_id = request.session['cliente']
+        
+        try:
+            # Obtém o cliente da base de dados
+            cliente = Cliente.objects.get(id=cliente_id)
+            
+            # Obtém todos os produtos e categorias
+            produto = Produtos.objects.all()
+            categoria = Categoria_produto.objects.all()
 
-    cliente = get_object_or_404(Cliente, id=cliente_id)
-    itens = Carrinho.objects.filter(cliente=cliente)
-    return render(request, 'carrinho.html', {
-        'itens': itens,
-        'cliente': cliente
-    })
+            # Obtém o carrinho do cliente, cria um novo se não existir
+            carrinho, created = Carrinho.objects.get_or_create(cliente=cliente)
+            itens = ItemCarrinho.objects.filter(carrinho=carrinho)
+
+            # Calcula subtotal e total
+            subtotal = sum(item.subtotal() for item in itens)
+            total = subtotal
+
+            if request.method == 'POST':
+                form = PedidoForm(request.POST)
+                if form.is_valid():
+                    pedido = form.save(commit=False)
+                    pedido.usuario = cliente
+                    pedido.save()
+
+                    for item in itens:
+                        ItemPedido.objects.create(
+                            pedido=pedido,
+                            produto=item.produto,
+                            quantidade=item.quantidade
+                        )
+
+                    # REDIRECIONAR para pagamento APÓS CRIAR O PEDIDO
+                    return redirect('pagamento', pedido_id=pedido.id)
+            else:
+                form = PedidoForm()
+
+            return render(request, 'carrinho.html', {
+                'cliente': cliente,
+                'produto': produto,
+                'categoria': categoria,
+                'itens': itens,
+                'carrinho': carrinho,
+                'form': form,
+                'subtotal': subtotal,
+                'total': total
+            })
+
+        except Cliente.DoesNotExist:
+            return HttpResponse("Cliente não encontrado.", status=404)
+    else:
+        return HttpResponse("Você não está autenticado para acessar esta página.")
+
 
 
 def carrinho_empresa(request):
@@ -512,7 +648,7 @@ def conta_login_gerente(request):
 def motor(request):
     categoria_motor = Categoria_produto.objects.get(nome = 'motor')
     produtos = Produtos.objects.filter(categoria=categoria_motor)
-    return render(request, 'motor.html', {'produtos':produtos})
+    return render(request, 'motor.html', {'categoria':categoria_motor, 'produtos':produtos})
 
 def freio(request):
     categoria_freio = Categoria_produto.objects.get(nome = 'freios')
@@ -520,14 +656,14 @@ def freio(request):
     return render(request, 'freio.html',{'produtos':produtos} )
 
 def eletrico(request):
-    categoria_eletrico = Categoria_produto.objects.get(nome = 'eletrico')
+    categoria_eletrico = Categoria_produto.objects.get(nome = 'sistema elétrico')
     produtos = Produtos.objects.filter(categoria=categoria_eletrico)
-    return render(request, 'eletrico.html',{'produtos':produtos})
+    return render(request, 'eletrico.html',{'categoria':categoria_eletrico, 'produtos':produtos})
 
 def interior_conforto(request):
-    categoria_interior_conforto = Categoria_produto.objects.get(nome = 'interior')
+    categoria_interior_conforto = Categoria_produto.objects.get(nome = 'Interior')
     produtos = Produtos.objects.filter(categoria=categoria_interior_conforto)
-    return render(request, 'interior_conforto.html',{'produtos':produtos})
+    return render(request, 'interior_conforto.html',{'categoria':categoria_interior_conforto, 'produtos':produtos})
 
 def carroceria(request):
     categoria_carroceria = Categoria_produto.objects.get(nome = 'carroceria')
@@ -535,15 +671,111 @@ def carroceria(request):
     return render(request, 'carroceria.html',{'produtos':produtos})
 
 def suspensao(request):
-    categoria_suspensao = Categoria_produto.objects.get(nome = 'suspensão')
+    categoria_suspensao = Categoria_produto.objects.get(nome = 'direção e suspensão')
     produtos = Produtos.objects.filter(categoria=categoria_suspensao)
-    return render(request, 'suspensao.html',{'produtos':produtos})
+    return render(request, 'suspensao.html',{'categoria':categoria_suspensao, 'produtos':produtos})
 
 def transmissao(request):
     categoria_transmissao = Categoria_produto.objects.get(nome = 'transmissão')
     produtos = Produtos.objects.filter(categoria=categoria_transmissao)
-    return render(request, 'transmissao.html',{'produtos':produtos})
+    return render(request, 'transmissao.html',{'categoria':produtos})
 
+#-----------------------------------------------
+from django.shortcuts import redirect
+
+def interior_cliente(request):
+    if 'cliente' not in request.session:
+        return redirect('login_url')  # Redireciona para a página de login se o usuário não estiver logado
+
+    cliente_id = request.session['cliente']
+    cliente = Cliente.objects.get(id=cliente_id)
+    
+    categoria_interior = get_object_or_404(Categoria_produto, nome='Interior')
+    produtos = Produtos.objects.filter(categoria=categoria_interior)
+    return render(request, 'interior_cliente.html', {'produtos': produtos, 'categoria': categoria_interior, 'cliente': cliente})
+
+def motor_cliente(request):
+    if 'cliente' not in request.session:
+        return redirect('login_url')
+
+    cliente_id = request.session['cliente']
+    cliente = Cliente.objects.get(id=cliente_id)
+
+    categoria_motor = get_object_or_404(Categoria_produto, nome='motor')
+    produtos = Produtos.objects.filter(categoria=categoria_motor)
+    return render(request, 'motor_cliente.html', {'produtos': produtos, 'categoria': categoria_motor, 'cliente': cliente})
+
+def sistema_eletrico_cliente(request):
+    if 'cliente' not in request.session:
+        return redirect('login_url')
+
+    cliente_id = request.session['cliente']
+    cliente = Cliente.objects.get(id=cliente_id)
+
+    categoria_sistema_eletrico = get_object_or_404(Categoria_produto, nome='sistema elétrico')
+    produtos = Produtos.objects.filter(categoria=categoria_sistema_eletrico)
+    return render(request, 'sistema_eletrico_cliente.html', {'produtos': produtos, 'categoria': categoria_sistema_eletrico, 'cliente': cliente})
+
+def direcao_suspensao_cliente(request):
+    if 'cliente' not in request.session:
+        return redirect('login_url')
+
+    cliente_id = request.session['cliente']
+    cliente = Cliente.objects.get(id=cliente_id)
+
+    categoria_direcao_suspensao = get_object_or_404(Categoria_produto, nome='direção e suspensão')
+    produtos = Produtos.objects.filter(categoria=categoria_direcao_suspensao)
+    return render(request, 'direcao_suspensao_cliente.html', {'produtos': produtos, 'categoria': categoria_direcao_suspensao, 'cliente': cliente})
+
+#------------------empresas------------------------
+
+def interior_empresa(request):
+    if 'empresa' not in request.session:
+        return redirect('login_empresa')  # Redireciona para a página de login se a empresa não estiver logada
+
+    empresa_id = request.session['empresa']
+    empresa = Empresas.objects.get(id=empresa_id)
+    
+    categoria_interior = get_object_or_404(Categoria_produto, nome='Interior')
+    produtos = Produtos.objects.filter(categoria=categoria_interior)
+    return render(request, 'interior_empresa.html', {'produtos': produtos, 'categoria': categoria_interior, 'empresa': empresa})
+
+
+
+def motor_empresa(request):
+    if 'empresa' not in request.session:
+        return redirect('login_empresa')
+
+    empresa_id = request.session['empresa']
+    empresa = Empresas.objects.get(id=empresa_id)
+
+    categoria_motor = get_object_or_404(Categoria_produto, nome='motor')
+    produtos = Produtos.objects.filter(categoria=categoria_motor)
+    return render(request, 'motor_empresa.html', {'produtos': produtos, 'categoria': categoria_motor, 'empresa': empresa})
+
+
+def sistema_eletrico_empresa(request):
+    if 'empresa' not in request.session:
+        return redirect('login_empresa')
+
+    empresa_id = request.session['empresa']
+    empresa = Empresas.objects.get(id=empresa_id)
+
+    categoria_sistema_eletrico = get_object_or_404(Categoria_produto, nome='sistema elétrico')
+    produtos = Produtos.objects.filter(categoria=categoria_sistema_eletrico)
+    return render(request, 'sistema_eletrico_empresa.html', {'produtos': produtos, 'categoria': categoria_sistema_eletrico, 'empresa': empresa})
+
+
+def direcao_suspensao_empresa(request):
+    if 'empresa' not in request.session:
+        return redirect('login_empresa')
+
+    empresa_id = request.session['empresa']
+    empresa = Empresas.objects.get(id=empresa_id)
+
+    categoria_direcao_suspensao = get_object_or_404(Categoria_produto, nome='direção e suspensão')
+    produtos = Produtos.objects.filter(categoria=categoria_direcao_suspensao)
+    return render(request, 'direcao_suspensao_empresa.html', {'produtos': produtos, 'categoria': categoria_direcao_suspensao, 'empresa': empresa})
 
 #------------------------comprar------------------------------
 
@@ -589,24 +821,68 @@ def eliminar_estoque(request, id):
     return redirect('/vetor5/estoque/')
 
 
+
+import cv2
+import numpy as np
+from django.shortcuts import render
+from .models import Produtos
+
 def pesquisar(request):
-    nome_filtrar = request.GET.get('mome_filtrar')
+    nome_filtrar = request.GET.get('nome_filtrar')
+    imagem_filtrar = request.FILES.get('imagem_filtrar')
 
     if nome_filtrar:
         produtos = Produtos.objects.filter(nome__icontains=nome_filtrar)
+    elif imagem_filtrar:
+        produtos = []
+        query_image = cv2.imdecode(np.fromstring(imagem_filtrar.read(), np.uint8), cv2.IMREAD_COLOR)
+
+        for produto in Produtos.objects.all():
+            produto_imagem_path = produto.imagem.path
+            produto_imagem = cv2.imread(produto_imagem_path)
+
+            # Comparação básica usando histogramas (por exemplo)
+            hist_query = cv2.calcHist([query_image], [0, 1, 2], None, [8, 8, 8], [0, 256, 0, 256, 0, 256])
+            hist_produto = cv2.calcHist([produto_imagem], [0, 1, 2], None, [8, 8, 8], [0, 256, 0, 256, 0, 256])
+
+            # Comparar as imagens (quanto menor a diferença, mais próximas as imagens)
+            diff = cv2.compareHist(hist_query, hist_produto, cv2.HISTCMP_CORREL)
+            if diff > 0.7:  # Ajuste o limiar conforme necessário
+                produtos.append(produto)
     else:
-        produtos = Produtos.objects.all()  # Ajuste conforme o seu modelo
-    return render(request, 'ver_produto.html', {'produtos': produtos})
+        produtos = Produtos.objects.all()
+
+    return render(request, 'cliente.html', {'produto': produtos})
+
+
 
 
 def pesquisare(request):
-    nome_filtrar = request.GET.get('mome_filtrar')
+    nome_filtrar = request.GET.get('nome_filtrar')
+    imagem_filtrar = request.FILES.get('imagem_filtrar')
 
     if nome_filtrar:
         produtos = Produtos.objects.filter(nome__icontains=nome_filtrar)
+    elif imagem_filtrar:
+        produtos = []
+        query_image = cv2.imdecode(np.fromstring(imagem_filtrar.read(), np.uint8), cv2.IMREAD_COLOR)
+
+        for produto in Produtos.objects.all():
+            produto_imagem_path = produto.imagem.path
+            produto_imagem = cv2.imread(produto_imagem_path)
+
+            # Comparação básica usando histogramas (por exemplo)
+            hist_query = cv2.calcHist([query_image], [0, 1, 2], None, [8, 8, 8], [0, 256, 0, 256, 0, 256])
+            hist_produto = cv2.calcHist([produto_imagem], [0, 1, 2], None, [8, 8, 8], [0, 256, 0, 256, 0, 256])
+
+            # Comparar as imagens (quanto menor a diferença, mais próximas as imagens)
+            diff = cv2.compareHist(hist_query, hist_produto, cv2.HISTCMP_CORREL)
+            if diff > 0.7:  # Ajuste o limiar conforme necessário
+                produtos.append(produto)
     else:
-        produtos = Produtos.objects.all()  # Ajuste conforme o seu modelo
-    return render(request, 'estoque.html', {'produtos': produtos})
+        produtos = Produtos.objects.all()
+
+    return render(request, 'ver_produto.html', {'produtos': produtos})
 
 
 def pesquisar_ver(request):
@@ -693,9 +969,11 @@ def pedido_empresa_gerente(request):
 
     cliente = get_object_or_404(Empresas, id=cliente_id)
     itens = Pedido_empresa.objects.filter(empresa=cliente)
+    produto = Produtos.objects.all()
     return render(request, 'pedido_empresa_gerente.html', {
         'itens': itens,
-        'cliente': cliente
+        'cliente': cliente,
+        'produto':produto
     })
 
 
@@ -771,16 +1049,9 @@ def finalizar_compra(request):
 
 
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from .models import Fatura, Cliente, Pedido, Produtos, ItemPedido, Carrinho
-from .forms import PedidoForm 
-from django.core.files.storage import FileSystemStorage  
-from django.utils import timezone  
+from django.core.mail import send_mail
 
-
-
-
+from PyPDF2 import PdfReader  # Substitua PdfFileReader por PdfReader
 
 def pagamento_view(request, pedido_id):
     if request.method == 'POST':
@@ -788,22 +1059,21 @@ def pagamento_view(request, pedido_id):
         if not cliente_id:
             return HttpResponse("Cliente não encontrado na sessão.", status=404)
 
-        comprovante = request.FILES.get('comprovativo') 
+        comprovante = request.FILES.get('comprovativo')
 
         if comprovante:
             fs = FileSystemStorage()
             filename = fs.save(comprovante.name, comprovante)
             file_path = fs.path(filename)
-            
+
             try:
                 with open(file_path, 'rb') as f:
-                    reader = PyPDF2.PdfFileReader(f)
-                    num_pages = reader.numPages
+                    reader = PdfReader(f)  # Usando PdfReader em vez de PdfFileReader
                     text = ""
-                    for page in range(num_pages):
-                        text += reader.getPage(page).extractText()
-                
-                if any(word in text for word in ["BAI", "Atlântico", "BPC"]):
+                    for page in reader.pages:
+                        text += page.extract_text()
+
+                if any(word in text for word in ["BAI", "ATLANTICO", "BPC"]):
                     file_url = fs.url(filename)
                     print(f"Pagamento recebido, comprovante: {file_url}")
 
@@ -818,18 +1088,27 @@ def pagamento_view(request, pedido_id):
                                 valor_total=pedido.total(),
                                 data_emissao=timezone.now()
                             )
-                            
+
                             carrinho = Carrinho.objects.get(cliente=cliente) 
-                            carrinho.produtos.clear()  
-                            
+                            carrinho.produtos.clear()
+
+                            send_mail(
+                            'Pedido Recebido',
+                            f'Olá {cliente.nome}, seu pedido foi recebido e está sendo processado.',
+                            'muquissicarlos@gmail.com',  # Substitua pelo seu email
+                            [cliente.email],
+                            fail_silently=False,
+                        )  
+
                             return redirect('/vetor5/faturas', fatura_id=fatura.id)
                         except Exception as e:
-                            return HttpResponse(f"Erro ao criar a fatura: {e}", status=500)
+                            return HttpResponse(f"Erro ao criar a fatura, Nome de usuário e senha não aceitos pelo google, esse dominio precisar estar hospedado! ", status=500)
                 else:
                     return HttpResponse("O comprovativo é inválido.", status=400)
 
             except Exception as e:
                 return HttpResponse(f"Erro ao ler o comprovativo: {e}", status=500)
+
 
 
     pedido = get_object_or_404(Pedido, pk=pedido_id) 
@@ -868,14 +1147,16 @@ def finalizar_compra_empresa(request):
             return redirect('/vetor5/login_empresa/?status=2')  # Redireciona para a página de login se não estiver logado
 
         empresa = Empresas.objects.get(id=empresa_id)
-        carrinho = Carrinho_empresa.objects.get(empresa=empresa)
+        carrinho = get_object_or_404(Carrinho_empresa, empresa=empresa)
+
+        # Obtém os itens do carrinho
         itens = ItemCarrinho.objects.filter(carrinho_empresa=carrinho)
 
         if not itens:
-            return redirect('/vetor5/pagamento/?status=3')  # Carrinho vazio
+            return redirect('/vetor5/pagamento_empresa/?status=3')  # Carrinho vazio
 
         subtotal = sum(item.subtotal() for item in itens)
-        total = subtotal 
+        total = subtotal  # Ajuste se você tiver impostos ou outras taxas
 
         if request.method == 'POST':
             form = PedidoEmpresaForm(request.POST)
@@ -903,7 +1184,6 @@ def finalizar_compra_empresa(request):
                     data_emissao=timezone.now()
                 )
 
-                # Verifique se o pedido foi salvo corretamente e se possui um ID
                 if pedido.id:
                     return redirect('pagamento_empresa', pedido_id=pedido.id)
                 else:
@@ -924,17 +1204,16 @@ def finalizar_compra_empresa(request):
     except Carrinho_empresa.DoesNotExist:
         return HttpResponse("Carrinho não encontrado.", status=404)
     except Exception as e:
-        # Captura qualquer outra exceção não prevista
         return HttpResponse(f"Erro inesperado: {str(e)}", status=500)
 
 
 def pagamentos_empresa(request, pedido_id):
     empresa_id = request.session.get('empresa')
     if not empresa_id:
-        return redirect('/vetor5/login_empresa/?status=2')  # Redireciona para a página de login se não estiver logado
+        return redirect('/vetor5/login_empresa/?status=2')
 
     empresa = get_object_or_404(Empresas, id=empresa_id)
-    faturas = Fatura.objects.filter(empresa=empresa)  # Ajuste o filtro conforme seu modelo
+    faturas = Fatura.objects.filter(empresa=empresa)
 
     if request.method == 'POST':
         comprovante = request.FILES.get('comprovativo')
@@ -963,18 +1242,17 @@ def pagamentos_empresa(request, pedido_id):
                             data_emissao=timezone.now()
                         )
 
-                        # Limpar o carrinho
-                        carrinho = Carrinho_empresa.objects.get(empresa=empresa)  # Supondo que exista um modelo de Carrinho_empresa
-                        carrinho.itemcarrinho_set.all().delete()  # Remove todos os itens do carrinho
-                        
-                        return redirect('/vetor5/faturas', fatura_id=fatura.id)  # Corrigir URL para redirecionar adequadamente
+                        carrinho = Carrinho_empresa.objects.get(empresa=empresa)
+                        carrinho.itemcarrinho_set.all().delete()
+
+                        return redirect('/vetor5/faturas', fatura_id=fatura.id)
                     except Exception as e:
                         return HttpResponse(f"Erro ao criar a fatura: {e}", status=500)
                 else:
                     return HttpResponse("O comprovativo é inválido.", status=400)
 
             except Exception as e:
-                return HttpResponse(f"Erro ao ler o comprovativo: {e}", status=500)
+                return HttpResponse(f"Erro interno do sistema: {e}", status=500)
 
     return render(request, 'pagamento_empresa.html', {'empresa': empresa, 'faturas': faturas})
 
@@ -1016,28 +1294,45 @@ from .models import Pedido, Fatura, ItemPedido
 
 @login_required
 def gerar_fatura(request, pedido_id):
-    if 'cliente' in request.session:
-        cliente_id = request.session['cliente']
-        cliente = get_object_or_404(Cliente, id=cliente_id)
-        
-        # Verificar se o pedido pertence ao cliente autenticado
-        pedido = get_object_or_404(Pedido, id=pedido_id, usuario=cliente)
-        
-        # Calcular o valor total e criar a fatura (se necessário)
-        itens_pedido = pedido.item_pedido_set.all()
-        valor_total = sum(item.subtotal() for item in itens_pedido)
-        
-        # Adicione o código para criar a fatura, se necessário
+    """
+    Gera uma fatura para um pedido.
+    """
+    if 'gerente' in request.session:
+        try:
+            pedido = Pedido.objects.get(id=pedido_id)
+            cliente = pedido.usuario
+            tipo_cliente = "Cliente"
+            itens_pedido = pedido.item_pedido_set.all()
+        except Pedido.DoesNotExist:
+            pedido = get_object_or_404(Pedido_empresa, id=pedido_id)
+            cliente = pedido.empresa
+            tipo_cliente = "Empresa"
+            itens_pedido = pedido.itempedidoempresa_set.all()
+
+        valor_total = sum(item.quantidade * item.produto.preco for item in itens_pedido)
+        imposto = valor_total * 0.10
+        total_com_imposto = valor_total + imposto
+
         fatura = Fatura.objects.create(
-            cliente=cliente,
+            cliente=cliente if tipo_cliente == "Cliente" else None,
+            empresa=cliente if tipo_cliente == "Empresa" else None,
             pedido=pedido,
             valor_total=valor_total
         )
 
-        # Renderizar o template com os dados do pedido
-        return render(request, 'lista_facturas.html', {'pedido': pedido, 'itens_pedido': itens_pedido, 'valor_total': valor_total, 'faturas':fatura})
+        return render(request, 'pedido_empresa_gerente.html', {
+            'fatura': fatura,
+            'tipo_cliente': tipo_cliente,
+            'pedido': pedido,
+            'valor_total': valor_total,
+            'imposto': imposto,
+            'total_com_imposto': total_com_imposto,
+            'cliente': cliente,
+            'itens_pedido': itens_pedido
+        })
     else:
         return HttpResponse("Você não está autenticado para acessar esta página.")
+
 
 def lista_faturas(request):
     faturas = Fatura.objects.all()
@@ -1130,3 +1425,99 @@ def atualizar_ticket(request, id):
         ticket.save()
         return redirect('tickets_gerente')  # Redireciona de volta para a lista de tickets
     return render(request, 'suporte_gerente.html', {'ticket': ticket})
+
+from .models import ItemCarrinho, Carrinho, Carrinho_empresa
+from django.http import HttpResponse 
+
+def remover_produto_carrinho(request, produto_id):
+    try:
+        # Verifica se o cliente está logado 
+        cliente_id = request.session.get('cliente')
+        if cliente_id:
+            cliente = get_object_or_404(Cliente, id=cliente_id)
+            # A mudança principal:  Tenta obter o Carrinho usando filter
+            carrinho = Carrinho.objects.filter(cliente=cliente).first() 
+
+            if carrinho: 
+                item = ItemCarrinho.objects.filter(produto_id=produto_id, carrinho=carrinho).first()  
+                if item:  
+                    item.delete()
+                    return redirect('/vetor5/carrinho/')  
+                else: 
+                    return HttpResponse("Item não encontrado no carrinho.", status=404)
+            else: 
+                return HttpResponse("Você não tem itens em seu carrinho.", status=404)
+
+        # Verifica se a empresa está logada 
+        empresa_id = request.session.get('empresa')  
+        if empresa_id:
+            empresa = get_object_or_404(Empresas, id=empresa_id) 
+            carrinho_empresa = Carrinho_empresa.objects.filter(empresa=empresa).first() # Obtem o carrinho com filter.
+            if carrinho_empresa:
+                item = ItemCarrinho.objects.filter(produto_id=produto_id, carrinho_empresa=carrinho_empresa).first() 
+                if item:
+                    item.delete()
+                    return redirect('/vetor5/carrinho_empresa/') 
+                else:
+                    return HttpResponse("Item não encontrado no carrinho da empresa.", status=404)
+            else:
+                return HttpResponse("Você não tem itens no carrinho da empresa.", status=404)
+
+        # Caso o usuário não esteja logado como empresa nem cliente 
+        return HttpResponse("Você precisa estar logado para remover itens do carrinho.", status=403) 
+
+    except (Cliente.DoesNotExist, Carrinho.DoesNotExist, Carrinho_empresa.DoesNotExist, ItemCarrinho.DoesNotExist):
+        return HttpResponse("Carrinho ou Item não encontrado.", status=404)
+    except Exception as e:
+        return HttpResponse(f"Erro inesperado: {str(e)}", status=500)
+
+
+def remover_produto_carrinho_empresa(request, produto_id):
+    try:
+        empresa_id = request.session.get('empresa')
+        if not empresa_id:
+            return redirect('/vetor5/login_empresa/?status=2')
+
+        empresa = get_object_or_404(Empresas, id=empresa_id)
+        carrinho_empresa = Carrinho_empresa.objects.filter(empresa=empresa).first()
+
+        if carrinho_empresa: 
+            item = get_object_or_404(ItemCarrinho, produto_id=produto_id, carrinho_empresa=carrinho_empresa)
+            item.delete()
+            return redirect('/vetor5/carrinho_empresa/')
+        else:
+            return HttpResponse("Carrinho da empresa está vazio.", status=404)
+
+    except ItemCarrinho.DoesNotExist:
+        return HttpResponse("Item não encontrado no carrinho.", status=404)
+    except Carrinho_empresa.DoesNotExist:
+        return HttpResponse("Carrinho não encontrado.", status=404)
+    except Exception as e:
+        return HttpResponse(f"Erro inesperado: {str(e)}", status=500)
+    
+
+
+'''
+def adicionar_endereco(request):
+    if request.method == 'POST':
+        form = EnderecoForm(request.POST)
+        if form.is_valid():
+            endereco = form.save(commit=False)
+            endereco.cliente = request.user.cliente  
+            endereco.save()
+            return redirect('sucesso') 
+    else:
+        form = EnderecoForm()
+    return render(request, 'endereco.html', {'form': form})
+'''
+
+
+def produtos_por_marca(request, marca_nome):
+    # Filtra todas as instâncias da marca pelo nome
+    marca = Marca_produto.objects.filter(nome=marca_nome)
+    
+    # Filtra os produtos que pertencem a qualquer uma das instâncias de marca encontradas
+    produtos = Produtos.objects.filter(marca__in=marca)
+    
+    return render(request, 'nossas_marcas.html', {'produtos': produtos, 'marca': marca})
+

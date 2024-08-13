@@ -57,10 +57,6 @@
 
 
 
-    <div class="preloader">
-        <div class="preloader__image"></div>
-    </div>
-    <!-- /.preloader -->
 
 
     <div class="page-wrapper">
@@ -92,9 +88,9 @@
                 </div>
             </div>
         </section>
-        <!--Page Header End-->
+    
 
-        <!--Product Details Start-->
+    
         <section class="product-details">
             <div class="container">
                 <div class="row">
@@ -116,7 +112,7 @@
                         </div>
                         <div class="product-details__content">
                             <p class="product-details__content-text1">{{produto.descricao}}</p>
-                            <p class="product-details__content-text2">Peso : {{produto.peso}}KZ<br>
+                            <p class="product-details__content-text2">Peso : {{produto.peso}}kz<br>
                                 </p>
                         </div>
 
@@ -139,9 +135,7 @@
                 </div>
             </div>
         </section>
-        <!--Product Details End-->
-
-        <!--Product Description Start-->
+       
         <section class="product-description">
             <div class="container">
                 <h3 class="product-description__title">Descricao</h3>
@@ -153,52 +147,7 @@
             </div>
         </section>
 
-        <section class="review-one">
-            <div class="container">
-                <div class="comments-area">
-                    <div class="review-one__title">
-                        <h3>Avaliacaoes dos nossos clientes</h3>
-                    </div>
-                    <!--Start Comment Box-->
-                    <div class="comment-box">
-                        <div class="comment">
-                            <div class="author-thumb">
-                                <figure class="thumb"><img src="{% static 'assets/images/shop/review-1-1.jpg' %}" alt="">
-                                </figure>
-                            </div>
-
-                            <div class="review-one__content">
-                                <div class="review-one__content-top">
-                                    <div class="info">
-                                        <h2>Kevin Martin <span>20 Sep, 2021 . 4:00 pm</span></h2>
-                                    </div>
-                                    <div class="reply-btn">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-
-                                <div class="review-one__content-bottom">
-                                    <p>It has survived not only five centuries, but also the leap into electronic
-                                        typesetting unchanged. It was popularised in the sheets containing lorem ipsum
-                                        is simply free text. Class aptent taciti sociosqu ad litora torquent per conubia
-                                        nostra, per inceptos himenaeos. Vestibulum sollicitudin varius mauris non
-                                        dignissim.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End Comment Box-->
-
-        
-                </div>
-            </div>
-        </section>
-
-        <!--Product Description End-->
+       
         <section class="review-form-one">
             <div class="container">
                 <div class="review-form-one__inner">
@@ -213,7 +162,7 @@
                             <i class="fa fa-star"></i>
                         </div>
                     </div>
-                    <form action="{% url 'avaliar_produto' %}" method="POST" class="review-form-one__form contact-form-validated"
+                    <form action="#" method="POST" class="review-form-one__form contact-form-validated"
                         novalidate="novalidate"> {% csrf_token %}
                         <div class="row">
                             <div class="col-xl-12">
@@ -245,7 +194,7 @@
         </section>
         
 
-        <!--Site Footer Start-->
+    <!--Site Footer Start-->
     <footer class="site-footer">
         <div class="site-footer__top">
             <div class="site-footer__shape-1 float-bob-x">
@@ -276,11 +225,11 @@
                                 <h3 class="footer-widget__title">Explorar</h3>
                             </div>
                             <ul class="footer-widget__Explore-list list-unstyled">
-                                <li><a href="about.html">Sobre</a></li>
-                                <li><a href="about.html">Como Funciona</a></li>
-                                <li><a href="about.html">Hub de Conhecimento</a></li>
-                                <li><a href="news.html">Histórias de Sucesso</a></li>
-                                <li><a href="contact.html">Contato</a></li>
+                                <li><a href="#">Sobre</a></li>
+                                <li><a href="#">Como Funciona</a></li>
+                                <li><a href="#">Hub de Conhecimento</a></li>
+                                <li><a href="#">Histórias de Sucesso</a></li>
+                                <li><a href="#">Contato</a></li>
                             </ul>
                         </div>
                     </div>
@@ -290,11 +239,11 @@
                                 <h3 class="footer-widget__title">Categorias</h3>
                             </div>
                             <ul class="footer-widget__Explore-list list-unstyled">
-                                <li><a href="about.html">Equipamentos de Pesca</a></li>
-                                <li><a href="about.html">Acessórios Automotivos</a></li>
-                                <li><a href="about.html">Manutenção de Carros</a></li>
-                                <li><a href="about.html">Vestuário de Pesca</a></li>
-                                <li><a href="about.html">Peças e Ferramentas</a></li>
+                                <li><a href="#">Equipamentos de Pesca</a></li>
+                                <li><a href="#">Acessórios Automotivos</a></li>
+                                <li><a href="#">Manutenção de Carros</a></li>
+                                <li><a href="#">Vestuário de Pesca</a></li>
+                                <li><a href="#">Peças e Ferramentas</a></li>
                             </ul>
                         </div>
                     </div>
@@ -309,7 +258,7 @@
                                         <span class="icon-telephone"></span>
                                     </div>
                                     <div class="text">
-                                        <p><a href="tel:+5521987654321">923908353</a></p>
+                                        <p><a href="tel:"></a></p>
                                     </div>
                                 </li>
                                 <li>
@@ -317,7 +266,7 @@
                                         <span class="icon-email"></span>
                                     </div>
                                     <div class="text">
-                                        <p><a href="mailto:contato@loja.com">contato@loja.com</a></p>
+                                        <p><a href="mailto:contato@loja.com">vetor5@gmail.com</a></p>
                                     </div>
                                 </li>
                                 <li>
@@ -329,12 +278,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <div class="site-footer__social">
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-facebook"></i></a>
-                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
+                           
 
 
                         </div>
@@ -347,7 +291,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="site-footer__bottom-inner">
-                            <p class="site-footer__bottom-text">© Copyright 2024 por <a href="#">Loja de Pesca e Automóveis</a></p>
+                            <p class="site-footer__bottom-text">© Copyright 2024 por <a href="{% url 'login_gerente' %}">Vector5</a></p>
                         </div>
                     </div>
                 </div>
@@ -355,8 +299,6 @@
         </div>
     </footer>
     <!--Site Footer End-->
-
-
     </div><!-- /.page-wrapper -->
 
 

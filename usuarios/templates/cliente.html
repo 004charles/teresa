@@ -2,202 +2,521 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+<!-- Mirrored from qrowd-html.vercel.app/main-html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 07:09:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vetor5</title>
+    <!-- favicons Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png" />
+    <link rel="manifest" href="assets/images/favicons/site.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="description" content="Qrowd HTML 5 Template " />
 
-  <title>Cliente</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    {% load static %}
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    <!-- Vendor CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/animate/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/animate/custom-animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/jarallax/jarallax.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.pips.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/odometer/odometer.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/swiper/swiper.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/qrowd-icons/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/tiny-slider/tiny-slider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/reey-font/stylesheet.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bxslider/jquery.bxslider.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-select/css/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/vegas/vegas.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/jquery-ui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/timepicker/timePicker.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Template styles -->
+    <link rel="stylesheet" href="{% static 'assets/css/qrowd.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/qrowd-responsive.css' %}">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <style>
+        .form-container {
+            max-width: 600px; /* Limita a largura do formulário */
+            margin: 0 auto;   /* Centraliza o formulário horizontalmente */
+        }
+        .news-section {
+    background-color: #f8f9fa; /* Cor de fundo clara */
+    padding: 15px; /* Espaçamento interno */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    height: 400px; /* Altura da seção de notícias */
+    overflow: hidden; /* Oculta o excesso de conteúdo */
+    position: relative; /* Necessário para o posicionamento da rolagem */
+}
 
-  <!-- Vendor CSS Files -->
-  <link href="{% static 'assets3/vendor/aos/aos.css' %}" rel="stylesheet">
-  <link href="{% static 'assets3/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets3/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'assets3/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets3/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets3/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-  <!-- Vendor CSS Files -->
-  <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/animate/animate.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/animate/custom-animate.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/fontawesome/css/all.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/jarallax/jarallax.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.pips.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/odometer/odometer.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/swiper/swiper.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/qrowd-icons/style.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/tiny-slider/tiny-slider.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/reey-font/stylesheet.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.carousel.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.theme.default.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/bxslider/jquery.bxslider.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-select/css/bootstrap-select.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/vegas/vegas.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/jquery-ui/jquery-ui.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/timepicker/timePicker.css' %}">
-  
-  <!-- Template styles -->
-  <link rel="stylesheet" href="{% static 'assets/css/qrowd.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/qrowd-responsive.css' %}">
-  
+.news-list {
+    display: flex; /* Exibe itens em linha */
+    flex-direction: column; /* Alinha itens verticalmente */
+    animation: scrollNews 20s linear infinite; /* Animação de rolagem contínua */
+}
 
-  <!-- Template Main CSS File -->
-  <link href="{% static 'assets3/css/style.css' %}" rel="stylesheet">
+.news-item {
+    margin-bottom: 15px; /* Espaçamento abaixo de cada item de notícia */
+}
 
-  <style>
-    .form-container {
-        max-width: 600px; /* Limita a largura do formulário */
-        margin: 0 auto;   /* Centraliza o formulário horizontalmente */
+.news-item h5 {
+    margin-bottom: 5px; /* Espaçamento abaixo do título da notícia */
+}
+
+.news-item p {
+    color: #6c757d; /* Cor do texto da descrição */
+    font-size: 0.9rem; /* Tamanho da fonte */
+}
+
+/* Animação de rolagem contínua */
+@keyframes scrollNews {
+    0% {
+        transform: translateY(0);
     }
-</style>
+    100% {
+        transform: translateY(-100%);
+    }
+}
 
-</head>
 
-<body>
+.individuals-work__video-icon {
+    position: relative;
+    width: 560px; /* ajuste conforme necessário */
+    height: 315px; /* ajuste conforme necessário */
+}
 
-  <!-- ======= Mobile nav toggle button ======= -->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
 
-  <header id="header">
-    <div class="d-flex flex-column">
-        <div class="profile">
-            <img src="{{ cliente.foto.url }}" alt="Foto de {{ cliente.nome }}" class="img-fluid rounded-circle">
-            <h1 class="text-light"><a href="index.html">{{ cliente.nome }}</a></h1>
-            <div class="social-links mt-3 text-center">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-            </div>
-        </div>
-        <nav id="navbar" class="nav-menu navbar">
-            <ul>
-                <li><a href="{% url 'finalizar_compra' %}" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Meu carrinho</span></a></li>
-                <li><a href="{% url 'produto_cliente' %}" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Produtos</span></a></li>
-                <li><a href="{% url 'contacto_cliente' %}" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Contactar</span></a></li>
-                <li><a href="{% url 'listar_faturas' %}" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Relatorio de compra</span></a></li>
-                <li><a href="{% url 'sair' %}" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Sair</span></a></li>
-                <li><a href="{% url 'perfil_cliente' %}" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Configuracoes</span></a></li>
-            </ul>
-        </nav><!-- .nav-menu -->
-    </div>
-</header><!-- End Header -->
 
-  <main id="main">
+.custom-img {
+    width: 100%;
+    height: 200px; /* Altura fixa */
+    object-fit: cover; /* Redimensiona a imagem para preencher o contêiner */
+    display: block;
+    margin: 0 auto;
+}
 
-   
+
+.news-one__single {
+    display: flex;
+    flex-direction: column; /* Organiza os elementos em uma coluna */
+    height: auto; /* Ajusta a altura automaticamente com base no conteúdo */
+    box-sizing: border-box; /* Inclui o padding e a borda no cálculo da altura e largura */
+}
+
+.news-one__img-box {
+    height: auto; /* Permite que a caixa da imagem ajuste a altura automaticamente */
+}
+
+.news-one__img {
+    height: auto; /* Ajusta a altura da imagem para caber na caixa */
+    width: 100%; /* Garante que a imagem preencha a largura da caixa */
+}
+
+
+
+.news-section {
+    padding: 20px; /* Padding interno */
+    margin-left: 50px; /* Aumenta a margem à esquerda para afastar das notícias */
+    border: 1px solid #ddd; /* Adiciona uma borda para destaque, opcional */
+    border-radius: 8px; /* Arredonda os cantos, opcional */
+    background-color: #f9f9f9; /* Adiciona um fundo claro, opcional */
+}
+
+.news-one__content {
+    padding: 10px; /* Ajusta o padding interno */
+    display: flex;
+    flex-direction: column; /* Organiza o conteúdo em uma coluna */
+    justify-content: space-between; /* Espaça o conteúdo uniformemente */
+}
+
+.news-one__meta {
+    margin-bottom: 10px; /* Espaçamento inferior para o meta info */
+}
+
+.news-one__title {
+    font-size: 16px; /* Ajusta o tamanho da fonte do título */
+    margin: 10px 0; /* Espaçamento superior e inferior do título */
+}
+
+.news-one__bottom {
+    display: flex;
+    justify-content: space-between; /* Distribui o botão e o link de seta */
+}
+
+.news-one__button {
+    margin-top: 10px; /* Espaçamento superior para o botão */
+}
+
+.news-one__arrow {
+    margin-top: 10px; /* Espaçamento superior para a seta */
+}
+
+
+.home-showcase {
+    padding: 20px 0; /* Ajusta o padding para a seção */
+}
+
+.home-showcase__inner {
+    max-width: 1200px; /* Define a largura máxima para o conteúdo interno */
+    margin: 0 auto; /* Centraliza o container interno */
+}
+
+.home-showcase__item {
+    max-width: 300px; /* Define uma largura máxima para os itens */
+}
+
+.home-showcase__image img {
+    max-width: 100%; /* Garante que a imagem se ajuste à largura do contêiner */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+
+
+    </style>
 
     
+    
+</head>
 
-    <section class="product">
-      <div  class="container">
-          <div style="margin-top: 4%;" class="row">
-              <div class="col-xl-3 col-lg-3">
-                  <div class="product__sidebar">
-                    <div class="form-container">
-                        <form style="margin-bottom: 2%;" action="{% url 'pesquisar_cliente' %}" method="GET" class="d-flex justify-content-center">
+<body class="custom-cursor">
+
+    <div class="custom-cursor__cursor"></div>
+    <div class="custom-cursor__cursor-two"></div>
+
+
+
+
+    <!--
+    
+    <div class="preloader">
+        <div class="preloader__image"></div>
+    </div>
+    
+    -->
+
+
+
+    <div  class="page-wrapper">
+        <header class="main-header">
+            <nav class="main-menu">
+                <div class="main-menu__wrapper">
+                    <div class="main-menu__wrapper-inner clearfix">
+                        <div class="main-menu__left">
+                            <div class="main-menu__logo">
+                                <a href="{% url 'index' %}">Vetor5</a>
+                            </div>
+                            <div class="main-menu__main-menu-box">
+                                <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
+                                <ul class="main-menu__list">
+                                    <li class="dropdown">
+                                        <a href="#">Motor</a>
+                                        <ul class="shadow-box">
+                                            <li class="dropdown">
+                                                <a href="#">Ligeiro</a>
+                                                <ul class="shadow-box">
+                                                    <li><a href="{% url 'motor_cliente' %}">BMW</a></li>
+                                                    <li><a href="{% url 'motor_cliente' %}">Honda</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#">Pesados</a>
+                                                <ul class="shadow-box">
+                                                    <li><a href="{% url 'motor_cliente' %}">BMW</a></li>
+                                                    <li><a href="{% url 'motor_cliente' %}">Honda</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#">Direção e Suspensão</a>
+                                        <ul class="shadow-box">
+                                            <li class="dropdown">
+                                                <a href="#">Ligeiro</a>
+                                                <ul class="shadow-box">
+                                                    <li><a href="{% url 'direcao_suspensao_cliente' %}">BMW</a></li>
+                                                    <li><a href="{% url 'direcao_suspensao_cliente' %}">Honda</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#">Pesados</a>
+                                                <ul class="shadow-box">
+                                                    <li><a href="{% url 'direcao_suspensao_cliente' %}">BMW</a></li>
+                                                    <li><a href="{% url 'direcao_suspensao_cliente' %}">Honda</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#">Sistema Elétrico</a>
+                                        <ul class="shadow-box">
+                                            <li class="dropdown">
+                                                <a href="#">Ligeiro</a>
+                                                <ul class="shadow-box">
+                                                    <li><a href="{% url 'sistema_eletrico_cliente' %}">BMW</a></li>
+                                                    <li><a href="{% url 'sistema_eletrico_cliente' %}">Honda</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#">Pesados</a>
+                                                <ul class="shadow-box">
+                                                    <li><a href="{% url 'sistema_eletrico_cliente' %}">BMW</a></li>
+                                                    <li><a href="{% url 'sistema_eletrico_cliente' %}">Honda</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#">Interior</a>
+                                        <ul class="shadow-box">
+                                            <li class="dropdown">
+                                                <a href="#">Ligeiro</a>
+                                                <ul class="shadow-box">
+                                                    <li><a href="{% url 'interior_cliente' %}">BMW</a></li>
+                                                    <li><a href="{% url 'interior_cliente' %}">Honda</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#">Pesados</a>
+                                                <ul class="shadow-box">
+                                                    <li><a href="{% url 'interior_cliente' %}">BMW</a></li>
+                                                    <li><a href="{% url 'interior_cliente' %}">Honda</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="main-menu__right">
+                            <div class="main-menu__call-search-btn-box">
+                                <div class="main-menu__call">
+                                    <div class="main-menu__call-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="main-menu__call-content">
+                                        <p style="color: black;" class="main-menu__call-sub-title"><a href="{% url 'suporte' %}">Suporte</a></p>
+                                    </div>
+                                </div>
+
+                                
+                                <div>
+                                    <h1  style="font-size: 16px; margin-right: 8px;" >
+                                        <a href="{% url 'carrinho' %}"><svg style="width: 200;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                                          </svg></a>
+                                    </h1>
+                                </div>
+
+                                <div>
+                                    <h1 style="font-size: 16px; margin-right: 8px;" >{{cliente.nome}}</h1>
+                                </div>
+                                
+
+                               
+                                <div>
+                                    <a href=""><img style="width: 40px;" src="{% static 'assets/img/angola.jpeg' %}" alt=""></a>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        
+
+        <div class="stricky-header stricked-menu main-menu main-menu-two">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+
+        
+        
+
+
+
+        <section class="news-one" id="news">
+            <div class="container">
+                <div class="text-center mb-4">
+                    <div style="margin-top: 3%;" class="form-container">
+                        <form action="{% url 'pesquisar' %}" method="GET" enctype="multipart/form-data" class="d-flex justify-content-center">
                             {% csrf_token %}
-                            <input type="text" name="mome_cliente" placeholder="Pesquisar peças" class="form-control w-100">
+                            <input type="text" name="nome_filtrar" placeholder="Pesquisar peças" class="form-control w-50">
+                            <div class="position-relative w-25 mx-2">
+                                <input type="file" name="imagem_filtrar" accept="image/*" class="form-control" style="padding-left: 2.5rem;">
+                                <i class="fa fa-camera position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); color: #888;"></i>
+                            </div>
                             <input type="submit" value="Pesquisar" class="btn btn-primary">
                         </form>
                     </div>
-                      <div class="product__price-ranger product__sidebar-single">
-                          <h3 class="product__sidebar-title">Preço</h3>
-                          <div class="price-ranger">
-                              <div id="slider-range"></div>
-                              <div class="ranger-min-max-block">
-                                  <input type="text" readonly class="min">
-                                  <span>-</span>
-                                  <input type="text" readonly class="max">
-                                  <input type="submit" value="Filtrar">
-                              </div>
-                          </div>
-                      </div>
-                      <div class="shop-category product__sidebar-single">
-                          <h3 class="product__sidebar-title">Categorias</h3>
-                          <ul class="list-unstyled">
-                              {% for categoria in categoria %}
-                                  <li><a href="#">{{ categoria.nome }}</a></li>
-                              {% endfor %}
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-xl-9 col-lg-9">
-                  <div class="product__items">
-                      <div class="row">
-                          <div class="col-xl-12">
-                              <div class="product__showing-result">
-                                  <div class="product__showing-text-box">
-                                      <p class="product__showing-text">Mostrando {{ produtos.count }} Resultados</p>
-                                  </div>
-                    
-                              </div>
-                          </div>
-                      </div>
-                      <div class="product__all">
-                          <div class="row">
-                              {% for produto in produto %}
-                                  <div class="col-xl-4 col-lg-4 col-md-6">
-                                      <div class="product__all-single">
-                                          <div class="product__all-img">
-                                              <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
-                                              <div class="product__all-btn-box">
-                                                  <a href="{% url 'adicionar_ao_carrinho' produto.id %}" class="thm-btn product__all-btn"><i class="bi bi-cart-plus-fill"></i></a>
-                                              </div>
-                                          </div>
-                                          <div class="product__all-content">
-                                              <h4 class="product__all-title"><a href="{% url 'detalhe_produto' produto.id %}">{{ produto.nome }}</a></h4>
-                                              <p class="product__all-price">R$ {{ produto.preco }}</p>
-                                              <div class="product__all-review">
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                              </div>
-                                              <a href="{% url 'finalizar_compra' %}" style="margin-top: 2%;" class="thm-btn product__all-btn">Comprar</a>
+                </div>
+                
+                
+        
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12"> <!-- Ajustado para usar toda a largura disponível -->
+                        <div class="row">
+                            {% for produto in produto %}
+                            <div class="col-xl-3 col-lg-3 col-md-4 wow fadeInUp" data-wow-delay="300ms"> <!-- Alterado para 3 colunas -->
+                                <!--News One Single Start-->
+                                <div class="news-one__single">
+                                    <div class="news-one__img-box">
+                                        <div class="news-one__img">
+                                            <img style="width: 100%;" src="{{ produto.imagem.url }}" alt="" class="custom-img">
+                                            <a href="{% url 'adicionar_ao_carrinho' produto.id %}">
+                                                <span class="news-one__plus"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="news-one__content">
+                                        <ul class="news-one__meta list-unstyled">
+                                            <li>
+                                                <a href="#"><i class="fas fa-user-circle"></i>por Admin</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fas fa-comments"></i>02 Comentarios</a>
+                                            </li>
+                                        </ul>
+                                        <h3 class="news-one__title"><a href="{% url 'produtos_detalhe' produto.id %}">{{produto.nome}}</a></h3>
+                                        <div class="news-one__bottom">
+                                            <div class="news-one__button">
+                                                <a href="{% url 'produtos_detalhe' produto.id %}">Saber mais</a>
+                                            </div>
+                                            <div class="news-one__arrow">
+                                                <a href="{% url 'produtos_detalhe' produto.id %}"><span class="icon-right-arrow"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--News One Single End-->
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+        
+                   
+                </div>
+            </div>
+        </section>
+     
 
-                                          </div>
-                                      </div>
-                                  </div>
-                              {% empty %}
-                                  <p>Nenhum produto encontrado.</p>
-                              {% endfor %}
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-  
-  <!--Product End-->
-  </main><!-- End #main -->
 
-  
-  <!-- Vendor JS Files -->
-  <script src="{% static 'assets3/vendor/purecounter/purecounter_vanilla.js' %}"></script>
-  <script src="{% static 'assets3/vendor/aos/aos.js' %}"></script>
-  <script src="{% static 'assets3/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'assets3/vendor/glightbox/js/glightbox.min.js' %}"></script>
-  <script src="{% static 'assets3/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-  <script src="{% static 'assets3/vendor/swiper/swiper-bundle.min.js' %}"></script>
-  <script src="{% static 'assets3/vendor/typed.js/typed.umd.js' %}"></script>
-  <script src="{% static 'assets3/vendor/waypoints/noframework.waypoints.js' %}"></script>
-  <script src="{% static 'assets3/vendor/php-email-form/validate.js' %}"></script>
-  <script src="{% static 'assets/vendors/jquery/jquery-3.6.0.min.js' %}"></script>
+       
+
+<style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+
+
+               
+        
+        
+        
+</div><!-- /.page-wrapper -->
+
+
+<div class="mobile-nav__wrapper">
+    <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+    <!-- /.mobile-nav__overlay -->
+    <div class="mobile-nav__content">
+        <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+
+        <div class="logo-box">
+            <a href="index.html" aria-label="logo image">
+                    Vetor5</a>
+        </div>
+
+        
+        <!-- /.logo-box -->
+        <div class="mobile-nav__container"></div>
+        <!-- /.mobile-nav__container -->
+
+        <ul class="mobile-nav__contact list-unstyled">
+            <li>
+                <i class="fa fa-envelope"></i>
+                <a href="#">vetor5@gmail.com</a>
+            </li>
+            
+            
+        </ul><!-- /.mobile-nav__contact -->
+
+        <ul class="mobile-nav__contact list-unstyled">
+            <li>
+                <i class="fa fa-envelope"></i>
+                <a href="#"><img style="width: 40px;" src="{% static 'assets/img/angola.jpeg' %}" alt=""></a>
+            
+            </li>
+
+            <li>
+                <h1 style="font-size: 16px; margin-right: 8px;" >
+                    <a href="#"><svg style="width: 100;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                      </svg></a>
+                </h1>
+            </li>
+            
+        </ul><!-- /.mobile-nav__contact -->
+        
+
+
+    </div>
+    <!-- /.mobile-nav__content -->
+</div>
+<!-- /.mobile-nav__wrapper -->
+
+<div class="search-popup">
+    <div class="search-popup__overlay search-toggler"></div>
+    <!-- /.search-popup__overlay -->
+    <div class="search-popup__content">
+        <form action="#">
+            <label for="search" class="sr-only">pesquisar</label><!-- /.sr-only -->
+            <input type="text" id="search" placeholder="Search Here..." />
+            <button type="submit" aria-label="search submit" class="thm-btn">
+                <i class="icon-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
+
+    <!-- /.search-popup__content -->
+</div>
+<!-- /.search-popup -->
+
+<a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="icon-right-arrow"></i></a>
+
+
+
+<script src="{% static 'assets/vendors/jquery/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'assets/vendors/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'assets/vendors/jarallax/jarallax.min.js' %}"></script>
 <script src="{% static 'assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js' %}"></script>
@@ -226,10 +545,157 @@
 <!-- template js -->
 <script src="{% static 'assets/js/qrowd.js' %}"></script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const newsList = document.querySelector('.news-list');
+    const newsHeight = newsList.scrollHeight;
 
-  <!-- Template Main JS File -->
-  <script src="{% static 'assets3/js/main.js' %}"></script>
+    // Reproduz a animação de rolagem se necessário
+    newsList.style.animation = `scrollNews ${newsHeight / 50}s linear infinite`;
+});
+
+
+</script>
+
+<script>
+ 
+    document.addEventListener('DOMContentLoaded', function() {
+        const apiKey = 'YOUR_RAPIDAPI_KEY'; // Substitua pela sua chave da RapidAPI
+        const url = 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?q=car&count=10&offset=0';
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Host': 'contextualwebsearch-websearch-v1.p.rapidapi.com',
+                'X-RapidAPI-Key': apiKey
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const newsList = document.getElementById('news-list');
+            newsList.innerHTML = ''; // Limpa o conteúdo atual
+
+            data.value.forEach(newsItem => {
+                const newsHTML = `
+                    <div class="news-item">
+                        <img style="width: 200px;" src="${newsItem.urlToImage || 'default-image.jpg'}" alt="${newsItem.title}">
+                        <h5><a href="${newsItem.url}" target="_blank">${newsItem.title}</a></h5>
+                        <p>${newsItem.description || 'Descrição não disponível.'}</p>
+                    </div>
+                `;
+                newsList.innerHTML += newsHTML;
+            });
+        })
+        .catch(error => console.error('Erro ao buscar notícias:', error));
+    });
+
+
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const videoContainer = document.getElementById('video-container');
+        const videoFrame = document.getElementById('youtube-video');
+        const overlay = document.querySelector('.overlay');
+
+        // Carregar a API do IFrame Player do YouTube
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Cria o player do YouTube
+        let player;
+        window.onYouTubeIframeAPIReady = function() {
+            player = new YT.Player('youtube-video', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        };
+
+        function onPlayerReady(event) {
+            videoContainer.addEventListener('mouseenter', function() {
+                player.playVideo();
+                overlay.style.display = 'none'; // Esconde a sobreposição ao reproduzir o vídeo
+            });
+
+            videoContainer.addEventListener('mouseleave', function() {
+                player.pauseVideo();
+                overlay.style.display = 'flex'; // Mostra a sobreposição ao pausar o vídeo
+            });
+        }
+    });
+</script>
+
+<script>
+    function incrementarQuantidade(itemId) {
+        var quantidadeInput = document.getElementById("quantidade-" + itemId);
+        var quantidadeAtual = parseInt(quantidadeInput.value);
+        quantidadeInput.value = quantidadeAtual + 1;
+    }
+
+    function decrementarQuantidade(itemId) {
+        var quantidadeInput = document.getElementById("quantidade-" + itemId);
+        var quantidadeAtual = parseInt(quantidadeInput.value);
+        if (quantidadeAtual > 1) {
+            quantidadeInput.value = quantidadeAtual - 1;
+        }
+    }
+
+    function atualizarQuantidade(itemId) {
+        // Você precisará atualizar o carrinho do usuário no lado do servidor com o JavaScript aqui
+        // Você pode enviar um AJAX para uma nova URL.
+    }
+</script>
+
+
+
+<!-- Adicione o script do Google Maps no final do body -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap" async defer></script>
+
+<script>
+    let map;
+    let marker;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: -15.7801, lng: -47.9292 }, // Centralize no Brasil
+            zoom: 12,
+        });
+
+        marker = new google.maps.Marker({
+            map: map,
+            draggable: true,
+        });
+
+        const input = document.getElementById("endereco");
+        const autocomplete = new google.maps.places.Autocomplete(input);
+
+        autocomplete.addListener("place_changed", () => {
+            const place = autocomplete.getPlace();
+            if (!place.geometry) return;
+
+            map.setCenter(place.geometry.location);
+            marker.setPosition(place.geometry.location);
+            marker.setVisible(true);
+        });
+
+        map.addListener("click", (event) => {
+            const latLng = event.latLng;
+            marker.setPosition(latLng);
+            map.setCenter(latLng);
+
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ location: latLng }, (results, status) => {
+                if (status === "OK" && results[0]) {
+                    input.value = results[0].formatted_address;
+                }
+            });
+        });
+    }
+</script>
 
 </body>
-
 </html>

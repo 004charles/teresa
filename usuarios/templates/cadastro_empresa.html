@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Login Register || Qrowd || Qrowd HTML 5 Template </title>
+    <title> Cadastro</title>
     <!-- favicons Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
@@ -45,7 +45,20 @@
     <link rel="stylesheet" href="{% static 'assets/vendors/vegas/vegas.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendors/jquery-ui/jquery-ui.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendors/timepicker/timePicker.css' %}">
-    
+    <style>
+        .conta {
+      margin-top: 20px; /* Ajusta o espaçamento superior */
+  }
+  
+  .alert {
+      display: inline-block; /* Faz com que os alertas sejam inline e centralizados */
+      text-align: left; /* Alinha o texto à esquerda dentro do alerta */
+      max-width: 400px; /* Limita a largura máxima das mensagens */
+  }
+  
+  
+         
+     </style>
     <!-- Template styles -->
     <link rel="stylesheet" href="{% static 'assets/css/qrowd.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/qrowd-responsive.css' %}">
@@ -60,10 +73,6 @@
 
 
 
-    <div class="preloader">
-        <div class="preloader__image"></div>
-    </div>
-    <!-- /.preloader -->
 
 
     <div class="page-wrapper">
@@ -97,31 +106,62 @@
         </section>
         <!--Page Header End-->
 
+        <div class="conta">
+            <div class="text-center"> <!-- Centraliza o conteúdo -->
+                {% if status == '1' %}
+                    <div class="alert alert-success" role="alert">
+                        Cadastro realizado com sucesso!
+                    </div>
+                {% endif %} 
+        
+                {% if status == '9' %}
+                    <div class="alert alert-danger" role="alert">
+                        Nome e Email não podem estar vazios!
+                    </div>
+                {% endif %} 
+        
+                {% if status == '10' %}
+                    <div class="alert alert-danger" role="alert">
+                        Sua senha deve ter pelo menos 8 caracteres!
+                    </div>
+                {% endif %}
+        
+                {% if status == '11' %}
+                    <div class="alert alert-danger" role="alert">
+                        Usuário já existe no sistema!
+                    </div>
+                {% endif %} 
+        
+                {% if status == '4' %}
+                    <div class="alert alert-danger" role="alert">
+                        Erro interno do sistema!
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
         <section class="login-register">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
                         <h3 class="login-register__title">Cadastro</h3><!-- /.login-register__title -->
                         <form class="login-register__form" method="POST" action="{% url 'valida_cadastro_empresa' %}">{% csrf_token %}
+                           
                             <div class="contact-form__input-box">
-                                <input name="foto" type="file" placeholder="">
-                            </div><!-- /.contact-form__input-box -->
-
-                            <div class="contact-form__input-box">
-                                <input name="nome" type="text" placeholder="Dgite o nome da sociedade">
+                                <input name="nome" type="text" placeholder="Dgite o nome da empresa">
                             </div><!-- /.contact-form__input-box -->
                             <div class="contact-form__input-box">
                                 <input name="nif" type="text" placeholder="Digite o seu nif">
                             </div><!-- /.contact-form__input-box -->
                             <div class="contact-form__input-box">
-                                <input name="email" type="email" placeholder="Digite o email coorporativo">
+                                <input name="email" type="email" placeholder="Digite o email ">
                             </div><!-- /.contact-form__input-box -->
                             <div class="contact-form__input-box">
                                 <input name="senha" type="password" placeholder="Digite a sua senha">
                             </div><!-- /.contact-form__input-box -->
                             <div class="login-register__checkbox">
                                 <input type="checkbox" id="login-register__password">
-                                <label for="login-register__password">Remember Me?</label>
+                                <label for="login-register__password">Lembrar-me?</label>
                             </div><!-- /.contact-form__input-box -->
                             <div class="login-register__info">
                                 <input type="submit"  class="thm-btn login-register__btn" value="Cadastrar">
@@ -163,15 +203,7 @@
                     <a href="tel:666-888-0000">666 888 0000</a>
                 </li>
             </ul><!-- /.mobile-nav__contact -->
-            <div class="mobile-nav__top">
-                <div class="mobile-nav__social">
-                    <a href="#" class="fab fa-twitter"></a>
-                    <a href="#" class="fab fa-facebook-square"></a>
-                    <a href="#" class="fab fa-pinterest-p"></a>
-                    <a href="#" class="fab fa-instagram"></a>
-                </div><!-- /.mobile-nav__social -->
-            </div><!-- /.mobile-nav__top -->
-
+            
 
 
         </div>

@@ -29,7 +29,6 @@ urlpatterns = [
     path('editar_perfil/<int:pk>/', views.editar_perfil, name='editar_perfil'),
     path('suporte/', views.suporte, name='suporte'),
     path('enviar-ticket/', views.enviar_suporte, name='enviar_ticket'),
-    path('avaliar_produto/', views.avaliar_produto, name = "avaliar_produto"),
 
 
     
@@ -52,6 +51,7 @@ urlpatterns = [
     path('marca/', views.marca, name='marca'),
     path('categoria/', views.categoria, name='categoria'),
     path('fornecedor/', views.fornecedor, name='fornecedor'),
+    #path('adicionar-endereco/', views.adicionar_endereco, name='adicionar_endereco'),
     path('adicionar_categoria/', views.adicionar_categoria, name='adicionar_categoria'),
     path('minha_categoria/', views.minha_categoria, name='minha_categoria'),
     path('criar_fornecedor/', views.criar_fornecedor, name='criar_fornecedor'),
@@ -59,6 +59,12 @@ urlpatterns = [
 
     # URLs das Empresas:
     path('empresa/', views.empresa, name='empresa'),
+    path('interior_empresa/', views.interior_empresa, name='interior_empresa'),
+    path('direcao_suspensao_empresa/', views.direcao_suspensao_empresa, name='direcao_suspensao_empresa'),
+    path('sistema_eletrico_empresa/', views.sistema_eletrico_empresa, name='sistema_eletrico_empresa'),
+    path('motor_empresa/', views.motor_empresa, name='motor_empresa'),
+    path('remover_produto_carrinho/<int:produto_id>/', views.remover_produto_carrinho, name='remover_produto_carrinho'),
+    path('remover_produto_carrinho_empresa/<int:produto_id>/', views.remover_produto_carrinho_empresa, name='remover_produto_carrinho_empresa'),
     path('contato/', views.contato_view, name='contato_view'),
     path('pedido_empresa_gerente/', views.pedido_empresa_gerente, name='pedido_empresa_gerente'),
     path('listar_faturas_empresas/', views.listar_faturas_empresas, name= 'listar_faturas_empresas'),
@@ -101,6 +107,36 @@ urlpatterns = [
     path('clientes_cadastrados/',views.clientes_cadastrados, name='clientes_cadastrados' ),
     path('visao_geral/', views.visao_geral, name='visao_geral'),
     path('ticket/<int:id>/', views.ticket_detalhes, name='ticket_detalhes'),
+    path('interior_cliente/', views.interior_cliente, name='interior_cliente'),
+    path('direcao_suspensao_cliente/', views.direcao_suspensao_cliente, name='direcao_suspensao_cliente'),
+    path('sistema_eletrico_cliente/', views.sistema_eletrico_cliente, name='sistema_eletrico_cliente'),
+    path('motor_cliente/', views.motor_cliente, name='motor_cliente'),
+    path('marcas/BMW/', views.produtos_por_marca, {'marca_nome': 'BMW'}, name='produtos_BMW'),
+    path('marcas/Honda/', views.produtos_por_marca, {'marca_nome': 'Honda'}, name='produtos_Honda'),
+    path('marcas/Fiat/', views.produtos_por_marca, {'marca_nome': 'Fiat'}, name='produtos_Fiat'),
+    path('marcas/Jaguar/', views.produtos_por_marca, {'marca_nome': 'Jaguar'}, name='produtos_Jaguar'),
+    path('marcas/Rover/', views.produtos_por_marca, {'marca_nome': 'Rover'}, name='produtos_Rover'),
+    path('marcas/Renalt/', views.produtos_por_marca, {'marca_nome': 'Renalt'}, name='produtos_Renalt'),
+    path('marcas/Skoda/', views.produtos_por_marca, {'marca_nome': 'Skoda'}, name='produtos_Skoda'),
+    path('marcas/Leyland/', views.produtos_por_marca, {'marca_nome': 'Leyland'}, name='produtos_Leyland'),
+    path('marcas/Lexus/', views.produtos_por_marca, {'marca_nome': 'Lexus'}, name='produtos_Lexus'),
+    path('marcas/Geely/', views.produtos_por_marca, {'marca_nome': 'Geely'}, name='produtos_Geely'),
+    path('marcas/Hyuandai/', views.produtos_por_marca, {'marca_nome': 'Hyuandai'}, name='produtos_Hyuandai'),
+    path('marcas/Infiniti/', views.produtos_por_marca, {'marca_nome': 'Infiniti'}, name='produtos_Infiniti'),
+    path('marcas/Isuzu/', views.produtos_por_marca, {'marca_nome': 'Isuzu'}, name='produtos_Isuzu'),
+    path('marcas/Kia/', views.produtos_por_marca, {'marca_nome': 'Kia'}, name='produtos_Kia'),
+    path('marcas/Mahindra/', views.produtos_por_marca, {'marca_nome': 'Mahindra'}, name='produtos_Mahindra'),
+    path('marcas/Mitsubishi/', views.produtos_por_marca, {'marca_nome': 'Mitsubishi'}, name='produtos_Mitsubishi'),
+    path('marcas/Nissan/', views.produtos_por_marca, {'marca_nome': 'Nissan'}, name='produtos_Nissan'),
+    path('marcas/Subaru/', views.produtos_por_marca, {'marca_nome': 'Subaru'}, name='produtos_Subaru'),
+    path('marcas/Suzuki/', views.produtos_por_marca, {'marca_nome': 'Suzuki'}, name='produtos_Suzuki'),
+    path('marcas/Toyota/', views.produtos_por_marca, {'marca_nome': 'mercedes'}, name='produtos_mercedes'),
+    path('marcas/mercedes/', views.produtos_por_marca, {'marca_nome': 'Toyota'}, name='produtos_Toyota'),
+    path('marcas/bugatti/', views.produtos_por_marca, {'marca_nome': 'bugatti'}, name='produtos_bugatti'),
+
+
     path('ticket/<int:id>/atualizar/', views.atualizar_ticket, name='atualizar_ticket'),
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

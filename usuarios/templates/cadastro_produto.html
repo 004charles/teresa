@@ -124,11 +124,12 @@
                                     <div class="card mb-4">
                                         <div class="card-body">
                                             <h5 class="card-title">Cadastrar Produtos</h5>
-                                            <form method="POST">
+                                            <form method="POST" enctype="multipart/form-data">
                                                 {% csrf_token %}
                                                 {{ form.as_p }}
                                                 <button type="submit" class="btn btn-primary">Salvar</button>
                                             </form>
+                                            
                                         </div>
                                     </div>
                                     

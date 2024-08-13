@@ -34,10 +34,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Configurações</a></li>
-                        <li><a class="dropdown-item" href="#!">Histórico de Atividades</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Sair</a></li>
+                        <li><a class="dropdown-item" href="{% url 'perfil_gerente' %}">Perfil</a></li>
+                       
                     </ul>
                 </li>
             </ul>
@@ -169,7 +167,7 @@
                                                 <td>{{ produto.categoria }}</td>
                                                 <td>{{ produto.marca }}</td>
                                                 <td>{{ produto.estoque }}</td>
-                                                <td>R$ {{ produto.preco|floatformat:2 }}</td>
+                                                <td>kz {{ produto.preco|floatformat:2 }}</td>
                                                 <td>
                                                     <a href="" class="btn btn-warning">Editar</a>
                                                     <button type="button" class="btn btn-danger">Excluir</button> 

@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Login </title>
+    <title> Login / Cliente / Empresas</title>
     <!-- favicons Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
@@ -49,7 +49,91 @@
     <!-- Template styles -->
     <link rel="stylesheet" href="{% static 'assets/css/qrowd.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/qrowd-responsive.css' %}">
-    
+
+
+
+    <style>
+ .conta {
+      margin-top: 20px; /* Ajusta o espaçamento superior */
+  }
+  
+  .alert {
+      display: inline-block; /* Faz com que os alertas sejam inline e centralizados */
+      text-align: left; /* Alinha o texto à esquerda dentro do alerta */
+      max-width: 400px; /* Limita a largura máxima das mensagens */
+  }
+
+  .login-register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.container {
+    width: 100%; /* O container ocupará toda a largura disponível */
+    max-width: 1000px; /* Limite opcional para evitar que fique muito grande em telas grandes */
+    margin: auto;
+    padding: 20px;
+}
+.container {
+    width: 100%; /* O container ocupará toda a largura disponível */
+    max-width: 1000px; /* Limite opcional para evitar que fique muito grande em telas grandes */
+    margin: auto;
+    padding: 20px;
+}
+.container {
+    width: 100%; /* O container ocupará toda a largura disponível */
+    max-width: 1000px; /* Limite opcional para evitar que fique muito grande em telas grandes */
+    margin: auto;
+    padding: 20px;
+}
+.container {
+    width: 100%; /* O container ocupará toda a largura disponível */
+    max-width: 1000px; /* Limite opcional para evitar que fique muito grande em telas grandes */
+    margin: auto;
+    padding: 20px;
+}
+.container {
+    width: 100%; /* O container ocupará toda a largura disponível */
+    max-width: 1000px; /* Limite opcional para evitar que fique muito grande em telas grandes */
+    margin: auto;
+    padding: 20px;
+}
+.container {
+    width: 100%; /* O container ocupará toda a largura disponível */
+    max-width: 1000px; /* Limite opcional para evitar que fique muito grande em telas grandes */
+    margin: auto;
+    padding: 20px;
+}
+.container {
+    width: 100%; /* O container ocupará toda a largura disponível */
+    max-width: 1000px; /* Limite opcional para evitar que fique muito grande em telas grandes */
+    margin: auto;
+    padding: 20px;
+}
+.container {
+    width: 100%; /* O container ocupará toda a largura disponível */
+    max-width: 1000px; /* Limite opcional para evitar que fique muito grande em telas grandes */
+    margin: auto;
+    padding: 20px;
+}
+.container {
+    width: 100%;
+    max-width: none; /* Remove qualquer limitação de largura máxima */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.login-register__form {
+    width: 100%; /* Certifique-se de que o formulário ocupe toda a largura do container */
+}
+
+.col-lg-6 {
+    flex: 0 0 100%; /* Faz com que cada coluna ocupe 100% da largura, ficando uma em cima da outra */
+    max-width: 100%;
+    margin-bottom: 20px; /* Espaço entre as seções */
+}     
+     </style>
 </head>
 
 <body class="custom-cursor">
@@ -64,7 +148,7 @@
     <div class="preloader">
         <div class="preloader__image"></div>
     </div>
-    <!-- /.preloader -->
+   
 
 
     <div class="page-wrapper">
@@ -72,7 +156,7 @@
             <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
         </div><!-- /.stricky-header -->
 
-        <!--Page Header Start-->
+        
         <section class="page-header">
             <div class="page-header-bg" style="background-image: url(assets/images/backgrounds/page-header-bg.jpg)">
             </div>
@@ -96,12 +180,59 @@
                 </div>
             </div>
         </section>
-        <!--Page Header End-->
+       
+
+        
+        <div class="conta" >
+            <div class="text-center">
+                    {% if status == '1' %}
+                        <div class="alert alert-success preto" role="alert">
+                            email ou senha invalidos 
+                        </div>
+                    {% endif %}
+                
+                    {% if status == '2' %}
+                        <div class="alert alert-success" role="alert">
+                            faca o login antes de tentar acessar o sistema
+                        </div>
+                    {% endif %}
+            
+                    {% if status == '0' %}
+                        <div class="alert alert-danger" role="alert">
+                            Cadastro realizado com sucesso!
+                        </div>
+                    {% endif %} 
+                    {% if status == '9' %}
+                        <div class="alert alert-danger" role="alert">
+                            Nome e Email nao podem estar vazios!
+                        </div>
+                    {% endif %} 
+                
+                    {% if status == '10' %}
+                        <div class="alert alert-danger" role="alert">
+                            sua senha deve ter pelo menos 8 carateres!
+                        </div>
+                    {% endif %}
+                
+                    {% if status == '11' %}
+                        <div class="alert alert-danger" role="alert">
+                            usuario ja existe no sistema!
+                        </div>
+                    {% endif %} 
+                
+                    {% if status == '4' %}
+                        <div class="alert alert-danger" role="alert">
+                            Erro interno do sistema!
+                        </div>
+                    {% endif %}
+            </div>
+
+        </div>
 
         <section class="login-register">
-            <div class="container">
+            <div class="container d-flex justify-content-center">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div id="login-cliente" class="col-lg-6">
                         <h3 class="login-register__title">Login Cliente</h3><!-- /.login-register__title -->
                         <form class="login-register__form" method="POST" action="{% url 'valida_login_cliente' %}">{% csrf_token %}
                             <div class="contact-form__input-box">
@@ -120,10 +251,11 @@
                                 <!-- /.login-register__text -->
                             </div><!-- /.d-flex -->
                         </form>
+                        <p class="switch-text">É uma empresa? <a href="javascript:void(0);" onclick="showEmpresaLogin()">Clique aqui</a></p>
                     </div><!-- /.col-lg-6 -->
-                    
-                    <div class="col-lg-6">
-                        <h3 class="login-register__title">Empresas</h3><!-- /.login-register__title -->
+        
+                    <div id="login-empresa" class="col-lg-6" style="display: none;">
+                        <h3 class="login-register__title">Login Empresas</h3><!-- /.login-register__title -->
                         <form class="login-register__form" method="POST" action="{% url 'valida_login_empresa' %}">{% csrf_token %}
                             <div class="contact-form__input-box">
                                 <input type="email" name="email" placeholder="Digite o email corporativo">
@@ -141,123 +273,119 @@
                                 <!-- /.login-register__text -->
                             </div><!-- /.d-flex -->
                         </form>
+                        <p class="switch-text">Não é uma empresa? <a href="javascript:void(0);" onclick="showClienteLogin()">Clique aqui</a></p>
                     </div><!-- /.col-lg-6 -->
                 </div><!-- /.row -->
             </div><!-- /.container -->
         </section><!-- /.login-register -->
         
+        
 
 
-        <!--Site Footer Start-->
-        <footer class="site-footer">
-            <div class="site-footer__top">
-                <div class="site-footer__shape-1 float-bob-x">
-                    <img src="assets/images/shapes/site-footer-shape-1.png" alt="">
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
-                            <div class="footer-widget__column footer-widget__about">
-                                <div class="footer-widget__logo">
-                                    <a href="#"><img src="assets/images/resources/footer-logo.png" alt=""></a>
+       
+    <footer class="site-footer">
+        <div class="site-footer__top">
+            <div class="site-footer__shape-1 float-bob-x">
+                <img src="{% static 'assets/images/shapes/site-footer-shape-1.png' %}" alt="">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
+                        <div class="footer-widget__column footer-widget__about">
+                            <div class="footer-widget__logo">
+                                <a href="#"><img src="" alt=""></a>
+                            </div>
+                            <div class="footer-widget__about-text-box">
+                                <p class="footer-widget__about-text">Bem-vindo à nossa loja de pesca e automóveis. Oferecemos uma vasta gama de produtos para entusiastas da pesca e amantes de carros.</p>
+                            </div>
+                            <form class="footer-widget__subscribe-box">
+                                <div class="footer-widget__subscribe-input-box">
+                                    <input type="email" placeholder="Endereço de email" name="email">
+                                    <button type="submit" class="footer-widget__subscribe-btn"><img
+                                            src="{% static 'assets/images/icon/paper-plan.png' %}" alt=""></button>
                                 </div>
-                                <div class="footer-widget__about-text-box">
-                                    <p class="footer-widget__about-text">Lorem quas utamur delicata qui, vix ei prima
-                                        mentitum omnesque. Duo corrumpit
-                                        cotidieque ne.</p>
-                                </div>
-                                <form class="footer-widget__subscribe-box">
-                                    <div class="footer-widget__subscribe-input-box">
-                                        <input type="email" placeholder="Email address" name="email">
-                                        <button type="submit" class="footer-widget__subscribe-btn"><img
-                                                src="assets/images/icon/paper-plan.png" alt=""></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
+                        <div class="footer-widget__column footer-widget__Explore">
+                            <div class="footer-widget__title-box">
+                                <h3 class="footer-widget__title">Explorar</h3>
+                            </div>
+                            <ul class="footer-widget__Explore-list list-unstyled">
+                                <li><a href="#">Sobre</a></li>
+                                <li><a href="#">Como Funciona</a></li>
+                                <li><a href="#">Hub de Conhecimento</a></li>
+                                <li><a href="#">Histórias de Sucesso</a></li>
+                                <li><a href="#">Contato</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
+                        <div class="footer-widget__column footer-widget__Fundraising">
+                            <div class="footer-widget__title-box">
+                                <h3 class="footer-widget__title">Categorias</h3>
+                            </div>
+                            <ul class="footer-widget__Explore-list list-unstyled">
+                                <li><a href="#">Equipamentos de Pesca</a></li>
+                                <li><a href="#">Acessórios Automotivos</a></li>
+                                <li><a href="#">Manutenção de Carros</a></li>
+                                <li><a href="#">Vestuário de Pesca</a></li>
+                                <li><a href="#">Peças e Ferramentas</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
+                        <div class="footer-widget__column footer-widget__Contact">
+                            <div class="footer-widget__title-box">
+                                <h3 class="footer-widget__title">Contato</h3>
+                            </div>
+                            <ul class="footer-widget__Contact-list list-unstyled">
+                                <li>
+                                    <div class="icon">
+                                        <span class="icon-telephone"></span>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                            <div class="footer-widget__column footer-widget__Explore">
-                                <div class="footer-widget__title-box">
-                                    <h3 class="footer-widget__title">Explore</h3>
-                                </div>
-                                <ul class="footer-widget__Explore-list list-unstyled">
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="about.html">How it Works</a></li>
-                                    <li><a href="about.html">Knowledge Hub</a></li>
-                                    <li><a href="news.html">Success Stories</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                            <div class="footer-widget__column footer-widget__Fundraising">
-                                <div class="footer-widget__title-box">
-                                    <h3 class="footer-widget__title">Fundraising</h3>
-                                </div>
-                                <ul class="footer-widget__Explore-list list-unstyled">
-                                    <li><a href="about.html">Design</a></li>
-                                    <li><a href="about.html">Education</a></li>
-                                    <li><a href="about.html">Technology</a></li>
-                                    <li><a href="about.html">Games</a></li>
-                                    <li><a href="about.html">Film & Video</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                            <div class="footer-widget__column footer-widget__Contact">
-                                <div class="footer-widget__title-box">
-                                    <h3 class="footer-widget__title">Contact</h3>
-                                </div>
-                                <ul class="footer-widget__Contact-list list-unstyled">
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-telephone"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p><a href="tel:+9288006780">+92 ( 8800 ) - 6780</a></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-email"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p><a href="mailto:needhelp@company.com">needhelp@company.com</a></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-pin"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>30 broklyn golden street line. New York</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <div class="site-footer__social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-facebook"></i></a>
-                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
+                                    <div class="text">
+                                        <p><a href="tel:"></a></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <span class="icon-email"></span>
+                                    </div>
+                                    <div class="text">
+                                        <p><a href="#">vetor5@gmail.com</a></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <span class="icon-pin"></span>
+                                    </div>
+                                    <div class="text">
+                                        <p>Golf 2</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            
+
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="site-footer__bottom">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="site-footer__bottom-inner">
-                                <p class="site-footer__bottom-text">© Copyright 2022 by <a href="#">Qrowd.com</a></p>
-                            </div>
+        </div>
+        <div class="site-footer__bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="site-footer__bottom-inner">
+                            <p class="site-footer__bottom-text">© Copyright 2024 por <a href="{% url 'login_gerente' %}">Vector5</a></p>
                         </div>
                     </div>
                 </div>
             </div>
-        </footer>
-        <!--Site Footer End-->
+        </div>
+    </footer>
 
 
     </div><!-- /.page-wrapper -->
@@ -280,22 +408,14 @@
             <ul class="mobile-nav__contact list-unstyled">
                 <li>
                     <i class="fa fa-envelope"></i>
-                    <a href="mailto:needhelp@packageName__.com">needhelp@qrowd.com</a>
+                    <a href="muquissicarlos.com"> vetor5@gmail.com </a>
                 </li>
                 <li>
                     <i class="fa fa-phone-alt"></i>
-                    <a href="tel:666-888-0000">666 888 0000</a>
+                    <a href="tel:666-888-0000"> +244 923 908 353 </a>
                 </li>
-            </ul><!-- /.mobile-nav__contact -->
-            <div class="mobile-nav__top">
-                <div class="mobile-nav__social">
-                    <a href="#" class="fab fa-twitter"></a>
-                    <a href="#" class="fab fa-facebook-square"></a>
-                    <a href="#" class="fab fa-pinterest-p"></a>
-                    <a href="#" class="fab fa-instagram"></a>
-                </div><!-- /.mobile-nav__social -->
-            </div><!-- /.mobile-nav__top -->
-
+            </ul>
+            
 
 
         </div>
@@ -305,7 +425,6 @@
 
     <div class="search-popup">
         <div class="search-popup__overlay search-toggler"></div>
-        <!-- /.search-popup__overlay -->
         <div class="search-popup__content">
             <form action="#">
                 <label for="search" class="sr-only">search here</label><!-- /.sr-only -->
@@ -315,10 +434,8 @@
                 </button>
             </form>
         </div>
-        <!-- /.search-popup__content -->
     </div>
-    <!-- /.search-popup -->
-
+    
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="icon-right-arrow"></i></a>
 
 
@@ -350,6 +467,19 @@
 <script src="{% static 'assets/vendors/nice-select/jquery.nice-select.min.js' %}"></script>
 
 <script src="{% static 'assets/js/qrowd.js' %}"></script>
+
+<script>
+    function showEmpresaLogin() {
+    document.getElementById('login-cliente').style.display = 'none';
+    document.getElementById('login-empresa').style.display = 'block';
+}
+
+function showClienteLogin() {
+    document.getElementById('login-cliente').style.display = 'block';
+    document.getElementById('login-empresa').style.display = 'none';
+}
+
+</script>
 </body>
 
 

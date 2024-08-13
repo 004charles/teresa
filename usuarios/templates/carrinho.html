@@ -103,7 +103,7 @@
                                             <h3><a href="#">{{ item.produto.nome }}</a></h3>
                                         </div>
                                     </td>
-                                    <td>R$ {{ item.produto.preco|floatformat:2 }}</td>
+                                    <td>Kz {{ item.produto.preco|floatformat:2 }}</td>
                                     <td>
                                         <div class="quantity-box">
                                             <button type="button" class="sub"><i class="fa fa-minus"></i></button>
@@ -111,7 +111,7 @@
                                             <button type="button" class="add"><i class="fa fa-plus"></i></button>
                                         </div>
                                     </td>
-                                    <td>R$ {{ item.produto.preco|floatformat:2 }}</td>
+                                    <td>Kz {{ item.produto.preco|floatformat:2 }}</td>
                                     <td>
                                         <div class="cross-icon">
                                             <a href="#" class="fa fa-times remove-icon"></a>
@@ -129,37 +129,45 @@
 
                 <!-- Subtotal, Envio e Total -->
                 <div class="row">
-                    <div class="col-xl-8 col-lg-7">
-                        <form action="#" class="default-form cart-cupon__form">
-                            <input type="text" placeholder="Digite o código do cupom" class="cart-cupon__input">
-                            <button class="thm-btn" type="submit">
-                                <span>Aplicar Cupom</span>
-                            </button>
-                        </form>
-                    </div>
+                    
                     <div class="col-xl-4 col-lg-5">
                         <ul class="cart-total list-unstyled">
                             <li>
                                 <span>Subtotal</span>
-                                <span>R$ {{ subtotal|floatformat:2 }}</span>
+                                <span>Kz {{ subtotal|floatformat:2 }}</span>
                             </li>
                             <li>
                                 <span>Envio</span>
-                                <span>R$ 0.00</span>
+                                <span>Kz 0.00</span>
                             </li>
                             <li>
                                 <span>Total</span>
-                                <span class="cart-total-amount">R$ {{ total|floatformat:2 }}</span>
+                                <span class="cart-total-amount">kz {{ total|floatformat:2 }}</span>
                             </li>
                         </ul>
-                        <div class="cart-page__buttons">
-                            <div class="cart-page__buttons-1">
-                                <a href="#" class="thm-btn">Atualizar</a>
+                        
+                    </div>
+                </div>
+
+                <div class="fixed-cart__footer">
+                    <div class="fixed-cart__form">
+                        <hr>
+                        <h3>Endereço</h3>
+                        <form method="post" action="{% url 'finalizar_compra' %}">
+                            {% csrf_token %}
+                            <div class="card">
+                                
+                                <div class="card-body">
+                                    {{ form.non_field_errors }}
+                                    <div class="form-group">
+                                        {{ form.endereco.label_tag }}
+                                        {{ form.endereco }}
+                                        {{ form.endereco.errors }}
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-block">Finalizar Compra</button>
+                                </div>
                             </div>
-                            <div class="cart-page__buttons-2">
-                                <a href="#" class="thm-btn">Comprar</a>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

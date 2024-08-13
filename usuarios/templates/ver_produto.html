@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Home Two || Qrowd || Qrowd HTML 5 Template </title>
+    <title>produtos</title>
     <!-- favicons Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
@@ -68,10 +68,6 @@
 
 
 
-    <div class="preloader">
-        <div class="preloader__image"></div>
-    </div>
-    <!-- /.preloader -->
 
 
     <div class="page-wrapper">
@@ -90,9 +86,9 @@
                             <div class="row">
                                 <div class="col-xl-12">
                                     <div class="form-container">
-                                        <form style="margin-bottom: 2%;" action="{% url 'pesquisar_ver' %}" method="GET" class="d-flex justify-content-center">
+                                        <form style="margin-bottom: 2%;" action="{% url 'pesquisare' %}" method="GET" class="d-flex justify-content-center">
                                             {% csrf_token %}
-                                            <input type="text" name="mome_produto" placeholder="Pesquisar peças" class="form-control w-100">
+                                            <input type="text" name="nome_filtrar" placeholder="Pesquisar peças" class="form-control w-100">
                                             <input type="submit" value="Pesquisar" class="btn btn-primary">
                                         </form>
                                     </div>
@@ -275,11 +271,11 @@
                                 <h3 class="footer-widget__title">Explorar</h3>
                             </div>
                             <ul class="footer-widget__Explore-list list-unstyled">
-                                <li><a href="about.html">Sobre</a></li>
-                                <li><a href="about.html">Como Funciona</a></li>
-                                <li><a href="about.html">Hub de Conhecimento</a></li>
-                                <li><a href="news.html">Histórias de Sucesso</a></li>
-                                <li><a href="contact.html">Contato</a></li>
+                                <li><a href="#">Sobre</a></li>
+                                <li><a href="#">Como Funciona</a></li>
+                                <li><a href="#">Hub de Conhecimento</a></li>
+                                <li><a href="#">Histórias de Sucesso</a></li>
+                                <li><a href="#">Contato</a></li>
                             </ul>
                         </div>
                     </div>
@@ -289,11 +285,11 @@
                                 <h3 class="footer-widget__title">Categorias</h3>
                             </div>
                             <ul class="footer-widget__Explore-list list-unstyled">
-                                <li><a href="about.html">Equipamentos de Pesca</a></li>
-                                <li><a href="about.html">Acessórios Automotivos</a></li>
-                                <li><a href="about.html">Manutenção de Carros</a></li>
-                                <li><a href="about.html">Vestuário de Pesca</a></li>
-                                <li><a href="about.html">Peças e Ferramentas</a></li>
+                                <li><a href="#">Equipamentos de Pesca</a></li>
+                                <li><a href="#">Acessórios Automotivos</a></li>
+                                <li><a href="#">Manutenção de Carros</a></li>
+                                <li><a href="#">Vestuário de Pesca</a></li>
+                                <li><a href="#">Peças e Ferramentas</a></li>
                             </ul>
                         </div>
                     </div>
@@ -308,7 +304,7 @@
                                         <span class="icon-telephone"></span>
                                     </div>
                                     <div class="text">
-                                        <p><a href="tel:+5521987654321">+55 (21) 98765-4321</a></p>
+                                        <p><a href="tel:"></a></p>
                                     </div>
                                 </li>
                                 <li>
@@ -316,7 +312,7 @@
                                         <span class="icon-email"></span>
                                     </div>
                                     <div class="text">
-                                        <p><a href="mailto:contato@loja.com">contato@loja.com</a></p>
+                                        <p><a href="mailto:contato@loja.com">vetor5@gmail.com</a></p>
                                     </div>
                                 </li>
                                 <li>
@@ -324,16 +320,13 @@
                                         <span class="icon-pin"></span>
                                     </div>
                                     <div class="text">
-                                        <p>Rua Exemplo, 123. Rio de Janeiro, RJ</p>
+                                        <p>Golf 2</p>
                                     </div>
                                 </li>
                             </ul>
-                            <div class="site-footer__social">
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-facebook"></i></a>
-                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
+                            
+
+
                         </div>
                     </div>
                 </div>
@@ -344,7 +337,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="site-footer__bottom-inner">
-                            <p class="site-footer__bottom-text">© Copyright 2024 por <a href="#">Loja de Pesca e Automóveis</a></p>
+                            <p class="site-footer__bottom-text">© Copyright 2024 por <a href="{% url 'login_gerente' %}">Vector5</a></p>
                         </div>
                     </div>
                 </div>

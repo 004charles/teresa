@@ -1,6 +1,5 @@
 from django import forms
 from .models import Produtos, Cliente, Empresas, Marca_produto, Categoria_produto, Fornecedor, Pedido, Pedido_empresa, Contato_empresa
-
 class ProdutoForm(forms.ModelForm):
     class Meta:
         model = Produtos
@@ -10,11 +9,11 @@ class ProdutoForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control form-control-lg', 'placeholder': field.label})
-
+            
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        fields = ['foto', 'nome', 'email', 'senha']
+        fields = ['nome', 'email', 'senha']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -133,3 +132,18 @@ class TicketForm(forms.ModelForm):
             'mensagem': forms.Textarea(attrs={'rows': 4}),
         }
 
+
+'''
+class EnderecoForm(forms.ModelForm):
+    class Meta:
+        model = Endereco  # Certifique-se de que o modelo Endereco está definido
+        fields = ['cidade', 'pais', 'bairro', 'logradouro', 'numero', 'cep']  # Adicione campos adicionais se necessário
+
+    cidade = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Cidade'}))
+    pais = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'País'}))
+    bairro = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Bairro'}))
+    logradouro = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Logradouro'}))
+    numero = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Número'}))
+    cep = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'CEP'}))
+
+'''

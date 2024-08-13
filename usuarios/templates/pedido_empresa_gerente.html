@@ -214,7 +214,7 @@
                         <table class="invoice-items">
                             <thead>
                                 <tr>
-                                    <td>Descrição</td>
+                                    
                                     <td>Quantidade</td>
                                     <td>Preço Unitário</td>
                                     <td>Total</td>
@@ -223,7 +223,6 @@
                             <tbody>
                                 {% for produto in item.itempedidoempresa_set.all %}
                                 <tr>
-                                    <td>{{ produto.produto.descricao }}</td>
                                     <td>{{ produto.quantidade }}</td>
                                     <td>AKZ {{ produto.produto.preco_unitario }}</td>
                                     <td>AKZ {{ produto.total }}</td>

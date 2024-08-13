@@ -1,12 +1,14 @@
+from decimal import Decimal
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
+
+from decimal import Decimal
 
 
 from django.db import models
 
 class Gerente(models.Model):
-    foto = models.FileField(upload_to='imagem/')
     nome = models.CharField(max_length=50)
     email = models.EmailField(max_length=100)
     senha = models.CharField(max_length=40)
@@ -18,19 +20,15 @@ class Gerente(models.Model):
         verbose_name_plural = "Conta do gerente"
 
 
+from django.db import models
+
 class Cliente(models.Model):
-    foto = models.FileField(upload_to='imagem/')
-    nome = models.CharField(max_length=50)
-    email = models.EmailField(max_length=100)
-    senha = models.CharField(max_length=40)
+    nome = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    senha = models.CharField(max_length=255)
 
     def __str__(self):
         return self.nome
-    
-    def get_foto_url(self):
-        if self.foto:
-            return self.foto.url
-        return '/path/to/default/image.jpg'  # Imagem padrão se não houver foto
 
 
     class Meta:
@@ -39,8 +37,7 @@ class Cliente(models.Model):
 
 class Empresas(models.Model):
     nome = models.CharField(max_length=100)
-    nif = models.IntegerField()
-    foto = models.FileField(upload_to='imagem/')
+    nif = models.CharField(max_length=60)
     email = models.EmailField(max_length=100)
     senha = models.CharField(max_length=50)
 
@@ -111,6 +108,7 @@ class Produtos(models.Model):
     fornecedor = models.ForeignKey(Fornecedor, on_delete=models.CASCADE)
     garantia = models.CharField(max_length=50)
     prazo_entrega = models.CharField(max_length=50)
+    data_criacao = models.DateTimeField(default=timezone.now)  # Novo campo adicionado
 
     def __str__(self):
         return self.nome
@@ -130,8 +128,8 @@ class ItemCarrinho(models.Model):
 
 class Carrinho(models.Model):
     cliente = models.OneToOneField(Cliente, on_delete=models.CASCADE, related_name='carrinho')
-    empresa = models.ForeignKey(Empresas, on_delete=models.CASCADE, related_name='carrinhos_cliente')  
-    produtos = models.ManyToManyField(Produtos, through=ItemCarrinho, related_name='carrinhos_cliente') 
+    produtos = models.ManyToManyField(Produtos, through=ItemCarrinho, related_name='carrinhos_cliente')
+    endereco = models.CharField(max_length=255, blank=True, null=True)  # Campo para armazenar o endereço
 
 class Carrinho_empresa(models.Model):
     empresa = models.OneToOneField(Empresas, on_delete=models.CASCADE, related_name='carrinhos_empresa')
@@ -163,35 +161,27 @@ class Pedido_empresa(models.Model):
     def __str__(self):
         return f'Pedido {self.id} para {self.empresa.nome} em {self.data.strftime("%d/%m/%Y")}'
 
-    @property
     def subtotal(self):
-        return sum(item.quantidade * item.produto.preco_unitario for item in self.itempedidoempresa_set.all())
+        return sum(item.quantidade * item.preco for item in self.itens.all())
 
-    @property
     def imposto(self):
-        return self.subtotal * 0.10
+        return Decimal(self.subtotal()) * Decimal('0.10')
 
-    @property
     def total(self):
-        return self.subtotal + self.imposto
+        return self.subtotal() + self.imposto()
+
+    def total(self):
+        return sum(item.quantidade * item.produto.preco for item in self.itens.all())
+
 
 class ItemPedidoEmpresa(models.Model):
-    pedido = models.ForeignKey(Pedido_empresa, on_delete=models.CASCADE)
+    pedido = models.ForeignKey(Pedido_empresa, on_delete=models.CASCADE, related_name='itens')
     produto = models.ForeignKey(Produtos, on_delete=models.CASCADE)
     quantidade = models.PositiveIntegerField()
+    preco = models.DecimalField(max_digits=10, decimal_places=2)
 
-    def total(self):
-        return self.quantidade * self.produto.preco_unitario
-
-class Avaliacao(models.Model):
-    avaliacao = models.CharField(max_length=500)
-    nome = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-    data = models.DateTimeField(default=timezone.now)
-    
-    
     def __str__(self):
-          return self.nome
+        return f'{self.quantidade} x {self.produto.nome} no pedido {self.pedido.id}'
 
 
 class ItemPedido(models.Model):
@@ -224,19 +214,17 @@ class contactar(models.Model):
 
 from django.utils import timezone
 
-class Fatura(models.Model):
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True, blank=True)
-    empresa = models.ForeignKey(Empresas, on_delete=models.CASCADE, null=True, blank=True)
-    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
-    valor_total = models.DecimalField(max_digits=10, decimal_places=2)
-    data_emissao = models.DateTimeField(default=timezone.now)
+def generate_fatura_number():
+    return 'F-' + timezone.now().strftime("%Y%m%d%H%M%S")
 
-    def __str__(self):
-        if self.cliente:
-            return f'Fatura {self.id} para {self.cliente.nome}'
-        elif self.empresa:
-            return f'Fatura {self.id} para {self.empresa.nome}'
-        return f'Fatura {self.id}'
+class Fatura(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True, blank=True)  
+    empresa = models.ForeignKey(Empresas, on_delete=models.CASCADE, null=True, blank=True)  
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE) 
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2)
+    data_emissao = models.DateTimeField(default=timezone.now) 
+
+    
     
 class Estoque(models.Model):
     produto = models.ForeignKey(Produtos, on_delete=models.CASCADE, related_name='estoques')
@@ -308,3 +296,21 @@ class Ticket(models.Model):
 
     def __str__(self):
         return f"Ticket #{self.id} - {self.nome}"
+    
+'''
+class Endereco(models.Model):
+    cliente = models.OneToOneField('Cliente', on_delete=models.CASCADE, related_name='endereco')
+    cidade = models.CharField(max_length=100)
+    pais = models.CharField(max_length=100)
+    bairro = models.CharField(max_length=100)
+    logradouro = models.CharField(max_length=255)
+    numero = models.CharField(max_length=20)
+    cep = models.CharField(max_length=10)
+    data_adicao = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'{self.logradouro}, {self.numero} - {self.bairro}, {self.cidade}, {self.pais}'
+
+    class Meta:
+        verbose_name_plural = "Endereços"
+'''

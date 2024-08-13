@@ -1,5 +1,7 @@
 asgiref==3.8.1
 Django==5.1
+numpy==2.0.1
+opencv-python==4.10.0.84
 pillow==10.4.0
 PyPDF2==3.0.1
 sqlparse==0.5.1

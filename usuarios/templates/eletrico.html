@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Vector5/Motor</title>
+    <title>Sistema Eletrico</title>
     <!-- favicons Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
@@ -59,20 +59,17 @@
 
 
 
-    <div class="preloader">
-        <div class="preloader__image"></div>
-    </div>
-    <!-- /.preloader -->
-
 
     <div class="page-wrapper">
         
 
-        
+        <div class="stricky-header stricked-menu main-menu">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+
         <!--Page Header Start-->
         <section class="page-header">
-            <div class="page-header-bg" style="background-image: url({% static 'assets/images/shop/eletrico.jfif' %})">
-            </div>
+           
             <div class="page-header-shape-1 float-bob-x">
                 <img src="{% static 'assets/images/shapes/page-header-shape-1.png' %}" alt="">
             </div>
@@ -89,7 +86,7 @@
                         <li><span>/</span></li>
                         <li>Categoria</li>
                     </ul>
-                    <h2>eletrico</h2>
+                    <h2>Sistema eletrico</h2>
                 </div>
             </div>
         </section>
@@ -112,36 +109,43 @@
                             
                             <div class="product__all">
                                 <div class="row">
-                                {% for eletrico in produtos %}
-                                    <!--Product All Single Start-->
-                                    <div class="col-xl-3 col-lg-3 col-md-6">
-                                        <div class="product__all-single">
-                                            <div class="product__all-img">
-                                                <img src="{% static 'assets/images/shop/shop-product-1-1.jpg' %}" alt="">
-                                                <div class="product__all-btn-box">
-                                                    <a href="carrinho.html" class="thm-btn product__all-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
-                                                        <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/>
-                                                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                                                      </svg></a>
+                                {% if produtos %}
+                                    {% for categoria in produtos %}
+                                        <!--Product All Single Start-->
+                                        <div class="col-xl-3 col-lg-3 col-md-6">
+                                            <div class="product__all-single">
+                                                <div class="product__all-img">
+                                                    <img src="{{categoria.imagem.url}}" alt="">
+                                                    <div class="product__all-btn-box">
+                                                        <a href="{% url 'adicionar_ao_carrinho_empresa' categoria.id %}" class="thm-btn product__all-btn">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                                                                <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/>
+                                                                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                                                            </svg>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="product__all-content">
-                                                <h4 class="product__all-title"><a href="detalhes.html">Classic
-                                                        Chair</a></h4>
-                                                <p class="product__all-price">$33.00</p>
-                                                <div class="product__all-review">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                <div class="product__all-content">
+                                                    <h4 class="product__all-title"><a href="{% url 'detalhe_produto' categoria.id %}">{{categoria.nome}}</a></h4>
+                                                    <p class="product__all-price">kz{{categoria.preco}}</p>
+                                                    <div class="product__all-review">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="col-12 text-center">
+                                        <div class="alert alert-info mt-4">
+                                            <strong>Nenhum produto cadastrado!</strong> Volte mais tarde para ver as novidades.
+                                        </div>
                                     </div>
-                                   
-                                    
-                                {% endfor %}    
+                                {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -149,7 +153,6 @@
                 </div>
             </div>
         </section>
-
         <!--Events Page Start-->
        
 
@@ -187,11 +190,11 @@
                                 <h3 class="footer-widget__title">Explorar</h3>
                             </div>
                             <ul class="footer-widget__Explore-list list-unstyled">
-                                <li><a href="about.html">Sobre</a></li>
-                                <li><a href="about.html">Como Funciona</a></li>
-                                <li><a href="about.html">Hub de Conhecimento</a></li>
-                                <li><a href="news.html">Histórias de Sucesso</a></li>
-                                <li><a href="contact.html">Contato</a></li>
+                                <li><a href="#">Sobre</a></li>
+                                <li><a href="#">Como Funciona</a></li>
+                                <li><a href="#">Hub de Conhecimento</a></li>
+                                <li><a href="#">Histórias de Sucesso</a></li>
+                                <li><a href="#">Contato</a></li>
                             </ul>
                         </div>
                     </div>
@@ -201,11 +204,11 @@
                                 <h3 class="footer-widget__title">Categorias</h3>
                             </div>
                             <ul class="footer-widget__Explore-list list-unstyled">
-                                <li><a href="about.html">Equipamentos de Pesca</a></li>
-                                <li><a href="about.html">Acessórios Automotivos</a></li>
-                                <li><a href="about.html">Manutenção de Carros</a></li>
-                                <li><a href="about.html">Vestuário de Pesca</a></li>
-                                <li><a href="about.html">Peças e Ferramentas</a></li>
+                                <li><a href="#">Equipamentos de Pesca</a></li>
+                                <li><a href="#">Acessórios Automotivos</a></li>
+                                <li><a href="#">Manutenção de Carros</a></li>
+                                <li><a href="#">Vestuário de Pesca</a></li>
+                                <li><a href="#">Peças e Ferramentas</a></li>
                             </ul>
                         </div>
                     </div>
@@ -220,7 +223,7 @@
                                         <span class="icon-telephone"></span>
                                     </div>
                                     <div class="text">
-                                        <p><a href="tel:+5521987654321">+55 (21) 98765-4321</a></p>
+                                        <p><a href="tel:"></a></p>
                                     </div>
                                 </li>
                                 <li>
@@ -228,7 +231,7 @@
                                         <span class="icon-email"></span>
                                     </div>
                                     <div class="text">
-                                        <p><a href="mailto:contato@loja.com">contato@loja.com</a></p>
+                                        <p><a href="mailto:contato@loja.com">vetor5@gmail.com</a></p>
                                     </div>
                                 </li>
                                 <li>
@@ -236,7 +239,7 @@
                                         <span class="icon-pin"></span>
                                     </div>
                                     <div class="text">
-                                        <p>Rua Exemplo, 123. Rio de Janeiro, RJ</p>
+                                        <p>Golf 2</p>
                                     </div>
                                 </li>
                             </ul>
@@ -246,6 +249,8 @@
                                 <a href="#"><i class="fab fa-pinterest-p"></i></a>
                                 <a href="#"><i class="fab fa-instagram"></i></a>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -256,7 +261,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="site-footer__bottom-inner">
-                            <p class="site-footer__bottom-text">© Copyright 2024 por <a href="#">Loja de Pesca e Automóveis</a></p>
+                            <p class="site-footer__bottom-text">© Copyright 2024 por <a href="{% url 'login_gerente' %}">Vector5</a></p>
                         </div>
                     </div>
                 </div>
@@ -264,7 +269,6 @@
         </div>
     </footer>
     <!--Site Footer End-->
-    
 
 
 </div><!-- /.page-wrapper -->
@@ -287,11 +291,11 @@
         <ul class="mobile-nav__contact list-unstyled">
             <li>
                 <i class="fa fa-envelope"></i>
-                <a href="mailto:needhelp@packageName__.com">needhelp@qrowd.com</a>
+                <a href="mailto:needhelp@packageName__.com"><a>
             </li>
             <li>
                 <i class="fa fa-phone-alt"></i>
-                <a href="tel:666-888-0000">666 888 0000</a>
+                <a href="tel:666-888-0000"></a>
             </li>
         </ul><!-- /.mobile-nav__contact -->
         <div class="mobile-nav__top">
