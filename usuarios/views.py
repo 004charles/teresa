@@ -1224,7 +1224,7 @@ def pagamentos_empresa(request, pedido_id):
             
             try:
                 with open(file_path, 'rb') as f:
-                    reader = PyPDF2.PdfFileReader(f)
+                    reader = PdfReader(f)
                     text = ""
                     for page in range(reader.numPages):
                         text += reader.getPage(page).extractText()
