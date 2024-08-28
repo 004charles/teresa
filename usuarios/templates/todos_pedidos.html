@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos os Pedidos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Todos os Pedidos</h2>
+
+        {% if pedidos %}
+            <ul class="list-group">
+                {% for pedido in pedidos %}
+                    <li class="list-group-item">
+                        <strong>Cliente:</strong> {{ pedido.usuario.nome }} <br>
+                        <strong>Produto:</strong> {{ pedido.nome_produto }} <br>
+                        <strong>Data:</strong> {{ pedido.data }} <br>
+                        <strong>Status:</strong> {{ pedido.status }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhum pedido encontrado.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

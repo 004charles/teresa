@@ -1,162 +1,65 @@
+<!-- pedidos_cliente.html -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Fatura {{ fatura.id }}</title>
+    <title>Pedidos de {{ cliente.nome }}</title>
     <style>
         body {
             background-color: #f8f9fa;
             padding: 20px;
             font-family: Arial, sans-serif;
         }
-
-        .invoice-box {
+        .pedido-box {
             max-width: 800px;
             margin: auto;
-            padding: 30px;
-            border: 1px solid #eee;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            border: 1px solid #ddd;
             background-color: #fff;
-        }
-
-        .invoice-header {
-            text-align: center;
             margin-bottom: 20px;
         }
-
-        .invoice-header h1 {
-            margin: 0;
+        .pedido-box h2 {
+            margin-top: 0;
         }
-
-        .invoice-details, .invoice-items, .invoice-total {
+        .pedido-box table {
             width: 100%;
-            margin-bottom: 20px;
+            border-collapse: collapse;
         }
-
-        .invoice-details td, .invoice-items td, .invoice-total td {
-            padding: 10px;
-            border: 1px solid #eee;
+        .pedido-box table, .pedido-box th, .pedido-box td {
+            border: 1px solid #ddd;
         }
-
-        .invoice-details td:nth-child(2), .invoice-items td:nth-child(2), .invoice-total td:nth-child(2) {
-            text-align: right;
-        }
-
-        .invoice-items thead {
-            background: #f4f4f4;
-        }
-
-        .invoice-items td {
-            text-align: right;
-        }
-
-        .invoice-items td:nth-child(1), .invoice-items td:nth-child(2) {
+        .pedido-box th, .pedido-box td {
+            padding: 8px;
             text-align: left;
-        }
-
-        .invoice-total td {
-            font-weight: bold;
-            text-align: right;
-        }
-
-        .invoice-total td:nth-child(1) {
-            text-align: left;
-        }
-
-        .btn-custom {
-            background-color: red;
-            border-radius: 7px;
-            padding: 5px 20px;
-            color: #fff;
         }
     </style>
 </head>
 <body>
-    <div class="mb-3 text-end">
-        <a href="{% url 'cliente' %}" class="btn btn-custom">Sair</a>
-    </div>
-
-    {% for item in itens %}
-    <div class="invoice-box">
-        <div class="invoice-header">
-            <h1>Vector5</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4"><a href="{% url 'cliente' %}">Pedidos de {{ cliente.nome }}</a></h1>
+        
+        {% for pedido in pedidos %}
+        <div class="card mb-3">
+            <div class="card-header bg-primary text-white">
+                <h2 class="h5">Fatura #{{ pedido.id }}</h2>
+            </div>
+            <div class="card-body bg-light">
+                <p><strong>Cliente:</strong> {{ cliente.nome }}</p>
+                <p><strong>Pedido:</strong> {{ pedido.id }}</p>
+                <p><strong>Total:</strong> AKZ {{ pedido.total }}</p>
+                <p><strong>Produtos:</strong><a href="{% url 'produtos_detalhe' pedido.id %}">{{ pedido.nome_produto }}</a></p>
+                <p><strong>Endereço de Entrega:</strong> {{ pedido.endereco }}</p>
+                <p><strong>Data de Emissão:</strong> {{ pedido.data }}</p>
+            </div>
         </div>
-
-        <table class="invoice-details">
-            <tr>
-                <td><strong>Fatura #:</strong> {{ item.id }}</td>
-                <td><strong>Data:</strong> {{ item.data }} </td>
-            </tr>
-            <tr>
-                <td><strong>Cliente:</strong> {{ item.usuario.nome }}</td>
-                <td><strong>Endereço:</strong> {{ item.endereco }}</td>
-            </tr>
-        </table>
-
-        <table class="invoice-items">
-            <thead>
-                <tr>
-                    <td>Descrição</td>
-                    <td>Quantidade</td>
-                    <td>Preço Unitário</td>
-                    <td>Total</td>
-                </tr>
-            </thead>
-            <tbody>
-                {% for produto in item.itempedido_set.all %}
-                <tr>
-                    <td>{{ produto.produto.descricao }}</td>
-                    <td>{{ produto.quantidade }}</td>
-                    <td>AKZ {{ produto.produto.preco_unitario }}</td>
-                    <td>AKZ {{ produto.total }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <table class="invoice-total">
-            <tr>
-                <td>Subtotal</td>
-                <td>AKZ </td>
-            </tr>
-            <tr>
-                <td>Imposto (10%)</td>
-                <td>AKZ </td>
-            </tr>
-            <tr>
-                <td>Total</td>
-                <td>AKZ </td>
-            </tr>
-        </table>
-        <button class="btn btn-primary" onclick="shareInvoice({{ item.id }})"><i class="fas fa-share-alt"></i></button>
+        {% empty %}
+        <p class="text-muted">Este cliente não possui pedidos.</p>
+        {% endfor %}
     </div>
-    {% endfor %}
     
-    <script>
-        function shareInvoice(id) {
-            const url = window.location.origin + "/fatura/" + id + "/";
-            const texto = `Acesse a fatura: ${url}`;
-
-            if (navigator.share) {
-                navigator.share({
-                    title: document.title,
-                    url: url,
-                    text: texto
-                })
-                .then(() => console.log('Conteúdo compartilhado com sucesso!'))
-                .catch(error => console.error('Erro ao compartilhar: ', error));
-            } else {
-                alert('Seu navegador não suporta compartilhamento nativo. Por favor, copie e cole o link manualmente: ' + url);
-            }
-        }
-    </script>
-
-       <!-- Include external scripts -->
-       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-       <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-   
+    
 </body>
 </html>

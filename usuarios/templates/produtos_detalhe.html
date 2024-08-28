@@ -80,10 +80,10 @@
             <div class="page-header-shape-3 float-bob-x">
                 <img src="{% static 'assets/images/shapes/page-header-shape-3.png' %}" alt="">
             </div>
-            <div class="container">produto_detalhe.html
+            <div class="container">
                 <div class="page-header__inner">
                     <ul class="thm-breadcrumb list-unstyled">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Home</a></li>
                         <li><span>/</span></li>
                         <li>produto</li>
                     </ul>
@@ -125,14 +125,7 @@
                         </div>
 
 
-                        <div class="product-details__buttons">
-                            <div class="product-details__buttons-1">
-                            </div>
-
-                            <div class="product-details__buttons-2">
-                                <a href="{% url 'adicionar_ao_carrinho' produto.id %}" class="thm-btn">Adicionar ao carrinho</a>
-                            </div>
-                        </div>
+                       
                        
                     </div>
                 </div>
@@ -154,51 +147,7 @@
 
        
 
-        <!--Product Description End-->
-        <section class="review-form-one">
-            <div class="container">
-                <div class="review-form-one__inner">
-                    <h3 class="review-form-one__title">Avalie o nosso produto</h3>
-                    <div class="review-form-one__rate-box">
-                        <p class="review-form-one__rate-text">Gostou do nosso produto?</p>
-                        <div class="review-form-one__rate">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                    </div>
-                    <form action="#" method="POST" class="review-form-one__form contact-form-validated"
-                        novalidate="novalidate"> 
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="review-form-one__input-box text-message-box">
-                                    <textarea name="avaliacao" placeholder="Escreva sua avaliacao"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6">
-                                <div class="review-form-one__input-box">
-                                    <input type="text" placeholder="Seu nome" name="nome">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6">
-                                <div class="review-form-one__input-box">
-                                    <input type="email" placeholder="Endereço de email" name="email">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <button type="submit" class="thm-btn review-form-one__btn">Enviar avalicao</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
+        
         
 
     <!--Site Footer Start-->

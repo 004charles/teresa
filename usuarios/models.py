@@ -9,6 +9,7 @@ from decimal import Decimal
 from django.db import models
 
 class Gerente(models.Model):
+    foto = models.ImageField(upload_to='imagem/')
     nome = models.CharField(max_length=50)
     email = models.EmailField(max_length=100)
     senha = models.CharField(max_length=40)
@@ -138,11 +139,18 @@ class Carrinho_empresa(models.Model):
         return f'Carrinho da Empresa: {self.empresa.nome}'
 
 class Pedido(models.Model):
-    imagem = models.FileField(upload_to='imagem/')
+    nome_produto = models.TextField()  # Novo campo
+    imagem = models.ImageField(upload_to='imagem/', blank=True, null=True)  # Campo para a imagem
     usuario = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     data = models.DateTimeField(auto_now_add=True)
     endereco = models.CharField(max_length=255)
-    status = models.CharField(max_length=50)
+    status = models.CharField(max_length=50, choices=[
+        ('PENDENTE', 'Pendente'),
+        ('PROCESSANDO', 'Processando'),
+        ('ENVIADO', 'Enviado'),
+        ('ENTREGUE', 'Entregue'),
+        ('CANCELADO', 'Cancelado'),
+    ])
 
     def __str__(self):
         return f'Pedido {self.id} para {self.usuario.nome} em {self.data.strftime("%d/%m/%Y")}'
@@ -314,3 +322,15 @@ class Endereco(models.Model):
     class Meta:
         verbose_name_plural = "Endereços"
 '''
+
+
+class Nossas_faturas(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    pedido = models.OneToOneField(Pedido, on_delete=models.CASCADE)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    data_emissao = models.DateTimeField(auto_now_add=True)
+    endereco_entrega = models.CharField(max_length=255)
+    imagem = models.ImageField(upload_to='faturas/', null=True, blank=True)
+
+    def __str__(self):
+        return f'Fatura {self.id} - Pedido {self.pedido.id}'

@@ -43,7 +43,28 @@ def gerente(request):
         Pedido = Fatura.objects.count()
         categoria = Categoria_produto.objects.all()
         contactar = Contato_empresa.objects.all()
-        return render(request, 'gerente.html', {'gerente':gerente, 'produto':produto, 'categoria':categoria, 'estoques':estoques, 'contactar':contactar, 'contar':contar, 'soma_total':soma_total, 'contar_produto':contar_produto, 'Pedido':Pedido, 'clientes': clientes})
+
+        # Crie um dicionário com os clientes e suas URLs de pedidos
+        clientes_com_urls = []
+        for cliente in clientes:
+            cliente_url = reverse('pedidos_cliente', args=[cliente.id])
+            clientes_com_urls.append({
+                'cliente': cliente,
+                'url_pedidos': cliente_url,
+            })
+        return render(request, 'gerente.html', {
+            'gerente': gerente,
+            'produto': produto,
+            'categoria': categoria,
+            'estoques': estoques,
+            'contactar': contactar,
+            'contar': contar,
+            'soma_total': soma_total,
+            'contar_produto': contar_produto,
+            'Pedido': Pedido,
+            'clientes': clientes,
+            'clientes_com_urls': clientes_com_urls  # Atualizado para incluir URLs
+        })
     else:
         return HttpResponse("Você não está autenticado para acessar esta página.")
 
@@ -60,7 +81,7 @@ def perfil_gerente(request):
         gerente = Gerente.objects.get(id=gerente_id)
         produto = Produtos.objects.all()
         categoria = Categoria_produto.objects.all()
-        return render(request, 'perfil_gerente.html', {'gerente':gerente, 'produto':produto, 'categoria':categoria})
+        return render(request, 'perfil_gerente.html', {'gerente': gerente, 'produto': produto, 'categoria': categoria})
     else:
         return HttpResponse("Você não está autenticado para acessar esta página.")
 
@@ -112,22 +133,18 @@ def contactar_gerente(request):
     pass
 
 def cliente(request):
+    status = request.POST.get('status')
     if 'cliente' in request.session:
         cliente_id = request.session['cliente']
         
         try:
-            # Obtém o cliente da base de dados
             cliente = Cliente.objects.get(id=cliente_id)
-            
-            # Obtém todos os produtos e categorias
             produto = Produtos.objects.all()
             categoria = Categoria_produto.objects.all()
 
-            # Obtém o carrinho do cliente, cria um novo se não existir
             carrinho, created = Carrinho.objects.get_or_create(cliente=cliente)
             itens = ItemCarrinho.objects.filter(carrinho=carrinho)
 
-            # Calcula subtotal e total
             subtotal = sum(item.subtotal() for item in itens)
             total = subtotal
 
@@ -145,7 +162,6 @@ def cliente(request):
                             quantidade=item.quantidade
                         )
 
-                    # REDIRECIONAR para pagamento APÓS CRIAR O PEDIDO
                     return redirect('pagamento', pedido_id=pedido.id)
             else:
                 form = PedidoForm()
@@ -158,7 +174,8 @@ def cliente(request):
                 'carrinho': carrinho,
                 'form': form,
                 'subtotal': subtotal,
-                'total': total
+                'total': total,
+                'status':status
             })
 
         except Cliente.DoesNotExist:
@@ -492,6 +509,7 @@ def contacto_cliente(request):
 
 
 def adicionar_ao_carrinho(request, produto_id):
+    status = request.GET.get('status')
     produto = get_object_or_404(Produtos, id=produto_id)  # Verifica se o produto existe
     cliente_id = request.session.get('cliente')
 
@@ -511,7 +529,7 @@ def adicionar_ao_carrinho(request, produto_id):
         item_carrinho.quantidade += 1
     item_carrinho.save()
 
-    return redirect('/vetor5/cliente/')
+    return redirect('/vetor5/cliente/?status=0')
 
 from django.shortcuts import render, redirect
 from .forms import ClienteForm
@@ -903,6 +921,62 @@ def pesquisar_cliente(request):
         produtos = Produtos.objects.all()  # Ajuste conforme o seu modelo
     return render(request, 'cliente.html', {'produtos': produtos})
 
+def carrinho(request):
+    if 'cliente' in request.session:
+        cliente_id = request.session['cliente']
+        
+        try:
+            # Obtém o cliente da base de dados
+            cliente = Cliente.objects.get(id=cliente_id)
+            
+            # Obtém todos os produtos e categorias
+            produto = Produtos.objects.all()
+            categoria = Categoria_produto.objects.all()
+
+            # Obtém o carrinho do cliente, cria um novo se não existir
+            carrinho, created = Carrinho.objects.get_or_create(cliente=cliente)
+            itens = ItemCarrinho.objects.filter(carrinho=carrinho)
+
+            # Calcula subtotal e total
+            subtotal = sum(item.subtotal() for item in itens)
+            total = subtotal
+
+            if request.method == 'POST':
+                form = PedidoForm(request.POST)
+                if form.is_valid():
+                    pedido = form.save(commit=False)
+                    pedido.usuario = cliente
+                    pedido.save()
+
+                    for item in itens:
+                        ItemPedido.objects.create(
+                            pedido=pedido,
+                            produto=item.produto,
+                            quantidade=item.quantidade
+                        )
+
+                    # REDIRECIONAR para pagamento APÓS CRIAR O PEDIDO
+                    return redirect('pagamento', pedido_id=pedido.id)
+            else:
+                form = PedidoForm()
+
+            return render(request, 'carrinho.html', {
+                'cliente': cliente,
+                'produto': produto,
+                'categoria': categoria,
+                'itens': itens,
+                'carrinho': carrinho,
+                'form': form,
+                'subtotal': subtotal,
+                'total': total
+            })
+
+        except Cliente.DoesNotExist:
+            return HttpResponse("Cliente não encontrado.", status=404)
+    else:
+        return HttpResponse("Você não está autenticado para acessar esta página.")
+
+
 
 def editar_perfil(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
@@ -999,8 +1073,25 @@ def sucesso(request, fatura_id):
     return render(request, 'sucesso.html', {'fatura': fatura})
 
 
+from django.core.mail import send_mail
+
+from django.core.mail import send_mail
+from django.conf import settings
 
 
+def enviar_email_gerente(pedido, emails_gerentes):
+    subject = 'Novo Pedido Recebido'
+    message = (
+        f'Um novo pedido foi realizado. Detalhes do pedido:\n\n'
+        f'ID do Pedido: {pedido.id}\n'
+        f'Total: {pedido.total()}\n\n'
+        f'Acesse o painel de gerenciamento para mais detalhes'
+    )
+    from_email = settings.DEFAULT_FROM_EMAIL  # Usar e-mail padrão do Django configurado nas settings
+
+    # Enviar e-mail para cada gerente na lista
+    for email in emails_gerentes:
+        send_mail(subject, message, from_email, [email], fail_silently=False)
 
 def finalizar_compra(request):
     try:
@@ -1013,7 +1104,7 @@ def finalizar_compra(request):
         itens = ItemCarrinho.objects.filter(carrinho=carrinho)
 
         subtotal = sum(item.subtotal() for item in itens)
-        total = subtotal  
+        total = subtotal
 
         if request.method == 'POST':
             form = PedidoForm(request.POST)
@@ -1029,8 +1120,14 @@ def finalizar_compra(request):
                         quantidade=item.quantidade
                     )
 
+                # Obter e-mails dos gerentes
+                emails_gerentes = [gerente.email for gerente in Gerente.objects.all()]
+
+                # Enviar e-mail ao(s) gerente(s) após gerar a fatura
+                enviar_email_gerente(pedido, emails_gerentes)
+
                 # REDIRECIONAR para pagamento APÓS CRIAR O PEDIDO
-                return redirect('pagamento', pedido_id=pedido.id)  
+                return redirect('pagamento', pedido_id=pedido.id)
         else:
             form = PedidoForm()
 
@@ -1041,13 +1138,12 @@ def finalizar_compra(request):
             'subtotal': subtotal,
             'total': total
         })
-    
+
     except Cliente.DoesNotExist:
         return HttpResponse("Cliente não encontrado.", status=404)
     except Carrinho.DoesNotExist:
-        return HttpResponse("Carrinho não encontrado.", status=404)  
-
-
+        return HttpResponse("Carrinho não encontrado.", status=404)
+from django.urls import reverse
 
 from django.core.mail import send_mail
 import PyPDF2
@@ -1068,7 +1164,7 @@ def pagamento_view(request, pedido_id):
 
             try:
                 with open(file_path, 'rb') as f:
-                    reader = PdfReader(f)  # Usando PdfReader em vez de PdfFileReader
+                    reader = PdfReader(f)
                     text = ""
                     for page in reader.pages:
                         text += page.extract_text()
@@ -1082,6 +1178,12 @@ def pagamento_view(request, pedido_id):
                         try:
                             pedido = Pedido.objects.get(pk=pedido_id)
                             cliente = Cliente.objects.get(pk=cliente_id)
+
+                            # Concatenar os nomes dos produtos do pedido em uma única string
+                            nomes_produtos = ', '.join([item.produto.nome for item in pedido.item_pedido_set.all()])
+                            pedido.nome_produto = nomes_produtos  # Armazena a string concatenada no campo nome_produto
+                            pedido.save()
+
                             fatura = Fatura.objects.create(
                                 cliente=cliente,
                                 pedido=pedido,
@@ -1089,18 +1191,19 @@ def pagamento_view(request, pedido_id):
                                 data_emissao=timezone.now()
                             )
 
+                            # Limpar o carrinho após a criação da fatura
                             carrinho = Carrinho.objects.get(cliente=cliente) 
                             carrinho.produtos.clear()
 
                             send_mail(
-                            'Pedido Recebido',
-                            f'Olá {cliente.nome}, seu pedido foi recebido e está sendo processado.',
-                            'muquissicarlos@gmail.com',  # Substitua pelo seu email
-                            [cliente.email],
-                            fail_silently=False,
-                        )  
+                                'Pedido Recebido',
+                                f'Olá {cliente.nome}, seu pedido foi recebido e está sendo processado.',
+                                'muquissicarlos@gmail.com',  # Substitua pelo seu email
+                                [cliente.email],
+                                fail_silently=False,
+                            )  
 
-                            return redirect('/vetor5/faturas', fatura_id=fatura.id)
+                            return redirect(reverse('pedidos_cliente', kwargs={'cliente_id': cliente_id}))
                         except Exception as e:
                             return HttpResponse(f"Erro ao criar a fatura, Nome de usuário e senha não aceitos pelo google, esse dominio precisar estar hospedado! ", status=500)
                 else:
@@ -1108,8 +1211,6 @@ def pagamento_view(request, pedido_id):
 
             except Exception as e:
                 return HttpResponse(f"Erro ao ler o comprovativo: {e}", status=500)
-
-
 
     pedido = get_object_or_404(Pedido, pk=pedido_id) 
     iban = Iban.objects.all()
@@ -1521,3 +1622,48 @@ def produtos_por_marca(request, marca_nome):
     
     return render(request, 'nossas_marcas.html', {'produtos': produtos, 'marca': marca})
 
+
+@login_required
+def visualizar_faturas(request, pedido_id):
+    pedido = get_object_or_404(Pedido, id=pedido_id, usuario=request.user)
+    fatura = get_object_or_404(Fatura, pedido=pedido)
+    context = {
+        'fatura': fatura,
+    }
+    return render(request, 'visualizar_fatura.html', context)
+
+
+
+def pedidos_cliente(request, cliente_id):
+    if 'cliente' in request.session:
+        cliente_id = request.session['cliente']
+    cliente = get_object_or_404(Cliente, id=cliente_id)
+    pedidos = Pedido.objects.filter(usuario=cliente)
+    
+    context = {
+        'cliente': cliente,
+        'pedidos': pedidos
+    }
+    
+    return render(request, 'factura.html', context)
+
+def editar_perfil(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('perfil')
+    else:
+        form = ClienteForm(instance=request.user)
+
+    return render(request, 'perfil_cliente.html', {'form': form})
+
+
+from django.shortcuts import render
+from .models import Pedido
+
+def todos_os_pedidos(request):
+    # Agrega todos os pedidos em uma única lista
+    pedidos = Pedido.objects.all()
+
+    return render(request, 'todos_pedidos.html', {'pedidos': pedidos})

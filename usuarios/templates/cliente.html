@@ -23,7 +23,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
-    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Vendor CSS Files -->
     <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendors/animate/animate.min.css' %}">
@@ -199,6 +200,42 @@
 }
 
 
+/* Estilos para o menu dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-menu .dropdown-item {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+.conta {
+      margin-top: 20px; /* Ajusta o espaçamento superior */
+      background-color: black;
+  }
 
     </style>
 
@@ -231,85 +268,272 @@
                     <div class="main-menu__wrapper-inner clearfix">
                         <div class="main-menu__left">
                             <div class="main-menu__logo">
-                                <a href="{% url 'index' %}">Vetor5</a>
+                                <div class="dropdown">
+                                    <button class="dropdown-toggle">
+                                        <img style="width: 30px;" src="{% static 'assets/img/settings.png' %}" alt="Logo">
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{% url 'perfil_cliente' %}">Configurações</a>
+                                        <a class="dropdown-item" href="{% url 'carrinho' %}">Carrinho</a>
+                                        <!-- Adicione mais opções aqui se necessário -->
+                                    </div>
+                                </div>
                             </div>
                             <div class="main-menu__main-menu-box">
                                 <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
                                 <ul class="main-menu__list">
                                     <li class="dropdown">
-                                        <a href="#">Motor</a>
+                                        <a href="#">direção e suspensão</a>
                                         <ul class="shadow-box">
-                                            <li class="dropdown">
-                                                <a href="#">Ligeiro</a>
-                                                <ul class="shadow-box">
-                                                    <li><a href="{% url 'motor_cliente' %}">BMW</a></li>
-                                                    <li><a href="{% url 'motor_cliente' %}">Honda</a></li>
-                                                </ul>
+                                            
+                                            <li>
+                                                <li class="dropdown">
+                                                    <a href="#">Ligeiro</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'eletrico' %}">BMW</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Honda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Fiat</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Jaguar</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Rover</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Renalt</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Skoda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Leyland</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Lexus</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Geely</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Hyuandai</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Infiniti</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Isuzu</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Kia</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mahindra</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mitsubishi</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Nissan</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Subaru</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Suzuki</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Toyota</a></li>
+                                                    </ul>
+                                                </li>
                                             </li>
-                                            <li class="dropdown">
-                                                <a href="#">Pesados</a>
-                                                <ul class="shadow-box">
-                                                    <li><a href="{% url 'motor_cliente' %}">BMW</a></li>
-                                                    <li><a href="{% url 'motor_cliente' %}">Honda</a></li>
-                                                </ul>
+
+                                            <li>
+                                                <li class="dropdown">
+                                                    <a href="#">Pesados</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'eletrico' %}">BMW</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Honda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Fiat</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Jaguar</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Rover</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Renalt</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Skoda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Leyland</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Lexus</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Geely</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Hyuandai</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Infiniti</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Isuzu</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Kia</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mahindra</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mitsubishi</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Nissan</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Subaru</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Suzuki</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Toyota</a></li>
+                                                    </ul>
+                                                </li>
                                             </li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#">Direção e Suspensão</a>
-                                        <ul class="shadow-box">
-                                            <li class="dropdown">
-                                                <a href="#">Ligeiro</a>
-                                                <ul class="shadow-box">
-                                                    <li><a href="{% url 'direcao_suspensao_cliente' %}">BMW</a></li>
-                                                    <li><a href="{% url 'direcao_suspensao_cliente' %}">Honda</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="#">Pesados</a>
-                                                <ul class="shadow-box">
-                                                    <li><a href="{% url 'direcao_suspensao_cliente' %}">BMW</a></li>
-                                                    <li><a href="{% url 'direcao_suspensao_cliente' %}">Honda</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#">Sistema Elétrico</a>
-                                        <ul class="shadow-box">
-                                            <li class="dropdown">
-                                                <a href="#">Ligeiro</a>
-                                                <ul class="shadow-box">
-                                                    <li><a href="{% url 'sistema_eletrico_cliente' %}">BMW</a></li>
-                                                    <li><a href="{% url 'sistema_eletrico_cliente' %}">Honda</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="#">Pesados</a>
-                                                <ul class="shadow-box">
-                                                    <li><a href="{% url 'sistema_eletrico_cliente' %}">BMW</a></li>
-                                                    <li><a href="{% url 'sistema_eletrico_cliente' %}">Honda</a></li>
-                                                </ul>
-                                            </li>
+                                            
                                         </ul>
                                     </li>
                                     <li class="dropdown">
                                         <a href="#">Interior</a>
                                         <ul class="shadow-box">
-                                            <li class="dropdown">
-                                                <a href="#">Ligeiro</a>
-                                                <ul class="shadow-box">
-                                                    <li><a href="{% url 'interior_cliente' %}">BMW</a></li>
-                                                    <li><a href="{% url 'interior_cliente' %}">Honda</a></li>
-                                                </ul>
+                                            
+                                            <li>
+                                                <li class="dropdown">
+                                                    <a href="#">Ligeiro</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'eletrico' %}">BMW</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Honda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Fiat</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Jaguar</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Rover</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Renalt</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Skoda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Leyland</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Lexus</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Geely</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Hyuandai</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Infiniti</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Isuzu</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Kia</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mahindra</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mitsubishi</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Nissan</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Subaru</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Suzuki</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Toyota</a></li>
+                                                    </ul>
+                                                </li>
                                             </li>
-                                            <li class="dropdown">
-                                                <a href="#">Pesados</a>
-                                                <ul class="shadow-box">
-                                                    <li><a href="{% url 'interior_cliente' %}">BMW</a></li>
-                                                    <li><a href="{% url 'interior_cliente' %}">Honda</a></li>
-                                                </ul>
+
+                                            <li>
+                                                <li class="dropdown">
+                                                    <a href="#">Pesados</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'eletrico' %}">BMW</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Honda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Fiat</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Jaguar</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Rover</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Renalt</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Skoda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Leyland</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Lexus</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Geely</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Hyuandai</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Infiniti</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Isuzu</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Kia</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mahindra</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mitsubishi</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Nissan</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Subaru</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Suzuki</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Toyota</a></li>
+                                                    </ul>
+                                                </li>
                                             </li>
+                                            
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#">sistema elétrico</a>
+                                        <ul class="shadow-box">
+                                            
+                                            <li>
+                                                <li class="dropdown">
+                                                    <a href="#">Ligeiro</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'eletrico' %}">BMW</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Honda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Fiat</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Jaguar</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Rover</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Renalt</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Skoda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Leyland</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Lexus</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Geely</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Hyuandai</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Infiniti</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Isuzu</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Kia</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mahindra</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mitsubishi</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Nissan</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Subaru</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Suzuki</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Toyota</a></li>
+                                                        
+                                                        
+                                                    </ul>
+                                                </li>
+                                            </li>
+
+                                            <li>
+                                                <li class="dropdown">
+                                                    <a href="#">Pesados</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'eletrico' %}">BMW</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Honda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Fiat</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Jaguar</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Rover</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Renalt</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Skoda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Leyland</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Lexus</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Geely</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Hyuandai</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Infiniti</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Isuzu</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Kia</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mahindra</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mitsubishi</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Nissan</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Subaru</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Suzuki</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Toyota</a></li>
+                                                    </ul>
+                                                </li>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+
+                                    
+                                    <li class="dropdown">
+                                        <a href="#">Motor</a>
+                                        <ul class="shadow-box">
+                                            
+                                            <li>
+                                                <li class="dropdown">
+                                                    <a href="#">Ligeiro</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'eletrico' %}">BMW</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Honda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Fiat</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Jaguar</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Rover</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Renalt</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Skoda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Leyland</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Lexus</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Geely</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Hyuandai</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Infiniti</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Isuzu</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Kia</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mahindra</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mitsubishi</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Nissan</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Subaru</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Suzuki</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Toyota</a></li>
+                                                    </ul>
+                                                </li>
+                                            </li>
+
+                                            <li>
+                                                <li class="dropdown">
+                                                    <a href="#">Pesados</a>
+                                                    <ul class="shadow-box">
+                                                        <li><a href="{% url 'eletrico' %}">BMW</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Honda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Fiat</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Jaguar</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Rover</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Renalt</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Skoda</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Leyland</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Lexus</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Geely</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Hyuandai</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Infiniti</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Isuzu</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Kia</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mahindra</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Mitsubishi</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Nissan</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Subaru</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Suzuki</a></li>
+                                                        <li><a href="{% url 'eletrico' %}">Toyota</a></li>ref="{% url 'motor' %}">Honda</a></li>
+                                                        
+                                                        
+                                                    </ul>
+                                                </li>
+                                            </li>
+                                            
                                         </ul>
                                     </li>
                                 </ul>
@@ -348,6 +572,7 @@
                                 
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </nav>
@@ -359,6 +584,17 @@
         </div><!-- /.stricky-header -->
 
         
+
+        <div class="conta" >
+            <div class="text-center">
+                    {% if status == '0' %}
+                        <div class="alert alert-success preto" role="alert">
+                            Produto adicionado ao carrinho
+                        </div>
+                    {% endif %}
+            </div>
+
+        </div>
         
 
 
@@ -366,7 +602,7 @@
         <section class="news-one" id="news">
             <div class="container">
                 <div class="text-center mb-4">
-                    <div style="margin-top: 3%;" class="form-container">
+                    <div style="margin-top: -4%; margin-bottom: 9%;" class="form-container">
                         <form action="{% url 'pesquisar' %}" method="GET" enctype="multipart/form-data" class="d-flex justify-content-center">
                             {% csrf_token %}
                             <input type="text" name="nome_filtrar" placeholder="Pesquisar peças" class="form-control w-50">
@@ -377,53 +613,64 @@
                             <input type="submit" value="Pesquisar" class="btn btn-primary">
                         </form>
                     </div>
+
+                    
                 </div>
+
                 
-                
-        
                 <div class="row">
-                    <div class="col-xl-12 col-lg-12"> <!-- Ajustado para usar toda a largura disponível -->
-                        <div class="row">
-                            {% for produto in produto %}
-                            <div class="col-xl-3 col-lg-3 col-md-4 wow fadeInUp" data-wow-delay="300ms"> <!-- Alterado para 3 colunas -->
-                                <!--News One Single Start-->
-                                <div class="news-one__single">
-                                    <div class="news-one__img-box">
-                                        <div class="news-one__img">
-                                            <img style="width: 100%;" src="{{ produto.imagem.url }}" alt="" class="custom-img">
-                                            <a href="{% url 'adicionar_ao_carrinho' produto.id %}">
-                                                <span class="news-one__plus"></span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="news-one__content">
-                                        <ul class="news-one__meta list-unstyled">
-                                            <li>
-                                                <a href="#"><i class="fas fa-user-circle"></i>por Admin</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="fas fa-comments"></i>02 Comentarios</a>
-                                            </li>
-                                        </ul>
-                                        <h3 class="news-one__title"><a href="{% url 'produtos_detalhe' produto.id %}">{{produto.nome}}</a></h3>
-                                        <div class="news-one__bottom">
-                                            <div class="news-one__button">
-                                                <a href="{% url 'produtos_detalhe' produto.id %}">Saber mais</a>
-                                            </div>
-                                            <div class="news-one__arrow">
-                                                <a href="{% url 'produtos_detalhe' produto.id %}"><span class="icon-right-arrow"></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="col-12"> 
+                      <div class="row">
+                        {% for produto in produto %}
+                          <div class="col-6 col-lg-3"> 
+                            <!-- 2 colunas em telas pequenas e 4 em telas grandes -->
+                            <div class="product__all-single">
+                              <div class="product__all-img">
+                                <img src="{{produto.imagem.url}}" alt="" />
+                                <div class="product__all-btn-box">
+                                  <a
+                                    href="{% url 'adicionar_ao_carrinho' produto.id %}"
+                                    class="thm-btn product__all-btn"
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="16"
+                                      height="16"
+                                      fill="currentColor"
+                                      class="bi bi-cart-plus"
+                                      viewBox="0 0 16 16"
+                                    >
+                                      <path
+                                        d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"
+                                      />
+                                      <path
+                                        d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"
+                                      />
+                                    </svg>
+                                  </a>
                                 </div>
-                                <!--News One Single End-->
+                              </div>
+                              <div class="product__all-content">
+                                <h4 class="product__all-title">
+                                  <a href="{% url 'detalhe_produto' produto.id %}"
+                                    >{{produto.nome}}</a
+                                  >
+                                </h4>
+                                <p class="product__all-price">kz{{produto.preco}}</p>
+                                <div class="product__all-review">
+                                  <i class="fa fa-star"></i>
+                                  <i class="fa fa-star"></i>
+                                  <i class="fa fa-star"></i>
+                                  <i class="fa fa-star"></i>
+                                  <i class="fa fa-star"></i>
+                                </div>
+                              </div>
                             </div>
-                            {% endfor %}
-                        </div>
+                          </div>
+                        {% endfor %}
+                      </div>
                     </div>
-        
-                   
-                </div>
+                  </div>
             </div>
         </section>
      
@@ -651,6 +898,9 @@
 </script>
 
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- Adicione o script do Google Maps no final do body -->
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap" async defer></script>
@@ -696,6 +946,34 @@
         });
     }
 </script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var dropdownToggle = document.querySelector('.dropdown-toggle');
+    var dropdownMenu = document.querySelector('.dropdown-menu');
+
+    dropdownToggle.addEventListener('click', function () {
+        if (dropdownMenu.style.display === 'block') {
+            dropdownMenu.style.display = 'none';
+        } else {
+            dropdownMenu.style.display = 'block';
+        }
+    });
+
+    // Fechar o dropdown se clicar fora dele
+    window.addEventListener('click', function (event) {
+        if (!event.target.matches('.dropdown-toggle')) {
+            if (dropdownMenu.style.display === 'block') {
+                dropdownMenu.style.display = 'none';
+            }
+        }
+    });
+});
+
+</script>
+
+
 
 </body>
 </html>

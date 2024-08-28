@@ -33,6 +33,7 @@ urlpatterns = [
 
     
     # URLs do Gerente:
+    path('fatura/<int:pedido_id>/', views.visualizar_faturas, name='visualizar_fatura'),
     path('gerente/', views.gerente, name='gerente'),
     path('perfil_gerente/', views.perfil_gerente, name='perfil_gerente'),
     path('contactar_cliente/', views.contactar_cliente, name='contactar_cliente'),
@@ -133,10 +134,10 @@ urlpatterns = [
     path('marcas/Toyota/', views.produtos_por_marca, {'marca_nome': 'mercedes'}, name='produtos_mercedes'),
     path('marcas/mercedes/', views.produtos_por_marca, {'marca_nome': 'Toyota'}, name='produtos_Toyota'),
     path('marcas/bugatti/', views.produtos_por_marca, {'marca_nome': 'bugatti'}, name='produtos_bugatti'),
-
-
     path('ticket/<int:id>/atualizar/', views.atualizar_ticket, name='atualizar_ticket'),
-
+    path('perfil/', views.editar_perfil, name='editar_perfil'),
+    path('todos-pedidos/', views.todos_os_pedidos, name='todos_os_pedidos'),
+    path('cliente/<int:cliente_id>/pedidos/', views.pedidos_cliente, name='pedidos_cliente'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

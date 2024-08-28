@@ -125,7 +125,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'muquissicarlos@gmail.com'  # Seu endereço de email
-EMAIL_HOST_PASSWORD = 'Mundo@1234'  # Substitua com a senha de aplicativo gerada
+EMAIL_HOST_PASSWORD = 'uruj ywep dyee sfmg'  # Substitua com a senha de aplicativo gerada
 DEFAULT_FROM_EMAIL = 'muquissicarlos@gmail.com'
   
 

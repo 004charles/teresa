@@ -830,84 +830,81 @@
 
         <section class="news-one" id="news">
             <div class="container">
-                <div class="text-center mb-4">
-                    <div style="margin-top: 3%;" class="form-container">
-                        <form action="{% url 'pesquisare' %}" method="GET" enctype="multipart/form-data" class="d-flex justify-content-center">
-                            {% csrf_token %}
-                            <input type="text" name="nome_filtrar" placeholder="Pesquisar peças" class="form-control w-50">
-                            <div class="position-relative w-25 mx-2">
-                                <input type="file" name="imagem_filtrar" accept="image/*" class="form-control" style="padding-left: 2.5rem;">
-                                <i class="fa fa-camera position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); color: #888;"></i>
-                            </div>
-                            <input type="submit" value="Pesquisar" class="btn btn-primary">
-                        </form>
+              <div class="text-center mb-4">
+                <div style="margin-top: 3%;" class="form-container">
+                  <form action="{% url 'pesquisare' %}" method="GET" enctype="multipart/form-data" class="d-flex justify-content-center">
+                    {% csrf_token %}
+                    <input type="text" name="nome_filtrar" placeholder="Pesquisar peças" class="form-control w-50">
+                    <div class="position-relative w-25 mx-2">
+                      <input type="file" name="imagem_filtrar" accept="image/*" class="form-control" style="padding-left: 2.5rem;">
+                      <i class="fa fa-camera position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); color: #888;"></i>
                     </div>
+                    <input type="submit" value="Pesquisar" class="btn btn-primary">
+                  </form>
                 </div>
-        
-                <div class="row">
-                    <div class="col-xl-9 col-lg-9 mx-auto">
-                        <div class="product__items">
-                            
-                            <div class="product__all">
-                                <div class="row">
-                            
-                                    {% for categorias in produtos %}
-                                        <!--Product All Single Start-->
-                                        <div class="col-xl-3 col-lg-3 col-md-6">
-                                            <div class="product__all-single">
-                                                <div class="product__all-img">
-                                                    <img src="{{categorias.imagem.url}}" alt="">
-                                                    <div class="product__all-btn-box">
-                                                        <a href="{% url 'login_cliente' %}" class="thm-btn product__all-btn">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
-                                                                <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/>
-                                                                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                                                            </svg>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="product__all-content">
-                                                    <h4 class="product__all-title"><a href="{% url 'detalhe_produto' categorias.id %}">{{categorias.nome}}</a></h4>
-                                                    <p class="product__all-price">kz{{categorias.preco}}</p>
-                                                    <div class="product__all-review">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                
-                                </div>
+              </div>
+          
+              <div class="row">
+                <div class="col-lg-9"> 
+                  <div class="product__items">
+                    <div class="product__all">
+                      <div class="row">
+                        {% for categorias in produtos %}
+                        <div class="col-6 col-md-4 col-lg-3">
+                          <!-- 2 colunas em telas pequenas, 3 em telas médias e 4 em telas grandes -->
+                          <div class="product__all-single">
+                            <div class="product__all-img">
+                              <img src="{{categorias.imagem.url}}" alt="">
+                              <div class="product__all-btn-box">
+                                <a href="{% url 'login_cliente' %}" class="thm-btn product__all-btn">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                                    <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/>
+                                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                                  </svg>
+                                </a>
+                              </div>
                             </div>
-                        </div>
-                    </div>
-        
-                    <div class="col-xl-3 col-lg-3">
-                        <div class="news-section">
-                            <div class="row">
-                                <div class="news-list">
-                                    {% if noticias %}
-                                        {% for noticia in noticias %}
-                                            <div class="news-item col-12 mb-3">
-                                                <img style="width: 100%; border-radius: 8px;" src="{{ noticia.imagem.url }}" alt="Imagem da notícia">
-                                                <h5><a href="#">{{ noticia.titulo }}</a></h5>
-                                                <p>{{ noticia.descricao }}</p>
-                                            </div>
-                                        {% endfor %}
-                                    {% else %}
-                                        <p>Sem notícias disponíveis no momento.</p>
-                                    {% endif %}
-                                </div>
+                            <div class="product__all-content">
+                              <h4 class="product__all-title"><a href="{% url 'detalhe_produto' categorias.id %}">{{categorias.nome}}</a></h4>
+                              <p class="product__all-price">kz{{categorias.preco}}</p>
+                              <div class="product__all-review">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                              </div>
                             </div>
+                          </div>
                         </div>
+                        {% endfor %}
+                      </div>
                     </div>
+                  </div>
                 </div>
+            
+                <div class="col-lg-3">
+                  <div class="news-section">
+                    <div class="row">
+                      <div class="news-list">
+                        {% if noticias %}
+                          {% for noticia in noticias %}
+                            <div class="news-item col-12 mb-3">
+                              <img style="width: 100%; border-radius: 8px;" src="{{ noticia.imagem.url }}" alt="Imagem da notícia">
+                              <h5><a href="#">{{ noticia.titulo }}</a></h5>
+                              <p>{{ noticia.descricao }}</p>
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                          <p>Sem notícias disponíveis no momento.</p>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </section>
+          </section>
         
         
         
@@ -935,125 +932,114 @@
 
         <section class="news-one" id="news">
             <div class="container">
-                
-        
-                <div class="row">
-                    <div class="col-xl-9 col-lg-9 mx-auto">
-                        <div class="product__items">
-                            
-                            <div class="product__all">
-                                <div class="row">
-                                {% if produtos %}
-                                    {% for categoria in produtos %}
-                                        <!--Product All Single Start-->
-                                        <div class="col-xl-3 col-lg-3 col-md-6">
-                                            <div class="product__all-single">
-                                                <div class="product__all-img">
-                                                    <img src="{{categoria.imagem.url}}" alt="">
-                                                    <div class="product__all-btn-box">
-                                                        <a href="{% url 'adicionar_ao_carrinho' categoria.id %}" class="thm-btn product__all-btn">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
-                                                                <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/>
-                                                                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                                                            </svg>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="product__all-content">
-                                                    <h4 class="product__all-title"><a href="{% url 'detalhe_produto' categoria.id %}">{{categoria.nome}}</a></h4>
-                                                    <p class="product__all-price">kz{{categoria.preco}}</p>
-                                                    <div class="product__all-review">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                {% else %}
-                                    <div class="col-12 text-center">
-                                        <div class="alert alert-info mt-4">
-                                            <strong>Nenhum produto cadastrado!</strong> 
-                                        </div>
-                                    </div>
-                                {% endif %}
-                                </div>
+              
+          
+              <div class="row">
+                <div class="col-lg-9"> 
+                  <div class="product__items">
+                    <div class="product__all">
+                      <div class="row">
+                        {% for categorias in produtos %}
+                        <div class="col-6 col-md-4 col-lg-3">
+                          <!-- 2 colunas em telas pequenas, 3 em telas médias e 4 em telas grandes -->
+                          <div class="product__all-single">
+                            <div class="product__all-img">
+                              <img src="{{categorias.imagem.url}}" alt="">
+                              <div class="product__all-btn-box">
+                                <a href="{% url 'login_cliente' %}" class="thm-btn product__all-btn">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                                    <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/>
+                                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                                  </svg>
+                                </a>
+                              </div>
                             </div>
-                        </div>
-                    </div>
-        
-                    <div class="col-xl-3 col-lg-3">
-                        <div class="news-section">
-                            <div class="row">
-                                <div class="news-list">
-                                    {% if noticias %}
-                                        {% for noticia in noticias %}
-                                            <div class="news-item col-12 mb-3">
-                                                <img style="width: 100%; border-radius: 8px;" src="{{ noticia.imagem.url }}" alt="Imagem da notícia">
-                                                <h5><a href="#">{{ noticia.titulo }}</a></h5>
-                                                <p>{{ noticia.descricao }}</p>
-                                            </div>
-                                        {% endfor %}
-                                    {% else %}
-                                        <p>Sem notícias disponíveis no momento.</p>
-                                    {% endif %}
-                                </div>
+                            <div class="product__all-content">
+                              <h4 class="product__all-title"><a href="{% url 'detalhe_produto' categorias.id %}">{{categorias.nome}}</a></h4>
+                              <p class="product__all-price">kz{{categorias.preco}}</p>
+                              <div class="product__all-review">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                              </div>
                             </div>
+                          </div>
                         </div>
+                        {% endfor %}
+                      </div>
                     </div>
+                  </div>
                 </div>
+            
+                <div class="col-lg-3">
+                  <div class="news-section">
+                    <div class="row">
+                      <div class="news-list">
+                        {% if noticias %}
+                          {% for noticia in noticias %}
+                            <div class="news-item col-12 mb-3">
+                              <img style="width: 100%; border-radius: 8px;" src="{{ noticia.imagem.url }}" alt="Imagem da notícia">
+                              <h5><a href="#">{{ noticia.titulo }}</a></h5>
+                              <p>{{ noticia.descricao }}</p>
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                          <p>Sem notícias disponíveis no momento.</p>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </section>
+          </section>
 
 
 
 
 
 
-
-<section class="product">
-    <div class="container-fluid">
-        <div class="row">
-
-            <!-- Coluna de Produtos -->
-            <div class="col-xl-9 col-lg-9 mx-auto">
-                <div class="product__items">
-                    <h1 style="color: #8A2BE2; text-align: center; font-family: 'Arial', sans-serif; font-size: 36px; letter-spacing: 2px; text-transform: uppercase; margin-top: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
-                       Nossas Marcas
+          <section class="product">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-9 mx-auto">
+                  <div class="product__items">
+                    <h1
+                      style="color: #8A2BE2; text-align: center; font-family: 'Arial', sans-serif; font-size: 36px; letter-spacing: 2px; text-transform: uppercase; margin-top: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);"
+                    >
+                      Nossas Marcas
                     </h1>
-                                        <div class="product__all">
-                        <div style="margin-top: 3%;" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                                <!--inicio-->
-                                {% for marca in marcas %}
-                                <div class="col">
-                                    <div class="product__all-single">
-                                        <div class="product__all-img">
-                                            <img src="{{ marca.imagem.url }}" alt="{{ produto.nome }}">
-                                            <div class="product__all-btn-box">
-                                                <a href="{% url 'produtos_BMW' %}" class="thm-btn product__all-btn">
-                                                    Navegar
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="product__all-content">
-                                            <h4 class="product__all-title"><a href="">{{ marca.nome }}</a></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                                <!--fim-->
-
-                            
+                    <div class="product__all">
+                      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" style="margin-top: 3%;">
+                        {% for marca in marcas %}
+                        <div class="col"> 
+                          <!-- Para ocupar toda a largura em telas pequenas -->
+                          <div class="product__all-single">
+                            <div class="product__all-img">
+                              <img src="{{ marca.imagem.url }}" alt="{{ marca.nome }}"> 
+                              <div class="product__all-btn-box">
+                                <a href="{% url 'produtos_BMW' %}" class="thm-btn product__all-btn">
+                                  Navegar
+                                </a>
+                              </div>
+                            </div>
+                            <div class="product__all-content">
+                              <h4 class="product__all-title">
+                                <a href="">{{ marca.nome }}</a>
+                              </h4>
+                            </div>
+                          </div>
                         </div>
+                        {% endfor %}
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-
-    </div>
-</section>
+          </section>
 
 
     <!--Site Footer Start-->

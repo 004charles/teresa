@@ -77,6 +77,11 @@
             </div>
         </section>
 
+        <div class="container" >
+            <a style="text-align: center;" class="dropdown-item" href="{% url 'pedidos_cliente' cliente.id %}">Minhas Faturas</a>
+
+        </div>
+
         <!-- Carrinho -->
         {% if itens %}
         <section class="cart-page">
