@@ -428,7 +428,18 @@
                                                         <li><a href="{% url 'eletrico' %}">Jaguar</a></li>
                                                         <li><a href="{% url 'eletrico' %}">Rover</a></li>
                                                         <li><a href="{% url 'eletrico' %}">Renalt</a></li>
-                                                        <li><a href="{% url 'eletrico' %}">Skoda</a></li>
+                                                        <div class="main-menu__logo">
+                                                            <div class="dropdown">
+                                                                <button class="dropdown-toggle">
+                                                                    <img style="width: 30px;" src="{% static 'assets/img/settings.png' %}" alt="Logo">
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                    <a class="dropdown-item" href="{% url 'perfil_cliente' %}">Configurações</a>
+                                                                    <a class="dropdown-item" href="{% url 'carrinho' %}">Carrinho</a>
+                                                                    <!-- Adicione mais opções aqui se necessário -->
+                                                                </div>
+                                                            </div>
+                                                        </div>                            <li><a href="{% url 'eletrico' %}">Skoda</a></li>
                                                         <li><a href="{% url 'eletrico' %}">Leyland</a></li>
                                                         <li><a href="{% url 'eletrico' %}">Lexus</a></li>
                                                         <li><a href="{% url 'eletrico' %}">Geely</a></li>
@@ -614,7 +625,14 @@
                                                     <ul class="shadow-box">
                                                         <li><a href="{% url 'eletrico' %}">BMW</a></li>
                                                         <li><a href="{% url 'eletrico' %}">Honda</a></li>
-                                                        <li><a href="{% url 'eletrico' %}">Fiat</a></li>
+                                                        <div class="main-menu__call">
+                                                            <div class="main-menu__call-icon">
+                                                                <i class="fas fa-phone"></i>
+                                                            </div>
+                                                            <div class="main-menu__call-content">
+                                                                <p style="color: black;" class="main-menu__call-sub-title"><a href="{% url 'suporte' %}">Suporte</a></p>
+                                                            </div>
+                                                        </div>                                                <li><a href="{% url 'eletrico' %}">Fiat</a></li>
                                                         <li><a href="{% url 'eletrico' %}">Jaguar</a></li>
                                                         <li><a href="{% url 'eletrico' %}">Rover</a></li>
                                                         <li><a href="{% url 'eletrico' %}">Renalt</a></li>
@@ -643,39 +661,35 @@
                                     <li class="dropdown">
                                         <a href="#">Todas Marcas</a>
                                         <ul class="shadow-box">
-                                            
-                                            <li>
-                                                <li class="dropdown">
-                                                    <a href="#">Visualizar</a>
-                                                    <ul class="shadow-box">
-                                                        <li><a href="{% url 'produtos_BMW' %}">BMW</a></li>
-                                                        <li><a href="{% url 'produtos_Honda' %}">Honda</a></li>
-                                                        <li><a href="{% url 'produtos_Fiat' %}">Fiat</a></li>
-                                                        <li><a href="{% url 'produtos_Jaguar' %}">Jaguar</a></li>
-                                                        <li><a href="{% url 'produtos_Rover' %}">Rover</a></li>
-                                                        <li><a href="{% url 'produtos_Renalt' %}">Renalt</a></li>
-                                                        <li><a href="{% url 'produtos_Skoda' %}">Skoda</a></li>
-                                                        <li><a href="{% url 'produtos_Leyland' %}">Leyland</a></li>
-                                                        <li><a href="{% url 'produtos_Lexus' %}">Lexus</a></li>
-                                                        <li><a href="{% url 'produtos_Geely' %}">Geely</a></li>
-                                                        <li><a href="{% url 'produtos_Hyuandai' %}">Hyuandai</a></li>
-                                                        <li><a href="{% url 'produtos_Infiniti' %}">Infiniti</a></li>
-                                                        <li><a href="{% url 'produtos_Isuzu' %}">Isuzu</a></li>
-                                                        <li><a href="{% url 'produtos_Kia' %}">Kia</a></li>
-                                                        <li><a href="{% url 'produtos_Mahindra' %}">Mahindra</a></li>
-                                                        <li><a href="{% url 'produtos_Mitsubishi' %}">Mitsubishi</a></li>
-                                                        <li><a href="{% url 'produtos_Nissan' %}">Nissan</a></li>
-                                                        <li><a href="{% url 'produtos_Subaru' %}">Subaru</a></li>
-                                                        <li><a href="{% url 'produtos_Suzuki' %}">Suzuki</a></li>
-                                                        <li><a href="{% url 'produtos_Toyota' %}">Toyota</a></li>
-                                                        <li><a href="{% url 'produtos_mercedes' %}">Mercedes</a></li>
-                                                        <li><a href="{% url 'produtos_bugatti' %}">Bugatti</a></li>
-
-
-                                                                                                                
-                                                                                                            </ul>
-                                                </li>
-                                            </li>
+                                            <li><a href="{% url 'produtos_BMW' %}">BMW</a></li>
+                                            <li><a href="{% url 'produtos_Honda' %}">Honda</a></li>
+                                            <li><a href="{% url 'produtos_Fiat' %}">Fiat</a></li>
+                                            <li><a href="{% url 'produtos_Jaguar' %}">Jaguar</a></li>
+                                            <li><a href="{% url 'produtos_Rover' %}">Rover</a></li>
+                                            <li><a href="{% url 'produtos_Renalt' %}">Renalt</a></li>
+                                            <li><a href="{% url 'produtos_Skoda' %}">Skoda</a></li>
+                                            <li><a href="{% url 'produtos_Leyland' %}">Leyland</a></li>
+                                            <li><a href="{% url 'produtos_Lexus' %}">Lexus</a></li>
+                                            <li><a href="{% url 'produtos_Geely' %}">Geely</a></li>
+                                            <li><a href="{% url 'produtos_Hyuandai' %}">Hyuandai</a></li>
+                                            <li><a href="{% url 'produtos_Infiniti' %}">Infiniti</a></li>
+                                            <li><a href="{% url 'produtos_Isuzu' %}">Isuzu</a></li>
+                                            <li><a href="{% url 'produtos_Kia' %}">Kia</a></li>
+                                            <li><a href="{% url 'produtos_Mahindra' %}">Mahindra</a></li>
+                                            <div class="main-menu__call">
+                                                <div class="main-menu__call-icon">
+                                                    <i class="fas fa-phone"></i>
+                                                </div>
+                                                <div class="main-menu__call-content">
+                                                    <p style="color: black;" class="main-menu__call-sub-title"><a href="{% url 'suporte' %}">Suporte</a></p>
+                                                </div>
+                                            </div>                                    <li><a href="{% url 'produtos_Mitsubishi' %}">Mitsubishi</a></li>
+                                            <li><a href="{% url 'produtos_Nissan' %}">Nissan</a></li>
+                                            <li><a href="{% url 'produtos_Subaru' %}">Subaru</a></li>
+                                            <li><a href="{% url 'produtos_Suzuki' %}">Suzuki</a></li>
+                                            <li><a href="{% url 'produtos_Toyota' %}">Toyota</a></li>
+                                            <li><a href="{% url 'produtos_mercedes' %}">Mercedes</a></li>
+                                            <li><a href="{% url 'produtos_bugatti' %}">Bugatti</a></li>
                                         </ul>
                                     </li>
                                     
@@ -684,31 +698,33 @@
                         </div>
                         <div class="main-menu__right">
                             <div class="main-menu__call-search-btn-box">
-                                <div class="main-menu__call">
-                                    <div class="main-menu__call-icon">
-                                        <i class="fas fa-phone"></i>
-                                    </div>
-                                    <div class="main-menu__call-content">
-                                        <p style="color: black;" class="main-menu__call-sub-title"><a href="{% url 'suporte' %}">Suporte</a></p>
-                                        
-                                    </div>
-                                </div>
+                                
 
-                                <div>
-                                    <h1  style="font-size: 16px; margin-right: 8px;" >
-                                        <a href="{% url 'login_cliente' %}"><svg style="width: 200;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                          </svg></a>
+                                <style>
+                                    .icon-container {
+                                        margin-right: 10px; /* Ajuste este valor conforme necessário */
+                                    }
+                                    .flag-img {
+                                        width: 40px;
+                                    }
+                                </style>
+                                
+                                <div class="icon-container">
+                                    <h1 style="font-size: 2%;">
+                                        <a href="{% url 'login_cliente' %}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                                            </svg>
+                                        </a>
                                     </h1>
                                 </div>
                                 
                                 <div>
-                                    <a style="margin-right: 7px;" href="{% url 'suporte' %}">Suporte</a>
+                                    <a href="{% url 'suporte' %}">
+                                        <img class="flag-img" src="{% static 'assets/img/angola.jpeg' %}" alt="">
+                                    </a>
                                 </div>
-
-                                <div>
-                                    <a href=""><img style="width: 40px;" src="{% static 'assets/img/angola.jpeg' %}" alt=""></a>
-                                </div>
+                                
                                 
                             </div>
                         </div>
