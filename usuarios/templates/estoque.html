@@ -140,7 +140,7 @@
                                             <th>Marca</th>
                                             <th>Estoque</th>
                                             <th>Preço</th>
-                                            <th>Ações</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -163,10 +163,7 @@
                                                 <td>{{ produto.marca }}</td>
                                                 <td>{{ produto.estoque }}</td>
                                                 <td>kz {{ produto.preco|floatformat:2 }}</td>
-                                                <td>
-                                                    <a href="" class="btn btn-warning">Editar</a>
-                                                    <button type="button" class="btn btn-danger">Excluir</button> 
-                                                </td>
+                                                
                                             </tr>
                                         {% endfor %}
                                     </tbody>
